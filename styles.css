@@ -56,10 +56,10 @@
   --clay-shadow-hover: 14px 16px 34px color-mix(in oklab, var(--primary) 30%, transparent), -8px -8px 24px color-mix(in oklab, white 7%, transparent), inset 2px 2px 6px color-mix(in oklab, white 9%, transparent);
 }
 
-/* Base Styles (including outline reset) */
+/* Base Styles */
 * {
   border-color: var(--border);
-  outline: none; /* Removes any browser default focus rings */
+  outline: none; /* Globally removes default focus/hover rings */
 }
 
 body {
@@ -190,11 +190,11 @@ h1, h2, h3, .font-display {
 .rise {
   animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
 /* Scroll Reveal Animations */
 .scroll-element {
   opacity: 0;
   transform: translateY(30px);
-  /* The transition rule targets opacity and transform to create the slide-up fade */
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
               transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
