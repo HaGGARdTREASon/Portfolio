@@ -11,12 +11,18 @@
   <meta property="og:type" content="profile" />
   <meta name="twitter:card" content="summary_large_image" />
 
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="min-h-screen bg-background text-foreground font-sans">
@@ -33,7 +39,7 @@
   </label>
 
   <main>
-    <!-- Hero Section (Using initial load animation: .rise) -->
+    <!-- Hero Section -->
     <section class="hero-glow relative overflow-hidden border-b border-border">
       <div class="grid-lines pointer-events-none absolute inset-0" aria-hidden="true"></div>
       <div class="relative mx-auto max-w-5xl px-6 py-24 sm:py-36">
@@ -290,10 +296,12 @@
     </section>
   </main>
 
+  <!-- Script block for interactions -->
   <script>
+    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // Setup Slider Logic
+    // Theme Slider Logic
     const themeSlider = document.getElementById('theme-slider');
     const htmlEl = document.documentElement;
 
@@ -323,15 +331,15 @@
     // Setup Intersection Observer for Scroll Animations
     const observerOptions = {
       root: null,
-      rootMargin: '0px 0px -50px 0px', // Triggers slightly before the element hits the very bottom of the screen
-      threshold: 0.1 // Triggers when 10% of the element is visible
+      rootMargin: '0px 0px -50px 0px', 
+      threshold: 0.1 
     };
 
     const scrollObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('scrolled');
-          observer.unobserve(entry.target); // Stops observing once it has animated in
+          observer.unobserve(entry.target); 
         }
       });
     }, observerOptions);
