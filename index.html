@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- Meta Tags from Route Definition -->
   <title>Jash Saha — Computer Science & Business Systems Engineer</title>
   <meta name="description" content="Portfolio of Jash Saha: AI, computer vision and data engineering projects, including a patented sign-language translation system." />
   <meta property="og:title" content="Jash Saha — Computer Science & Business Systems Engineer" />
@@ -12,31 +11,26 @@
   <meta property="og:type" content="profile" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS (via CDN for vanilla HTML) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="min-h-screen bg-background text-foreground font-sans">
 
-  <!-- Theme Toggle -->
-  <button id="theme-toggle" type="button" aria-label="Switch theme" class="clay fixed right-4 top-4 z-50 flex items-center gap-2 border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground sm:right-6 sm:top-6">
-    <i data-lucide="sun" class="size-4 text-accent hidden dark:block"></i>
-    <i data-lucide="moon" class="size-4 text-primary block dark:hidden"></i>
-    <span class="hidden sm:inline dark:hidden">Dark</span>
-    <span class="hidden sm:inline hidden dark:inline">Light</span>
-    <span aria-hidden="true" class="dark:hidden">🌙</span>
-    <span aria-hidden="true" class="hidden dark:inline">☀️</span>
-  </button>
+  <!-- Theme Toggle Slider -->
+  <label for="theme-slider" class="clay fixed right-4 top-4 z-50 flex cursor-pointer items-center gap-3 border border-border bg-card px-4 py-2.5 text-sm sm:right-6 sm:top-6">
+    <i data-lucide="sun" class="size-4 text-accent dark:text-muted-foreground"></i>
+    <div class="relative flex items-center">
+      <input type="checkbox" id="theme-slider" class="peer sr-only" />
+      <div class="h-5 w-9 rounded-full bg-muted transition-colors peer-checked:bg-primary"></div>
+      <div class="absolute left-0.5 h-4 w-4 rounded-full bg-white transition-transform peer-checked:translate-x-4"></div>
+    </div>
+    <i data-lucide="moon" class="size-4 text-muted-foreground dark:text-primary"></i>
+  </label>
 
   <main>
     <!-- Hero Section -->
@@ -75,7 +69,6 @@
           </a>
         </div>
         
-        <!-- Stats -->
         <dl class="rise mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4" style="animation-delay: 320ms">
           <div class="clay border border-border bg-card px-5 py-6">
             <dt class="font-display text-3xl font-bold text-primary"><span aria-hidden="true" class="mr-1 text-2xl">🚀</span>4</dt>
@@ -105,7 +98,6 @@
         <span class="rule-gradient h-px flex-1"></span>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
-        <!-- Project 1 -->
         <article class="panel group p-7">
           <div class="flex items-center gap-3">
             <span class="clay flex size-11 shrink-0 items-center justify-center border border-border bg-secondary text-lg"><span aria-hidden="true">🌲</span></span>
@@ -115,11 +107,10 @@
           </div>
           <h3 class="mt-4 text-xl font-semibold leading-snug">Automated Regression & Data Validation Framework</h3>
           <ul class="mt-4 space-y-3">
-            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:border-primary/50">Random Forest Regressor modelling complex non-linear dependencies across multi-variable datasets, with optimized feature selection.</li>
-            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:border-primary/50">Automated filtering that detects and removes statistical outliers by validating experimental data.</li>
+            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Random Forest Regressor modelling complex non-linear dependencies across multi-variable datasets, with optimized feature selection.</li>
+            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Automated filtering that detects and removes statistical outliers by validating experimental data.</li>
           </ul>
         </article>
-        <!-- Project 2 -->
         <article class="panel group p-7">
           <div class="flex items-center gap-3">
             <span class="clay flex size-11 shrink-0 items-center justify-center border border-border bg-secondary text-lg"><span aria-hidden="true">🤟</span></span>
@@ -129,11 +120,10 @@
           </div>
           <h3 class="mt-4 text-xl font-semibold leading-snug">Sign Language Translation System</h3>
           <ul class="mt-4 space-y-3">
-            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:border-primary/50">Bridges communication between sign language users and non-signers, eliminating language barriers.</li>
-            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:border-primary/50">Real-time hand gesture detection via computer vision, converted instantly into spoken audio.</li>
+            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Bridges communication between sign language users and non-signers, eliminating language barriers.</li>
+            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Real-time hand gesture detection via computer vision, converted instantly into spoken audio.</li>
           </ul>
         </article>
-        <!-- Project 3 -->
         <article class="panel group p-7">
           <div class="flex items-center gap-3">
             <span class="clay flex size-11 shrink-0 items-center justify-center border border-border bg-secondary text-lg"><span aria-hidden="true">🌾</span></span>
@@ -143,11 +133,10 @@
           </div>
           <h3 class="mt-4 text-xl font-semibold leading-snug">Agricultural Price & Market Risk AI</h3>
           <ul class="mt-4 space-y-3">
-            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:border-primary/50">Custom PyTorch neural network using a Multi-Algorithm Ensemble (MoE) architecture to predict localized commodity prices.</li>
-            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:border-primary/50">Dynamic risk-assessment algorithm categorizing supply chain risk — Critical Shortage, Elevated Risk — and forecasting price trends.</li>
+            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Custom PyTorch neural network using a Multi-Algorithm Ensemble (MoE) architecture to predict localized commodity prices.</li>
+            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Dynamic risk-assessment algorithm categorizing supply chain risk — Critical Shortage, Elevated Risk — and forecasting price trends.</li>
           </ul>
         </article>
-        <!-- Project 4 -->
         <article class="panel group p-7">
           <div class="flex items-center gap-3">
             <span class="clay flex size-11 shrink-0 items-center justify-center border border-border bg-secondary text-lg"><span aria-hidden="true">🛡️</span></span>
@@ -157,8 +146,8 @@
           </div>
           <h3 class="mt-4 text-xl font-semibold leading-snug">Bad Touch Detection System</h3>
           <ul class="mt-4 space-y-3">
-            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:border-primary/50">OpenCV + MediaPipe pipeline tracking skeletal landmarks to distinguish self-touch from unsafe foreign contact.</li>
-            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:border-primary/50">Geometric safety zones around the torso trigger an immediate Pygame audio alarm on unauthorized proximity.</li>
+            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">OpenCV + MediaPipe pipeline tracking skeletal landmarks to distinguish self-touch from unsafe foreign contact.</li>
+            <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Geometric safety zones around the torso trigger an immediate Pygame audio alarm on unauthorized proximity.</li>
           </ul>
         </article>
       </div>
@@ -172,7 +161,6 @@
         <span class="rule-gradient h-px flex-1"></span>
       </div>
       <div class="grid gap-8 sm:grid-cols-2">
-        <!-- Languages -->
         <div>
           <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <i data-lucide="code-2" class="size-4 text-primary"></i> <span aria-hidden="true">💻</span> Languages
@@ -185,7 +173,6 @@
             <span class="chip px-3.5 py-1.5 text-sm">HTML & CSS</span>
           </div>
         </div>
-        <!-- ML & Data -->
         <div>
           <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <i data-lucide="brain-circuit" class="size-4 text-primary"></i> <span aria-hidden="true">🤖</span> ML & Data
@@ -200,7 +187,6 @@
             <span class="chip px-3.5 py-1.5 text-sm">Matplotlib</span>
           </div>
         </div>
-        <!-- Practice -->
         <div>
           <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <i data-lucide="line-chart" class="size-4 text-primary"></i> <span aria-hidden="true">📊</span> Practice
@@ -212,7 +198,6 @@
             <span class="chip px-3.5 py-1.5 text-sm">Analysis</span>
           </div>
         </div>
-        <!-- Human -->
         <div>
           <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <i data-lucide="users" class="size-4 text-primary"></i> <span aria-hidden="true">🎤</span> Human
@@ -267,7 +252,7 @@
     </section>
 
     <!-- Leadership & Activities -->
-    <section class="mx-auto max-w-5xl px-6 py-20">
+    <section class="mx-auto max-w-5xl px-6 py-20 pb-36">
       <div class="mb-10 flex items-baseline gap-4">
         <span class="font-display text-xs tracking-[0.3em] text-primary">04</span>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-4xl"><span aria-hidden="true" class="mr-2">🌟</span>Leadership & Activities</h2>
@@ -303,49 +288,35 @@
         </div>
       </div>
     </section>
-
-    <footer class="border-t border-border">
-      <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground">
-        <span class="flex items-center gap-2">
-          <i data-lucide="handshake" class="size-4 text-primary"></i>© 2026 Jash Saha
-        </span>
-        <a href="mailto:jashsaha917@gmail.com" class="flex items-center gap-2 hover:text-primary">
-          ✨ Let's build something →
-        </a>
-      </div>
-    </footer>
   </main>
 
-  <!-- JavaScript logic for Theme & Icons -->
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // Theme Toggle Logic
-    const themeBtn = document.getElementById('theme-toggle');
+    // Setup Slider Logic
+    const themeSlider = document.getElementById('theme-slider');
     const htmlEl = document.documentElement;
 
-    // Check localStorage or system preference
     let currentTheme = localStorage.getItem('theme');
     if (!currentTheme) {
       currentTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     }
 
-    // Apply initial theme
     if (currentTheme === 'dark') {
       htmlEl.classList.add('dark');
+      themeSlider.checked = true;
     } else {
       htmlEl.classList.remove('dark');
+      themeSlider.checked = false;
     }
 
-    // Toggle event listener
-    themeBtn.addEventListener('click', () => {
-      if (htmlEl.classList.contains('dark')) {
-        htmlEl.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      } else {
+    themeSlider.addEventListener('change', (e) => {
+      if (e.target.checked) {
         htmlEl.classList.add('dark');
         localStorage.setItem('theme', 'dark');
+      } else {
+        htmlEl.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
       }
     });
   </script>
