@@ -33,7 +33,7 @@
   </label>
 
   <main>
-    <!-- Hero Section -->
+    <!-- Hero Section (Using initial load animation: .rise) -->
     <section class="hero-glow relative overflow-hidden border-b border-border">
       <div class="grid-lines pointer-events-none absolute inset-0" aria-hidden="true"></div>
       <div class="relative mx-auto max-w-5xl px-6 py-24 sm:py-36">
@@ -92,13 +92,13 @@
 
     <!-- Projects Section -->
     <section class="mx-auto max-w-5xl px-6 py-20">
-      <div class="mb-10 flex items-baseline gap-4">
+      <div class="mb-10 flex items-baseline gap-4 scroll-element">
         <span class="font-display text-xs tracking-[0.3em] text-primary">01</span>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-4xl"><span aria-hidden="true" class="mr-2">🚀</span>Projects</h2>
         <span class="rule-gradient h-px flex-1"></span>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
-        <article class="panel group p-7">
+        <article class="panel group p-7 scroll-element">
           <div class="flex items-center gap-3">
             <span class="clay flex size-11 shrink-0 items-center justify-center border border-border bg-secondary text-lg"><span aria-hidden="true">🌲</span></span>
             <span class="font-display inline-flex items-center gap-1.5 rounded-full border border-accent/40 px-3 py-1 text-[0.65rem] uppercase tracking-[0.2em] text-accent">
@@ -111,7 +111,7 @@
             <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Automated filtering that detects and removes statistical outliers by validating experimental data.</li>
           </ul>
         </article>
-        <article class="panel group p-7">
+        <article class="panel group p-7 scroll-element" style="transition-delay: 100ms;">
           <div class="flex items-center gap-3">
             <span class="clay flex size-11 shrink-0 items-center justify-center border border-border bg-secondary text-lg"><span aria-hidden="true">🤟</span></span>
             <span class="font-display inline-flex items-center gap-1.5 rounded-full border border-accent/40 px-3 py-1 text-[0.65rem] uppercase tracking-[0.2em] text-accent">
@@ -124,7 +124,7 @@
             <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Real-time hand gesture detection via computer vision, converted instantly into spoken audio.</li>
           </ul>
         </article>
-        <article class="panel group p-7">
+        <article class="panel group p-7 scroll-element">
           <div class="flex items-center gap-3">
             <span class="clay flex size-11 shrink-0 items-center justify-center border border-border bg-secondary text-lg"><span aria-hidden="true">🌾</span></span>
             <span class="font-display inline-flex items-center gap-1.5 rounded-full border border-accent/40 px-3 py-1 text-[0.65rem] uppercase tracking-[0.2em] text-accent">
@@ -137,7 +137,7 @@
             <li class="border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">Dynamic risk-assessment algorithm categorizing supply chain risk — Critical Shortage, Elevated Risk — and forecasting price trends.</li>
           </ul>
         </article>
-        <article class="panel group p-7">
+        <article class="panel group p-7 scroll-element" style="transition-delay: 100ms;">
           <div class="flex items-center gap-3">
             <span class="clay flex size-11 shrink-0 items-center justify-center border border-border bg-secondary text-lg"><span aria-hidden="true">🛡️</span></span>
             <span class="font-display inline-flex items-center gap-1.5 rounded-full border border-accent/40 px-3 py-1 text-[0.65rem] uppercase tracking-[0.2em] text-accent">
@@ -155,13 +155,13 @@
 
     <!-- Skills Section -->
     <section class="mx-auto max-w-5xl px-6 py-20">
-      <div class="mb-10 flex items-baseline gap-4">
+      <div class="mb-10 flex items-baseline gap-4 scroll-element">
         <span class="font-display text-xs tracking-[0.3em] text-primary">02</span>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-4xl"><span aria-hidden="true" class="mr-2">🧠</span>Skills</h2>
         <span class="rule-gradient h-px flex-1"></span>
       </div>
       <div class="grid gap-8 sm:grid-cols-2">
-        <div>
+        <div class="scroll-element">
           <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <i data-lucide="code-2" class="size-4 text-primary"></i> <span aria-hidden="true">💻</span> Languages
           </h3>
@@ -173,7 +173,7 @@
             <span class="chip px-3.5 py-1.5 text-sm">HTML & CSS</span>
           </div>
         </div>
-        <div>
+        <div class="scroll-element" style="transition-delay: 100ms;">
           <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <i data-lucide="brain-circuit" class="size-4 text-primary"></i> <span aria-hidden="true">🤖</span> ML & Data
           </h3>
@@ -187,7 +187,7 @@
             <span class="chip px-3.5 py-1.5 text-sm">Matplotlib</span>
           </div>
         </div>
-        <div>
+        <div class="scroll-element">
           <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <i data-lucide="line-chart" class="size-4 text-primary"></i> <span aria-hidden="true">📊</span> Practice
           </h3>
@@ -198,7 +198,7 @@
             <span class="chip px-3.5 py-1.5 text-sm">Analysis</span>
           </div>
         </div>
-        <div>
+        <div class="scroll-element" style="transition-delay: 100ms;">
           <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <i data-lucide="users" class="size-4 text-primary"></i> <span aria-hidden="true">🎤</span> Human
           </h3>
@@ -215,13 +215,13 @@
 
     <!-- Experience & Education -->
     <section class="mx-auto max-w-5xl px-6 py-20">
-      <div class="mb-10 flex items-baseline gap-4">
+      <div class="mb-10 flex items-baseline gap-4 scroll-element">
         <span class="font-display text-xs tracking-[0.3em] text-primary">03</span>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-4xl"><span aria-hidden="true" class="mr-2">🎓</span>Experience & Education</h2>
         <span class="rule-gradient h-px flex-1"></span>
       </div>
       <div class="space-y-6">
-        <div class="panel p-7">
+        <div class="panel p-7 scroll-element">
           <div class="flex flex-wrap items-baseline justify-between gap-2">
             <h3 class="flex items-center gap-2 text-lg font-semibold">
               <i data-lucide="line-chart" class="size-5 text-accent"></i> 💼 Indian Institute of Internship
@@ -230,7 +230,7 @@
           </div>
           <p class="mt-2 text-sm text-muted-foreground">Completed a Business Analytics project using Power BI.</p>
         </div>
-        <div class="panel p-7">
+        <div class="panel p-7 scroll-element">
           <div class="flex flex-wrap items-baseline justify-between gap-2">
             <h3 class="flex items-center gap-2 text-lg font-semibold">
               <i data-lucide="graduation-cap" class="size-5 text-primary"></i> Meghnad Saha Institute of Technology, Kolkata
@@ -239,7 +239,7 @@
           </div>
           <p class="mt-2 text-sm text-muted-foreground">B.Tech, Computer Science and Business Systems</p>
         </div>
-        <div class="panel p-7">
+        <div class="panel p-7 scroll-element">
           <div class="flex flex-wrap items-baseline justify-between gap-2">
             <h3 class="flex items-center gap-2 text-lg font-semibold">
               <i data-lucide="graduation-cap" class="size-5 text-primary"></i> Delhi Public School, Ruby Park
@@ -253,13 +253,13 @@
 
     <!-- Leadership & Activities -->
     <section class="mx-auto max-w-5xl px-6 py-20 pb-36">
-      <div class="mb-10 flex items-baseline gap-4">
+      <div class="mb-10 flex items-baseline gap-4 scroll-element">
         <span class="font-display text-xs tracking-[0.3em] text-primary">04</span>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-4xl"><span aria-hidden="true" class="mr-2">🌟</span>Leadership & Activities</h2>
         <span class="rule-gradient h-px flex-1"></span>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
-        <div class="panel p-7">
+        <div class="panel p-7 scroll-element">
           <span class="clay mb-4 flex size-11 items-center justify-center border border-border bg-secondary text-lg">
             <span aria-hidden="true">🔥</span>
           </span>
@@ -272,7 +272,7 @@
             <li>— Organized the 2025 Farewell ceremony.</li>
           </ul>
         </div>
-        <div class="panel p-7">
+        <div class="panel p-7 scroll-element" style="transition-delay: 100ms;">
           <span class="clay mb-4 flex size-11 items-center justify-center border border-border bg-secondary text-lg">
             <span aria-hidden="true">♻️</span>
           </span>
@@ -319,6 +319,25 @@
         localStorage.setItem('theme', 'light');
       }
     });
+
+    // Setup Intersection Observer for Scroll Animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -50px 0px', // Triggers slightly before the element hits the very bottom of the screen
+      threshold: 0.1 // Triggers when 10% of the element is visible
+    };
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('scrolled');
+          observer.unobserve(entry.target); // Stops observing once it has animated in
+        }
+      });
+    }, observerOptions);
+
+    const scrollElements = document.querySelectorAll('.scroll-element');
+    scrollElements.forEach(el => scrollObserver.observe(el));
   </script>
 </body>
 </html>
