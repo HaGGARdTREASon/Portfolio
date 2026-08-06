@@ -4,56 +4,48 @@
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   
   /* Radii */
-  --radius: 0.625rem;
+  --radius: 0.75rem;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-3xl: calc(var(--radius) + 18px);
   
-  /* Light Theme Colors */
-  --background: oklch(0.96 0.018 145);
-  --foreground: oklch(0.28 0.035 160);
-  --card: oklch(0.985 0.01 145);
-  --card-foreground: oklch(0.28 0.035 160);
-  --primary: oklch(0.62 0.15 152);
-  --primary-foreground: oklch(0.99 0.01 145);
-  --secondary: oklch(0.93 0.022 150);
-  --secondary-foreground: oklch(0.34 0.04 160);
-  --muted: oklch(0.93 0.02 150);
-  --muted-foreground: oklch(0.52 0.03 158);
-  --accent: oklch(0.7 0.14 60);
-  --accent-foreground: oklch(0.99 0.01 145);
-  --border: oklch(0.89 0.02 150);
-  
+  /* Default Light Theme Colors */
+  --background: oklch(0.96 0.012 160);
+  --foreground: oklch(0.22 0.03 160);
+  --card: oklch(0.97 0.01 160);
+  --card-foreground: oklch(0.22 0.03 160);
+  --primary: oklch(0.48 0.16 155);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.92 0.02 160);
+  --secondary-foreground: oklch(0.25 0.03 160);
+  --muted: oklch(0.90 0.015 160);
+  --muted-foreground: oklch(0.45 0.02 160);
+  --accent: oklch(0.62 0.18 45);
+  --accent-foreground: oklch(0.99 0 0);
+  --border: oklch(0.89 0.015 160);
+
   /* Shadows & Gradients */
-  --gradient-hero: radial-gradient(120% 90% at 15% 0%, color-mix(in oklab, var(--primary) 16%, transparent) 0%, transparent 62%);
-  --clay-shadow: 8px 8px 22px color-mix(in oklab, var(--foreground) 14%, transparent), -8px -8px 22px color-mix(in oklab, white 90%, transparent), inset 2px 2px 4px color-mix(in oklab, white 85%, transparent), inset -3px -3px 8px color-mix(in oklab, var(--foreground) 8%, transparent);
-  --clay-shadow-hover: 12px 14px 30px color-mix(in oklab, var(--primary) 26%, transparent), -8px -8px 24px color-mix(in oklab, white 92%, transparent), inset 2px 2px 5px color-mix(in oklab, white 90%, transparent);
-}
+  --gradient-hero: radial-gradient(120% 90% at 15% 0%, color-mix(in oklab, var(--primary) 12%, transparent) 0%, transparent 60%);
+  
+  /* Focused Light Claymorphism: Soft 3D volumetric extrusion & inner highlights */
+  --clay-shadow: 
+    14px 14px 28px -4px rgba(175, 190, 205, 0.55),
+    -12px -12px 24px 0px rgba(255, 255, 255, 0.95),
+    inset 3px 3px 6px 0px rgba(255, 255, 255, 0.9),
+    inset -4px -4px 8px 0px rgba(175, 190, 205, 0.35);
+    
+  --clay-shadow-hover: 
+    18px 20px 36px -4px rgba(160, 180, 200, 0.65),
+    -14px -14px 28px 0px rgba(255, 255, 255, 1),
+    inset 4px 4px 8px 0px rgba(255, 255, 255, 0.95),
+    inset -5px -5px 10px 0px rgba(160, 180, 200, 0.45);
 
-.dark {
-  /* Dark Theme Colors */
-  --background: oklch(0.17 0.02 160);
-  --foreground: oklch(0.95 0.01 140);
-  --card: oklch(0.22 0.022 162);
-  --card-foreground: oklch(0.95 0.01 140);
-  --primary: oklch(0.82 0.17 145);
-  --primary-foreground: oklch(0.18 0.03 160);
-  --secondary: oklch(0.27 0.025 165);
-  --secondary-foreground: oklch(0.95 0.01 140);
-  --muted: oklch(0.26 0.02 165);
-  --muted-foreground: oklch(0.72 0.02 155);
-  --accent: oklch(0.78 0.14 85);
-  --accent-foreground: oklch(0.18 0.03 160);
-  --border: oklch(0.32 0.025 165);
-
-  /* Dark Shadows & Gradients */
-  --gradient-hero: radial-gradient(120% 90% at 15% 0%, color-mix(in oklab, var(--primary) 22%, transparent) 0%, transparent 60%);
-  --clay-shadow: 10px 10px 26px color-mix(in oklab, black 55%, transparent), -8px -8px 24px color-mix(in oklab, white 6%, transparent), inset 2px 2px 6px color-mix(in oklab, white 7%, transparent), inset -4px -4px 10px color-mix(in oklab, black 35%, transparent);
-  --clay-shadow-hover: 14px 16px 34px color-mix(in oklab, var(--primary) 30%, transparent), -8px -8px 24px color-mix(in oklab, white 7%, transparent), inset 2px 2px 6px color-mix(in oklab, white 9%, transparent);
+  --clay-shadow-inset: 
+    inset 6px 6px 12px 0px rgba(175, 190, 205, 0.45),
+    inset -6px -6px 12px 0px rgba(255, 255, 255, 0.95);
 }
 
 /* Base Styles */
@@ -108,32 +100,50 @@ h1, h2, h3, .font-display {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: radial-gradient(80% 60% at 85% 10%, color-mix(in oklab, var(--accent) 16%, transparent) 0%, transparent 65%), linear-gradient(to bottom, transparent 70%, color-mix(in oklab, var(--background) 100%, transparent) 100%);
+  background-image: radial-gradient(80% 60% at 85% 10%, color-mix(in oklab, var(--accent) 10%, transparent) 0%, transparent 65%), linear-gradient(to bottom, transparent 70%, color-mix(in oklab, var(--background) 100%, transparent) 100%);
 }
 
 .grid-lines {
-  background-image: linear-gradient(to right, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px);
+  background-image: linear-gradient(to right, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(90% 70% at 50% 0%, black 0%, transparent 75%);
 }
 
 .text-gradient {
-  background-image: linear-gradient(100deg, var(--foreground) 10%, var(--primary) 55%, var(--accent) 95%);
+  background-image: linear-gradient(100deg, var(--foreground) 10%, var(--primary) 60%, var(--accent) 100%);
   background-clip: text;
   color: transparent;
 }
 
 .rule-gradient {
-  background-image: linear-gradient(to right, color-mix(in oklab, var(--primary) 60%, transparent), transparent);
+  background-image: linear-gradient(to right, color-mix(in oklab, var(--primary) 40%, transparent), transparent);
+}
+
+/* Tactile Claymorphism Elements */
+.clay {
+  border-radius: var(--radius-2xl);
+  background-color: var(--card);
+  box-shadow: var(--clay-shadow);
+  transition: box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.clay:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--clay-shadow-hover);
+}
+
+.clay-pressed {
+  border-radius: var(--radius-xl);
+  background-color: var(--background);
+  box-shadow: var(--clay-shadow-inset);
 }
 
 .panel {
   position: relative;
   background-color: var(--card);
-  border: 1px solid var(--border);
   border-radius: var(--radius-3xl);
   box-shadow: var(--clay-shadow);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   overflow: hidden;
 }
 
@@ -144,11 +154,11 @@ h1, h2, h3, .font-display {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.35s ease;
-  background-image: radial-gradient(70% 100% at 0% 0%, color-mix(in oklab, var(--primary) 12%, transparent), transparent 70%);
+  background-image: radial-gradient(70% 100% at 0% 0%, color-mix(in oklab, var(--primary) 8%, transparent), transparent 70%);
 }
 
 .panel:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   box-shadow: var(--clay-shadow-hover);
 }
 
@@ -157,9 +167,8 @@ h1, h2, h3, .font-display {
 }
 
 .chip {
-  border-radius: var(--radius-2xl);
-  border: 1px solid transparent;
-  background-color: var(--secondary);
+  border-radius: var(--radius-xl);
+  background-color: var(--card);
   color: var(--secondary-foreground);
   box-shadow: var(--clay-shadow);
   transition: color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
@@ -168,17 +177,6 @@ h1, h2, h3, .font-display {
 .chip:hover {
   transform: translateY(-2px);
   color: var(--primary);
-  box-shadow: var(--clay-shadow-hover);
-}
-
-.clay {
-  border-radius: var(--radius-3xl);
-  box-shadow: var(--clay-shadow);
-  transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.clay:hover {
-  transform: translateY(-2px);
   box-shadow: var(--clay-shadow-hover);
 }
 
@@ -194,7 +192,7 @@ h1, h2, h3, .font-display {
 /* 1s Scroll Zoom Animation from a Small Point */
 .scroll-zoom-point {
   opacity: 0;
-  transform: scale(0);
+  transform: scale(0.85);
   transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), 
               transform 1s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
