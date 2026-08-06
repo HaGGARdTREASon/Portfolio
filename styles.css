@@ -30,22 +30,22 @@
   /* Shadows & Gradients */
   --gradient-hero: radial-gradient(120% 90% at 15% 0%, color-mix(in oklab, var(--primary) 12%, transparent) 0%, transparent 60%);
   
-  /* Focused Light Claymorphism: Soft 3D volumetric extrusion & inner highlights */
+  /* High-Intensity Claymorphism Shadows for Deeper 3D Pop */
   --clay-shadow: 
-    14px 14px 28px -4px rgba(175, 190, 205, 0.55),
-    -12px -12px 24px 0px rgba(255, 255, 255, 0.95),
-    inset 3px 3px 6px 0px rgba(255, 255, 255, 0.9),
-    inset -4px -4px 8px 0px rgba(175, 190, 205, 0.35);
-    
-  --clay-shadow-hover: 
-    18px 20px 36px -4px rgba(160, 180, 200, 0.65),
+    16px 18px 36px -2px rgba(135, 155, 175, 0.75),
     -14px -14px 28px 0px rgba(255, 255, 255, 1),
     inset 4px 4px 8px 0px rgba(255, 255, 255, 0.95),
-    inset -5px -5px 10px 0px rgba(160, 180, 200, 0.45);
+    inset -5px -5px 10px 0px rgba(135, 155, 175, 0.5);
+    
+  --clay-shadow-hover: 
+    22px 26px 44px -2px rgba(115, 140, 165, 0.85),
+    -16px -16px 32px 0px rgba(255, 255, 255, 1),
+    inset 5px 5px 10px 0px rgba(255, 255, 255, 1),
+    inset -6px -6px 12px 0px rgba(115, 140, 165, 0.6);
 
   --clay-shadow-inset: 
-    inset 6px 6px 12px 0px rgba(175, 190, 205, 0.45),
-    inset -6px -6px 12px 0px rgba(255, 255, 255, 0.95);
+    inset 8px 8px 16px 0px rgba(135, 155, 175, 0.65),
+    inset -8px -8px 16px 0px rgba(255, 255, 255, 1);
 }
 
 /* Base Styles */
@@ -189,12 +189,12 @@ h1, h2, h3, .font-display {
   animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* 1s Scroll Zoom Animation from a Small Point */
+/* 2s Scroll Zoom Animation from a Small Point */
 .scroll-zoom-point {
   opacity: 0;
   transform: scale(0.85);
-  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), 
-              transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 2s cubic-bezier(0.22, 1, 0.36, 1), 
+              transform 2s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
