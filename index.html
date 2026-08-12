@@ -13,337 +13,558 @@
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+				<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Space+Grotesk:wght@500;700;800;900&display=swap" rel="stylesheet">
 
-		<!-- Tailwind CSS CDN -->
-		<script src="https://cdn.tailwindcss.com"></script>
+					<!-- Tailwind CSS CDN -->
+					<script src="https://cdn.tailwindcss.com"></script>
 
-		<!-- Custom Styles -->
-		<link rel="stylesheet" href="styles.css" />
+					<!-- Custom Valorant White Theme & Hardcore Animations -->
+					<style>
+						:root {
+						--val-red: #ff4655;
+						--val-dark: #0f1923;
+						--val-bg: #ece8e1;
+						--val-card: #ffffff;
+						--val-gray: #5e686e;
+						--val-border: rgba(15, 25, 35, 0.18);
+						}
 
-		<!-- Opening Animation Styles -->
-		<style>
-			body.loading {
-				overflow: hidden !important;
-			}
+						/* Force Scroll Reset */
+						html, body {
+						scroll-behavior: auto !important;
+						cursor: default;
+						}
 
-			#intro-loader {
-				position: fixed;
-				inset: 0;
-				z-index: 99999;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background-color: transparent;
-				pointer-events: auto;
-			}
+						body.loading {
+						overflow: hidden !important;
+						}
 
-			.loader-grid {
-				position: absolute;
-				inset: 0;
-				display: grid;
-				grid-template-columns: repeat(5, 1fr);
-				z-index: 1;
-			}
+						body {
+						background-color: var(--val-bg);
+						color: var(--val-dark);
+						font-family: 'DM Sans', sans-serif;
+						position: relative;
+						min-height: 100vh;
+						/* Animated Background Grid Pattern */
+						background-image:
+						linear-gradient(rgba(15, 25, 35, 0.04) 1px, transparent 1px),
+						linear-gradient(90deg, rgba(15, 25, 35, 0.04) 1px, transparent 1px);
+						background-size: 32px 32px;
+						animation: bgGridMove 20s linear infinite;
+						}
 
-			.loader-column {
-				background-color: #090a0f;
-				height: 100%;
-				width: 100%;
-				transform-origin: top;
-				animation: tileSlideUp 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-			}
+						@keyframes bgGridMove {
+						0% { background-position: 0 0; }
+						100% { background-position: 32px 32px; }
+						}
 
-			.loader-column:nth-child(1) { animation-delay: 2.0s; }
-			.loader-column:nth-child(2) { animation-delay: 2.1s; }
-			.loader-column:nth-child(3) { animation-delay: 2.2s; }
-			.loader-column:nth-child(4) { animation-delay: 2.1s; }
-			.loader-column:nth-child(5) { animation-delay: 2.0s; }
+						/* Mouse Follower Custom Crosshair */
+						#val-crosshair {
+						position: fixed;
+						top: 0;
+						left: 0;
+						width: 30px;
+						height: 30px;
+						border: 1px solid var(--val-red);
+						pointer-events: none;
+						z-index: 999999;
+						transform: translate(-50%, -50%);
+						transition: transform 0.05s ease-out, width 0.2s, height 0.2s;
+						}
 
-			.intro-content {
-				position: relative;
-				z-index: 2;
-				text-align: center;
-				animation: nameZoomFade 1.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-			}
+						#val-crosshair::before {
+						content: '';
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						width: 4px;
+						height: 4px;
+						background: var(--val-red);
+						transform: translate(-50%, -50%);
+						}
 
-			.intro-title {
-				font-family: 'Space Grotesk', sans-serif;
-				font-size: clamp(2.5rem, 8vw, 6.5rem);
-				font-weight: 700;
-				letter-spacing: 0.18em;
-				color: #ffffff;
-				text-transform: uppercase;
-				line-height: 1;
-				margin: 0;
-				text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-			}
+						#val-crosshair::after {
+						content: '';
+						position: absolute;
+						inset: -4px;
+						border: 1px dashed rgba(255, 70, 85, 0.5);
+						animation: crosshairSpin 8s linear infinite;
+						}
 
-			@keyframes nameZoomFade {
-				0% {
-					opacity: 0;
-					transform: scale(0.85);
-				}
-				30% {
-					opacity: 1;
-					transform: scale(1);
-				}
-				75% {
-					opacity: 1;
-					transform: scale(1.05);
-				}
-				100% {
-					opacity: 0;
-					transform: scale(1.12);
-				}
-			}
+						@keyframes crosshairSpin {
+						100% { transform: rotate(360deg); }
+						}
 
-			@keyframes tileSlideUp {
-				0% {
-					transform: scaleY(1);
-				}
-				100% {
-					transform: scaleY(0);
-				}
-			}
-		</style>
+						/* Hardcore Valorant Preloader */
+						#intro-loader {
+						position: fixed;
+						inset: 0;
+						z-index: 99999;
+						background-color: #0f1923;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						overflow: hidden;
+						}
 
-		<!-- Lucide Icons -->
-		<script src="https://unpkg.com/lucide@latest"></script>
-	</head>
-	<body class="loading min-h-screen text-foreground font-sans">
+						.loader-shutter-top, .loader-shutter-bottom {
+						position: absolute;
+						left: 0;
+						width: 100%;
+						height: 50%;
+						background-color: #0f1923;
+						z-index: 10;
+						transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+						}
 
-		<!-- Opening Animation Preloader -->
+						.loader-shutter-top { top: 0; transform-origin: top; }
+						.loader-shutter-bottom { bottom: 0; transform-origin: bottom; }
+
+						body:not(.loading) .loader-shutter-top { transform: translateY(-100%); }
+						body:not(.loading) .loader-shutter-bottom { transform: translateY(100%); }
+
+						.loader-content {
+						position: relative;
+						z-index: 20;
+						text-align: center;
+						}
+
+						.glitch-text {
+						font-family: 'Space Grotesk', sans-serif;
+						font-size: clamp(3rem, 10vw, 7.5rem);
+						font-weight: 900;
+						letter-spacing: 0.15em;
+						color: #ece8e1;
+						text-transform: uppercase;
+						position: relative;
+						display: inline-block;
+						animation: valGlitch 0.4s infinite alternate;
+						}
+
+						.glitch-text span {
+						color: var(--val-red);
+						}
+
+						@keyframes valGlitch {
+						0% { transform: translate(0); text-shadow: 2px 0 var(--val-red), -2px 0 cyan; }
+						20% { transform: translate(-3px, 3px); }
+						40% { transform: translate(-3px, -3px); text-shadow: -2px 0 var(--val-red), 2px 0 cyan; }
+						60% { transform: translate(3px, 1px); }
+						80% { transform: translate(1px, -2px); text-shadow: 2px 0 var(--val-red), -2px 0 cyan; }
+						100% { transform: translate(0); }
+						}
+
+						/* Laser Scanner Effect across sections */
+						.laser-scanner {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 3px;
+						background: linear-gradient(90deg, transparent, var(--val-red), transparent);
+						box-shadow: 0 0 15px var(--val-red);
+						animation: scanline 4s ease-in-out infinite;
+						pointer-events: none;
+						}
+
+						@keyframes scanline {
+						0% { top: 0%; opacity: 0; }
+						15% { opacity: 1; }
+						85% { opacity: 1; }
+						100% { top: 100%; opacity: 0; }
+						}
+
+						/* High Contrast Valorant Light Cards */
+						.val-card {
+						background-color: var(--val-card) !important;
+						border: 1px solid var(--val-border) !important;
+						clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+						position: relative;
+						transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+						box-shadow: 0 4px 20px rgba(15, 25, 35, 0.05);
+						overflow: hidden;
+						}
+
+						.val-card::before {
+						content: '';
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 5px;
+						height: 100%;
+						background: var(--val-dark);
+						transition: background 0.3s ease, width 0.3s ease;
+						}
+
+						.val-card:hover {
+						transform: translateY(-5px) skewX(-1deg) !important;
+						border-color: var(--val-red) !important;
+						box-shadow: 12px 12px 0px var(--val-dark) !important;
+						}
+
+						.val-card:hover::before {
+						background: var(--val-red);
+						width: 8px;
+						}
+
+						/* Tactical Animated Hover Corners */
+						.val-card::after {
+						content: '';
+						position: absolute;
+						bottom: 0;
+						right: 0;
+						width: 20px;
+						height: 20px;
+						background: var(--val-red);
+						clip-path: polygon(100% 0, 100% 100%, 0 100%);
+						opacity: 0;
+						transition: opacity 0.2s ease, transform 0.2s ease;
+						transform: translate(10px, 10px);
+						}
+
+						.val-card:hover::after {
+						opacity: 1;
+						transform: translate(0, 0);
+						}
+
+						/* Kinetic Angular Buttons */
+						.val-btn {
+						background-color: var(--val-red) !important;
+						color: #ffffff !important;
+						font-family: 'Space Grotesk', sans-serif !important;
+						font-weight: 800 !important;
+						text-transform: uppercase !important;
+						letter-spacing: 0.12em !important;
+						clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+						transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+						position: relative;
+						overflow: hidden;
+						}
+
+						.val-btn:hover {
+						background-color: var(--val-dark) !important;
+						color: var(--val-red) !important;
+						transform: scale(1.04);
+						box-shadow: 0 0 20px rgba(255, 70, 85, 0.4);
+						}
+
+						.val-btn-outline {
+						background-color: transparent !important;
+						color: var(--val-dark) !important;
+						border: 2px solid var(--val-dark) !important;
+						font-family: 'Space Grotesk', sans-serif !important;
+						font-weight: 700 !important;
+						text-transform: uppercase !important;
+						letter-spacing: 0.1em !important;
+						clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+						transition: all 0.2s ease !important;
+						}
+
+						.val-btn-outline:hover {
+						background-color: var(--val-dark) !important;
+						color: #ffffff !important;
+						border-color: var(--val-dark) !important;
+						}
+
+						/* Valorant Tactical Badges */
+						.val-badge {
+						background: var(--val-dark);
+						color: #ffffff;
+						font-family: 'Space Grotesk', sans-serif;
+						font-weight: 800;
+						letter-spacing: 0.15em;
+						clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+						}
+
+						.val-badge-red {
+						background: var(--val-red);
+						color: #ffffff;
+						}
+
+						/* Skill Chips */
+						.val-chip {
+						background: #ffffff;
+						border: 1px solid var(--val-dark);
+						color: var(--val-dark);
+						font-family: 'Space Grotesk', sans-serif;
+						font-weight: 700;
+						clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+						transition: all 0.2s ease;
+						}
+
+						.val-chip:hover {
+						background: var(--val-red);
+						color: #ffffff;
+						border-color: var(--val-red);
+						transform: translateY(-2px) rotate(-1deg);
+						}
+
+						/* Headings */
+						h1, h2, h3 {
+						font-family: 'Space Grotesk', sans-serif !important;
+						}
+
+						/* Tactical Clock Display */
+						#digital-clock {
+						background: var(--val-dark) !important;
+						border: 2px solid var(--val-red) !important;
+						clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+						color: #ffffff !important;
+						box-shadow: 0 4px 15px rgba(255, 70, 85, 0.3);
+						}
+
+						/* Hardcore Slash Entrance Animations */
+						.kinetic-entry {
+						animation: kineticSlash 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+						}
+
+						@keyframes kineticSlash {
+						0% {
+						opacity: 0;
+						transform: translateY(40px) skewY(3deg);
+						}
+						100% {
+						opacity: 1;
+						transform: translateY(0) skewY(0);
+						}
+						}
+					</style>
+
+					<!-- Lucide Icons -->
+					<script src="https://unpkg.com/lucide@latest"></script>
+				</head>
+	<body class="loading min-h-screen">
+
+		<!-- Custom Tactical Crosshair Follower -->
+		<div id="val-crosshair"></div>
+
+		<!-- Hardcore Glitch Opening Preloader -->
 		<div id="intro-loader" aria-hidden="true">
-			<div class="loader-grid">
-				<div class="loader-column"></div>
-				<div class="loader-column"></div>
-				<div class="loader-column"></div>
-				<div class="loader-column"></div>
-				<div class="loader-column"></div>
-			</div>
-			<div class="intro-content">
-				<h1 class="intro-title">JASH SAHA</h1>
+			<div class="loader-shutter-top"></div>
+			<div class="loader-shutter-bottom"></div>
+			<div class="loader-content">
+				<div class="mb-4 inline-block bg-[var(--val-red)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
+					SYSTEM INITIALIZATION // TAC-HUD
+				</div>
+				<div>
+					<h1 class="glitch-text">
+						JASH <span>SAHA</span>
+					</h1>
+				</div>
+				<p class="mt-4 font-mono text-sm tracking-[0.3em] text-[#768079] uppercase">
+					[ LOCKED & LOADED ] — COMPUTER SCIENCE ENGINEER
+				</p>
 			</div>
 		</div>
 
-		<!-- Floating Tactile Clay Digital Clock -->
-		<div id="digital-clock" class="clay fixed right-4 top-4 z-50 flex items-center gap-2.5 rounded-2xl bg-card px-4 py-2.5 font-display text-sm font-bold tracking-wider text-primary sm:right-6 sm:top-6">
-			<i data-lucide="clock" class="size-4 text-accent"></i>
+		<!-- Dynamic Floating Tactical HUD Clock -->
+		<div id="digital-clock" class="fixed right-4 top-4 z-50 flex items-center gap-2.5 px-5 py-2.5 font-display text-sm font-black tracking-widest sm:right-6 sm:top-6">
+			<i data-lucide="crosshair" class="size-4 animate-spin text-[var(--val-red)]"></i>
 			<span id="clock-time">00:00:00 AM</span>
 		</div>
 
-		<main>
+		<main class="relative z-10">
 			<!-- Hero Section -->
-			<section class="hero-glow relative overflow-hidden border-b border-border/50">
-				<div class="grid-lines pointer-events-none absolute inset-0" aria-hidden="true"></div>
-				<div class="relative mx-auto max-w-5xl px-6 py-24 sm:py-36">
-					<div class="rise flex items-center gap-4">
-						<span class="clay font-display flex size-14 items-center justify-center text-lg font-bold text-primary">
+			<section class="relative overflow-hidden border-b-2 border-[var(--val-dark)] bg-white/50 backdrop-blur-sm">
+				<div class="laser-scanner"></div>
+				<div class="relative mx-auto max-w-5xl px-6 py-20 sm:py-32">
+
+					<div class="kinetic-entry flex items-center gap-4">
+						<span class="val-badge val-badge-red flex size-12 items-center justify-center text-lg font-black">
 							JS
 						</span>
-						<p class="font-display text-[0.7rem] uppercase leading-relaxed tracking-[0.3em] text-primary font-semibold">
-							👋 Engineering Student
-							<span class="block text-muted-foreground font-normal">Kolkata, India</span>
+						<p class="font-display text-xs uppercase leading-relaxed tracking-[0.35em] text-[var(--val-dark)] font-black">
+							// AGENT CLASSIFICATION: CSBS ENGINEER
+							<span class="block text-[var(--val-gray)] font-semibold">DEPLOYMENT LOCATION: KOLKATA, INDIA</span>
 						</p>
 					</div>
 
-					<!-- Name with Circular Profile Picture on the Right -->
-					<div class="rise mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8" style="animation-delay: 80ms">
-						<h1 class="text-gradient text-6xl font-bold leading-[0.95] tracking-tight sm:text-8xl">
-							Jash Saha
+					<!-- Name & Profile Picture -->
+					<div class="kinetic-entry mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
+						<h1 class="text-6xl font-black uppercase leading-[0.9] tracking-tight text-[var(--val-dark)] sm:text-8xl hover:skew-x-2 transition-transform">
+							Jash <span class="text-[var(--val-red)]">Saha</span>
 						</h1>
-						<img
-						  src="1775580373561.jpg"
-						  alt="Jash Saha"
-						  class="clay size-28 sm:size-36 rounded-full object-cover shrink-0 border-2 border-primary/20"
-						/>
+						<div class="relative group">
+							<div class="absolute -inset-1 bg-[var(--val-red)] clip-path-polygon rotate-3 transition-transform group-hover:rotate-6"></div>
+							<img
+							  src="1775580373561.jpg"
+							  alt="Jash Saha"
+							  class="relative size-32 sm:size-40 rounded-none object-cover shrink-0 border-4 border-[var(--val-dark)] bg-white"
+							  style="clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);"
+							/>
+						</div>
 					</div>
 
-					<p class="rise mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground" style="animation-delay: 160ms">
-						A responsible, orderly engineering student who enjoys solving practical problems. My
-						background combines technical rigor with a structured approach to project management —
-						ensuring efficient, business-aligned delivery.
+					<p class="kinetic-entry mt-8 max-w-2xl text-lg font-medium leading-relaxed text-[var(--val-dark)]">
+						A disciplined, high-execution engineering student who builds practical AI systems and computer vision models. My background merges technical rigor with structured project execution for real-world impact.
 					</p>
-					<div class="rise mt-10 flex flex-wrap gap-4" style="animation-delay: 240ms">
-						<a href="mailto:jashsaha917@gmail.com" class="clay inline-flex items-center gap-2 bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-95">
+
+					<!-- Action Buttons -->
+					<div class="kinetic-entry mt-10 flex flex-wrap gap-4">
+						<a href="mailto:jashsaha917@gmail.com" class="val-btn inline-flex items-center gap-2 px-7 py-3.5 text-sm font-black">
 							<i data-lucide="mail" class="size-4"></i>
 							jashsaha917@gmail.com
 						</a>
-						<a href="tel:+917980236608" class="clay inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-foreground hover:text-primary">
-							<i data-lucide="phone" class="size-4 text-primary"></i>
+						<a href="tel:+917980236608" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
+							<i data-lucide="phone" class="size-4 text-[var(--val-red)]"></i>
 							+91 79802 36608
 						</a>
-						<a href="https://www.linkedin.com/in/jash-saha" target="_blank" rel="noreferrer" class="clay inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-foreground hover:text-primary">
+						<a href="https://www.linkedin.com/in/jash-saha" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
 							<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="size-4 object-contain" />
 							LinkedIn
 						</a>
-						<a href="https://github.com/HaGGARdTREASon" target="_blank" rel="noreferrer" class="clay inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-foreground hover:text-primary">
+						<a href="https://github.com/HaGGARdTREASon" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
 							<img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="size-4 object-contain" />
 							GitHub
 						</a>
 					</div>
 
-					<dl class="rise mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4" style="animation-delay: 320ms">
-						<div class="clay px-5 py-6">
-							<dt class="font-display text-3xl font-bold text-primary">
-								<span aria-hidden="true" class="mr-1 text-2xl">🚀</span>3
-							</dt>
-							<dd class="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Flagship projects</dd>
+					<!-- Stat Counters -->
+					<dl class="kinetic-entry mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4">
+						<div class="val-card p-6">
+							<dt class="font-display text-4xl font-black text-[var(--val-red)]">03</dt>
+							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Flagship Projects</dd>
 						</div>
-						<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="clay px-5 py-6 block transition-transform hover:scale-[1.02] hover:opacity-95">
-							<dt class="font-display text-3xl font-bold text-primary">
-								<span aria-hidden="true" class="mr-1 text-2xl">📜</span>1
-							</dt>
-							<dd class="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Published patent</dd>
+						<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card p-6 block">
+							<dt class="font-display text-4xl font-black text-[var(--val-red)]">01</dt>
+							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Published Patent</dd>
 						</a>
-						<div class="clay px-5 py-6">
-							<dt class="font-display text-lg sm:text-xl font-bold text-primary leading-tight">
-								<span aria-hidden="true" class="mr-1 text-2xl">📝</span>Research Papers
-							</dt>
-							<dd class="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Coming Soon</dd>
+						<div class="val-card p-6">
+							<dt class="font-display text-xl font-black text-[var(--val-dark)] uppercase leading-tight">Research</dt>
+							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-red)]">Coming Soon</dd>
 						</div>
-						<div class="clay px-5 py-6">
-							<dt class="font-display text-3xl font-bold text-primary">
-								<span aria-hidden="true" class="mr-1 text-2xl">🎓</span>2027
-							</dt>
-							<dd class="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">B.Tech graduation</dd>
+						<div class="val-card p-6">
+							<dt class="font-display text-4xl font-black text-[var(--val-red)]">2027</dt>
+							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Graduation Year</dd>
 						</div>
 					</dl>
 				</div>
 			</section>
 
 			<!-- Projects Section -->
-			<section class="mx-auto max-w-5xl px-6 py-20">
-				<div class="mb-10 flex items-baseline gap-4 scroll-zoom-point">
-					<span class="font-display text-xs tracking-[0.3em] text-primary font-bold">01</span>
-					<h2 class="text-2xl font-semibold tracking-tight sm:text-4xl">
-						<span aria-hidden="true" class="mr-2">🚀</span>Projects
+			<section class="relative mx-auto max-w-5xl px-6 py-20">
+				<div class="laser-scanner"></div>
+				<div class="mb-12 flex items-center gap-4">
+					<span class="val-badge val-badge-red px-3 py-1 font-display text-xs font-black tracking-widest">// 01</span>
+					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+						Tactical Projects
 					</h2>
-					<span class="rule-gradient h-px flex-1"></span>
+					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
-				<div class="space-y-6">
-					<article class="panel group p-7 scroll-zoom-point">
+
+				<div class="space-y-8">
+					<article class="val-card p-8">
 						<div class="flex items-center gap-3">
-							<span class="clay-pressed flex size-11 shrink-0 items-center justify-center text-lg">
-								<span aria-hidden="true">🤟</span>
-							</span>
-							<span class="font-display inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">
-								<i data-lucide="award" class="size-3"></i> Published Patent
+							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
+								<i data-lucide="award" class="size-3.5 text-[var(--val-red)]"></i> Published Patent
 							</span>
 						</div>
-						<h3 class="mt-4 text-xl font-semibold leading-snug">Sign Language Translation System</h3>
-						<ul class="mt-4 space-y-3">
-							<li class="border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">Bridges communication between sign language users and non-signers, eliminating language barriers.</li>
-							<li class="border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">Real-time hand gesture detection via computer vision, converted instantly into spoken audio.</li>
+						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">Sign Language Translation System</h3>
+						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+							<li class="border-l-4 border-[var(--val-red)] pl-4 text-sm leading-relaxed">Bridges communication between sign language users and non-signers, eliminating real-time audio-visual communication barriers.</li>
+							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Real-time hand gesture detection via computer vision, converted instantly into spoken audio responses.</li>
 						</ul>
 					</article>
-					<article class="panel group p-7 scroll-zoom-point">
+
+					<article class="val-card p-8">
 						<div class="flex items-center gap-3">
-							<span class="clay-pressed flex size-11 shrink-0 items-center justify-center text-lg">
-								<span aria-hidden="true">🌾</span>
-							</span>
-							<span class="font-display inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">
-								<i data-lucide="brain-circuit" class="size-3"></i> Deep Learning
+							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
+								<i data-lucide="brain-circuit" class="size-3.5 text-[var(--val-red)]"></i> Deep Learning
 							</span>
 						</div>
-						<h3 class="mt-4 text-xl font-semibold leading-snug">Agricultural Price & Market Risk AI</h3>
-						<ul class="mt-4 space-y-3">
-							<li class="border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">Custom PyTorch neural network using a Multi-Algorithm Ensemble (MoE) architecture to predict localized commodity prices.</li>
-							<li class="border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">Dynamic risk-assessment algorithm categorizing supply chain risk — Critical Shortage, Elevated Risk — and forecasting price trends.</li>
+						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">Agricultural Price & Market Risk AI</h3>
+						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+							<li class="border-l-4 border-[var(--val-red)] pl-4 text-sm leading-relaxed">Custom PyTorch neural network utilizing a Multi-Algorithm Ensemble (MoE) architecture to predict localized commodity prices.</li>
+							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Dynamic risk-assessment algorithm categorizing supply chain risk — Critical Shortage, Elevated Risk — and forecasting trends.</li>
 						</ul>
 					</article>
-					<article class="panel group p-7 scroll-zoom-point">
+
+					<article class="val-card p-8">
 						<div class="flex items-center gap-3">
-							<span class="clay-pressed flex size-11 shrink-0 items-center justify-center text-lg">
-								<span aria-hidden="true">🛡️</span>
-							</span>
-							<span class="font-display inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">
-								<i data-lucide="eye" class="size-3"></i> Computer Vision
+							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
+								<i data-lucide="eye" class="size-3.5 text-[var(--val-red)]"></i> Computer Vision
 							</span>
 						</div>
-						<h3 class="mt-4 text-xl font-semibold leading-snug">Bad Touch Detection System</h3>
-						<ul class="mt-4 space-y-3">
-							<li class="border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">OpenCV + MediaPipe pipeline tracking skeletal landmarks to distinguish self-touch from unsafe foreign contact.</li>
-							<li class="border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">Geometric safety zones around the torso trigger an immediate Pygame audio alarm on unauthorized proximity.</li>
+						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">Bad Touch Detection System</h3>
+						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+							<li class="border-l-4 border-[var(--val-red)] pl-4 text-sm leading-relaxed">OpenCV + MediaPipe pipeline tracking skeletal landmarks to distinguish self-touch from unsafe foreign contact.</li>
+							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Geometric safety zones around the torso trigger an immediate Pygame audio alarm upon unauthorized proximity.</li>
 						</ul>
 					</article>
 				</div>
 			</section>
 
-			<!-- Research Papers Section -->
+			<!-- Research Section -->
 			<section class="mx-auto max-w-5xl px-6 py-12">
-				<div class="mb-10 flex items-baseline gap-4 scroll-zoom-point">
-					<span class="font-display text-xs tracking-[0.3em] text-primary font-bold">02</span>
-					<h2 class="text-2xl font-semibold tracking-tight sm:text-4xl">
-						<span aria-hidden="true" class="mr-2">📄</span>Research Papers
+				<div class="mb-10 flex items-center gap-4">
+					<span class="val-badge val-badge-red px-3 py-1 font-display text-xs font-black tracking-widest">// 02</span>
+					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+						Research Papers
 					</h2>
-					<span class="rule-gradient h-px flex-1"></span>
+					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
-				<div class="panel p-8 text-center scroll-zoom-point">
-					<p class="font-display text-xl font-bold text-accent uppercase tracking-widest">Coming Soon</p>
-					<p class="mt-2 text-sm text-muted-foreground">Research papers focusing on AI, Deep Learning architectures, and Computer Vision are currently in progress.</p>
+				<div class="val-card p-10 text-center border-2 border-dashed border-[var(--val-red)]">
+					<p class="font-display text-2xl font-black text-[var(--val-red)] uppercase tracking-widest">// COMING SOON</p>
+					<p class="mt-2 text-base font-bold text-[var(--val-dark)]">Research papers focusing on AI architectures and Computer Vision are actively in progress.</p>
 				</div>
 			</section>
 
 			<!-- Skills Section -->
 			<section class="mx-auto max-w-5xl px-6 py-20">
-				<div class="mb-10 flex items-baseline gap-4 scroll-zoom-point">
-					<span class="font-display text-xs tracking-[0.3em] text-primary font-bold">03</span>
-					<h2 class="text-2xl font-semibold tracking-tight sm:text-4xl">
-						<span aria-hidden="true" class="mr-2">🧠</span>Skills
+				<div class="mb-12 flex items-center gap-4">
+					<span class="val-badge val-badge-red px-3 py-1 font-display text-xs font-black tracking-widest">// 03</span>
+					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+						Agent Skills
 					</h2>
-					<span class="rule-gradient h-px flex-1"></span>
+					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
 				<div class="grid gap-8 sm:grid-cols-2">
-					<div class="scroll-zoom-point">
-						<h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-							<i data-lucide="code-2" class="size-4 text-primary"></i> <span aria-hidden="true">💻</span> Languages
+					<div class="val-card p-6">
+						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-red)]">
+							<i data-lucide="code-2" class="size-4"></i> Core Languages
 						</h3>
-						<div class="mt-4 flex flex-wrap gap-3">
-							<span class="chip px-4 py-2 text-sm font-medium">C</span>
-							<span class="chip px-4 py-2 text-sm font-medium">C++</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Python</span>
-							<span class="chip px-4 py-2 text-sm font-medium">SQL</span>
-							<span class="chip px-4 py-2 text-sm font-medium">HTML & CSS</span>
+						<div class="mt-4 flex flex-wrap gap-2.5">
+							<span class="val-chip px-4 py-2 text-xs">C</span>
+							<span class="val-chip px-4 py-2 text-xs">C++</span>
+							<span class="val-chip px-4 py-2 text-xs">Python</span>
+							<span class="val-chip px-4 py-2 text-xs">SQL</span>
+							<span class="val-chip px-4 py-2 text-xs">HTML & CSS</span>
 						</div>
 					</div>
-					<div class="scroll-zoom-point" style="transition-delay: 250ms;">
-						<h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-							<i data-lucide="brain-circuit" class="size-4 text-primary"></i> <span aria-hidden="true">🤖</span> ML & Data
+					<div class="val-card p-6">
+						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-red)]">
+							<i data-lucide="brain-circuit" class="size-4"></i> ML & Data Stack
 						</h3>
-						<div class="mt-4 flex flex-wrap gap-3">
-							<span class="chip px-4 py-2 text-sm font-medium">PyTorch</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Scikit-Learn</span>
-							<span class="chip px-4 py-2 text-sm font-medium">OpenCV</span>
-							<span class="chip px-4 py-2 text-sm font-medium">MediaPipe</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Pandas</span>
-							<span class="chip px-4 py-2 text-sm font-medium">NumPy</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Matplotlib</span>
+						<div class="mt-4 flex flex-wrap gap-2.5">
+							<span class="val-chip px-4 py-2 text-xs">PyTorch</span>
+							<span class="val-chip px-4 py-2 text-xs">Scikit-Learn</span>
+							<span class="val-chip px-4 py-2 text-xs">OpenCV</span>
+							<span class="val-chip px-4 py-2 text-xs">MediaPipe</span>
+							<span class="val-chip px-4 py-2 text-xs">Pandas</span>
+							<span class="val-chip px-4 py-2 text-xs">NumPy</span>
 						</div>
 					</div>
-					<div class="scroll-zoom-point">
-						<h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-							<i data-lucide="line-chart" class="size-4 text-primary"></i> <span aria-hidden="true">📊</span> Practice
+					<div class="val-card p-6">
+						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-red)]">
+							<i data-lucide="line-chart" class="size-4"></i> Technical Practice
 						</h3>
-						<div class="mt-4 flex flex-wrap gap-3">
-							<span class="chip px-4 py-2 text-sm font-medium">Computer Aided Design</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Data Engineering</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Data Visualization</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Analysis</span>
+						<div class="mt-4 flex flex-wrap gap-2.5">
+							<span class="val-chip px-4 py-2 text-xs">CAD</span>
+							<span class="val-chip px-4 py-2 text-xs">Data Engineering</span>
+							<span class="val-chip px-4 py-2 text-xs">Power BI</span>
+							<span class="val-chip px-4 py-2 text-xs">Data Visualization</span>
 						</div>
 					</div>
-					<div class="scroll-zoom-point" style="transition-delay: 250ms;">
-						<h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-							<i data-lucide="users" class="size-4 text-primary"></i> <span aria-hidden="true">🎤</span> Human
+					<div class="val-card p-6">
+						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-red)]">
+							<i data-lucide="users" class="size-4"></i> Leadership & Soft Skills
 						</h3>
-						<div class="mt-4 flex flex-wrap gap-3">
-							<span class="chip px-4 py-2 text-sm font-medium">Public Speaking</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Leadership</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Communication</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Teamwork</span>
-							<span class="chip px-4 py-2 text-sm font-medium">Management</span>
+						<div class="mt-4 flex flex-wrap gap-2.5">
+							<span class="val-chip px-4 py-2 text-xs">Public Speaking</span>
+							<span class="val-chip px-4 py-2 text-xs">Leadership</span>
+							<span class="val-chip px-4 py-2 text-xs">Communication</span>
+							<span class="val-chip px-4 py-2 text-xs">Team Management</span>
 						</div>
 					</div>
 				</div>
@@ -351,134 +572,124 @@
 
 			<!-- Experience & Education -->
 			<section class="mx-auto max-w-5xl px-6 py-20">
-				<div class="mb-10 flex items-baseline gap-4 scroll-zoom-point">
-					<span class="font-display text-xs tracking-[0.3em] text-primary font-bold">04</span>
-					<h2 class="text-2xl font-semibold tracking-tight sm:text-4xl">
-						<span aria-hidden="true" class="mr-2">🎓</span>Experience & Education
+				<div class="mb-12 flex items-center gap-4">
+					<span class="val-badge val-badge-red px-3 py-1 font-display text-xs font-black tracking-widest">// 04</span>
+					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+						Track Record
 					</h2>
-					<span class="rule-gradient h-px flex-1"></span>
+					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
 				<div class="space-y-6">
-					<div class="panel p-7 scroll-zoom-point">
+					<div class="val-card p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
-							<h3 class="flex items-center gap-2 text-lg font-semibold">
-								<i data-lucide="line-chart" class="size-5 text-accent"></i> 💼 Indian Institute of Internship
+							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
+								<i data-lucide="line-chart" class="size-5 text-[var(--val-red)]"></i> Indian Institute of Internship
 							</h3>
-							<span class="font-display text-sm font-semibold text-primary">Aug 2025 — Oct 2025</span>
+							<span class="font-display text-sm font-black text-[var(--val-red)]">Aug 2025 — Oct 2025</span>
 						</div>
-						<p class="mt-2 text-sm text-muted-foreground">Completed a Business Analytics project using Power BI.</p>
+						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Completed a Business Analytics project using Power BI.</p>
 					</div>
-					<div class="panel p-7 scroll-zoom-point">
+					<div class="val-card p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
-							<h3 class="flex items-center gap-2 text-lg font-semibold">
-								<i data-lucide="graduation-cap" class="size-5 text-primary"></i> Meghnad Saha Institute of Technology, Kolkata
+							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
+								<i data-lucide="graduation-cap" class="size-5 text-[var(--val-red)]"></i> Meghnad Saha Institute of Technology
 							</h3>
-							<span class="font-display text-sm font-semibold text-primary">Aug 2023 — Jul 2027</span>
+							<span class="font-display text-sm font-black text-[var(--val-red)]">Aug 2023 — Jul 2027</span>
 						</div>
-						<p class="mt-2 text-sm text-muted-foreground">B.Tech, Computer Science and Business Systems</p>
+						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">B.Tech in Computer Science and Business Systems</p>
 					</div>
-					<div class="panel p-7 scroll-zoom-point">
+					<div class="val-card p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
-							<h3 class="flex items-center gap-2 text-lg font-semibold">
-								<i data-lucide="graduation-cap" class="size-5 text-primary"></i> Delhi Public School, Ruby Park
+							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
+								<i data-lucide="graduation-cap" class="size-5 text-[var(--val-red)]"></i> Delhi Public School, Ruby Park
 							</h3>
-							<span class="font-display text-sm font-semibold text-primary">Feb 2009 — Feb 2023</span>
+							<span class="font-display text-sm font-black text-[var(--val-red)]">Feb 2009 — Feb 2023</span>
 						</div>
-						<p class="mt-2 text-sm text-muted-foreground">High School Diploma in Science</p>
+						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">High School Diploma in Science</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- Leadership & Activities -->
+			<!-- Leadership -->
 			<section class="mx-auto max-w-5xl px-6 py-20 pb-36">
-				<div class="mb-10 flex items-baseline gap-4 scroll-zoom-point">
-					<span class="font-display text-xs tracking-[0.3em] text-primary font-bold">05</span>
-					<h2 class="text-2xl font-semibold tracking-tight sm:text-4xl">
-						<span aria-hidden="true" class="mr-2">🌟</span>Leadership & Activities
+				<div class="mb-12 flex items-center gap-4">
+					<span class="val-badge val-badge-red px-3 py-1 font-display text-xs font-black tracking-widest">// 05</span>
+					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+						Command & Leadership
 					</h2>
-					<span class="rule-gradient h-px flex-1"></span>
+					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
-				<div class="space-y-6">
-					<div class="panel p-7 scroll-zoom-point">
-						<img src="phoenix_test_2.3.jpg" alt="Phoenix Logo" class="mb-4 h-24 sm:h-28 w-auto object-contain rounded-lg" />
-						<h3 class="flex items-start gap-2 text-base font-semibold leading-snug">
-							<i data-lucide="sparkles" class="mt-0.5 size-4 shrink-0 text-primary"></i>
-							President & Ex-Vice President — Phoenix, Cultural Committee of CSBS
+				<div class="grid gap-8 sm:grid-cols-2">
+					<div class="val-card p-7">
+						<img src="phoenix_test_2.3.jpg" alt="Phoenix Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
+						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
+							President & Ex-Vice President — Phoenix, CSBS
 						</h3>
-						<ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+						<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
 							<li>— Organized Teacher's Day celebrations in 2025 and 2026.</li>
-							<li>— Organized the Farewell ceremonies for 2025 and 2026.</li>
+							<li>— Managed Farewell ceremonies for graduating batches.</li>
 						</ul>
 					</div>
-					<div class="panel p-7 scroll-zoom-point">
-						<img src="Greenovation club.jpg" alt="Greenovation Club Logo" class="mb-4 h-24 sm:h-28 w-auto object-contain rounded-lg" />
-						<h3 class="flex items-start gap-2 text-base font-semibold leading-snug">
-							<i data-lucide="leaf" class="mt-0.5 size-4 shrink-0 text-primary"></i>
-							Vice President & Former Executive Lead — Greenovation Club, GCMSIT
+					<div class="val-card p-7">
+						<img src="Greenovation club.jpg" alt="Greenovation Club Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
+						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
+							Vice President — Greenovation Club, GCMSIT
 						</h3>
-						<ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
-							<li>— Currently serving as Vice President of Greenovation Club.</li>
-							<li>— Ran an E-waste Recycle Campaign collecting 10kg+ of e-waste.</li>
-							<li>— Hosted a handicrafts-from-waste competition with 75+ submissions.</li>
-							<li>— Organized the AQI workshop.</li>
+						<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
+							<li>— Collected 10kg+ of e-waste during recycling drive.</li>
+							<li>— Hosted waste-to-handicrafts competition with 75+ entries.</li>
 						</ul>
 					</div>
 				</div>
 			</section>
 		</main>
 
-		<!-- Script block for interactions -->
+		<!-- Script for Crosshair, Timer & Page Refresh Scroll Reset -->
 		<script>
-			// Handle Intro Preloader Dismissal
+			// Force Page Scroll Reset on Refresh
+			if ('scrollRestoration' in history) {
+			history.scrollRestoration = 'manual';
+			}
+			window.scrollTo(0, 0);
+
+			// Interactive Mouse-Tracking Crosshair
+			const crosshair = document.getElementById('val-crosshair');
+			document.addEventListener('mousemove', (e) => {
+			crosshair.style.left = `${e.clientX}px`;
+			crosshair.style.top = `${e.clientY}px`;
+			});
+
+			// Intro Preloader Animation Dismissal
 			setTimeout(() => {
-				document.body.classList.remove('loading');
-				const loader = document.getElementById('intro-loader');
-				if (loader) {
-					loader.style.display = 'none';
-				}
-			}, 2950);
+			document.body.classList.remove('loading');
+			const loader = document.getElementById('intro-loader');
+			if (loader) {
+			loader.style.opacity = '0';
+			loader.style.transition = 'opacity 0.5s ease';
+			setTimeout(() => loader.style.display = 'none', 500);
+			}
+			}, 2200);
 
 			// Initialize Lucide Icons
 			lucide.createIcons();
 
-			// Live Digital Clock Logic
+			// Digital Clock Updates
 			function updateClock() {
-				const now = new Date();
-				let hours = now.getHours();
-				const minutes = String(now.getMinutes()).padStart(2, '0');
-				const seconds = String(now.getSeconds()).padStart(2, '0');
-				const ampm = hours >= 12 ? 'PM' : 'AM';
+			const now = new Date();
+			let hours = now.getHours();
+			const minutes = String(now.getMinutes()).padStart(2, '0');
+			const seconds = String(now.getSeconds()).padStart(2, '0');
+			const ampm = hours >= 12 ? 'PM' : 'AM';
 
-				hours = hours % 12;
-				hours = hours ? hours : 12;
-				const hoursStr = String(hours).padStart(2, '0');
+			hours = hours % 12;
+			hours = hours ? hours : 12;
+			const hoursStr = String(hours).padStart(2, '0');
 
-				const timeString = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
-				document.getElementById('clock-time').textContent = timeString;
+			document.getElementById('clock-time').textContent = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
 			}
 
 			updateClock();
 			setInterval(updateClock, 1000);
-
-			// Setup Intersection Observer for Scroll Animations
-			const observerOptions = {
-				root: null,
-				rootMargin: '0px 0px -50px 0px',
-				threshold: 0.1
-			};
-
-			const scrollObserver = new IntersectionObserver((entries, observer) => {
-				entries.forEach(entry => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('scrolled');
-						observer.unobserve(entry.target);
-					}
-				});
-			}, observerOptions);
-
-			// Observe elements using the zoom-from-point class
-			const scrollElements = document.querySelectorAll('.scroll-zoom-point');
-			scrollElements.forEach(el => scrollObserver.observe(el));
 		</script>
 	</body>
 </html>
