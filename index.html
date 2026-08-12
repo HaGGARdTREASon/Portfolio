@@ -22,10 +22,111 @@
 		<!-- Custom Styles -->
 		<link rel="stylesheet" href="styles.css" />
 
+		<!-- Opening Animation Styles -->
+		<style>
+			body.loading {
+				overflow: hidden !important;
+			}
+
+			#intro-loader {
+				position: fixed;
+				inset: 0;
+				z-index: 99999;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: transparent;
+				pointer-events: auto;
+			}
+
+			.loader-grid {
+				position: absolute;
+				inset: 0;
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				z-index: 1;
+			}
+
+			.loader-column {
+				background-color: #090a0f;
+				height: 100%;
+				width: 100%;
+				transform-origin: top;
+				animation: tileSlideUp 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+			}
+
+			.loader-column:nth-child(1) { animation-delay: 2.0s; }
+			.loader-column:nth-child(2) { animation-delay: 2.1s; }
+			.loader-column:nth-child(3) { animation-delay: 2.2s; }
+			.loader-column:nth-child(4) { animation-delay: 2.1s; }
+			.loader-column:nth-child(5) { animation-delay: 2.0s; }
+
+			.intro-content {
+				position: relative;
+				z-index: 2;
+				text-align: center;
+				animation: nameZoomFade 1.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+			}
+
+			.intro-title {
+				font-family: 'Space Grotesk', sans-serif;
+				font-size: clamp(2.5rem, 8vw, 6.5rem);
+				font-weight: 700;
+				letter-spacing: 0.18em;
+				color: #ffffff;
+				text-transform: uppercase;
+				line-height: 1;
+				margin: 0;
+				text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+			}
+
+			@keyframes nameZoomFade {
+				0% {
+					opacity: 0;
+					transform: scale(0.85);
+				}
+				30% {
+					opacity: 1;
+					transform: scale(1);
+				}
+				75% {
+					opacity: 1;
+					transform: scale(1.05);
+				}
+				100% {
+					opacity: 0;
+					transform: scale(1.12);
+				}
+			}
+
+			@keyframes tileSlideUp {
+				0% {
+					transform: scaleY(1);
+				}
+				100% {
+					transform: scaleY(0);
+				}
+			}
+		</style>
+
 		<!-- Lucide Icons -->
 		<script src="https://unpkg.com/lucide@latest"></script>
 	</head>
-	<body class="min-h-screen text-foreground font-sans">
+	<body class="loading min-h-screen text-foreground font-sans">
+
+		<!-- Opening Animation Preloader -->
+		<div id="intro-loader" aria-hidden="true">
+			<div class="loader-grid">
+				<div class="loader-column"></div>
+				<div class="loader-column"></div>
+				<div class="loader-column"></div>
+				<div class="loader-column"></div>
+				<div class="loader-column"></div>
+			</div>
+			<div class="intro-content">
+				<h1 class="intro-title">JASH SAHA</h1>
+			</div>
+		</div>
 
 		<!-- Floating Tactile Clay Digital Clock -->
 		<div id="digital-clock" class="clay fixed right-4 top-4 z-50 flex items-center gap-2.5 rounded-2xl bg-card px-4 py-2.5 font-display text-sm font-bold tracking-wider text-primary sm:right-6 sm:top-6">
@@ -328,23 +429,32 @@
 
 		<!-- Script block for interactions -->
 		<script>
+			// Handle Intro Preloader Dismissal
+			setTimeout(() => {
+				document.body.classList.remove('loading');
+				const loader = document.getElementById('intro-loader');
+				if (loader) {
+					loader.style.display = 'none';
+				}
+			}, 2950);
+
 			// Initialize Lucide Icons
 			lucide.createIcons();
 
 			// Live Digital Clock Logic
 			function updateClock() {
-			const now = new Date();
-			let hours = now.getHours();
-			const minutes = String(now.getMinutes()).padStart(2, '0');
-			const seconds = String(now.getSeconds()).padStart(2, '0');
-			const ampm = hours >= 12 ? 'PM' : 'AM';
+				const now = new Date();
+				let hours = now.getHours();
+				const minutes = String(now.getMinutes()).padStart(2, '0');
+				const seconds = String(now.getSeconds()).padStart(2, '0');
+				const ampm = hours >= 12 ? 'PM' : 'AM';
 
-			hours = hours % 12;
-			hours = hours ? hours : 12;
-			const hoursStr = String(hours).padStart(2, '0');
+				hours = hours % 12;
+				hours = hours ? hours : 12;
+				const hoursStr = String(hours).padStart(2, '0');
 
-			const timeString = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
-			document.getElementById('clock-time').textContent = timeString;
+				const timeString = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
+				document.getElementById('clock-time').textContent = timeString;
 			}
 
 			updateClock();
@@ -352,18 +462,18 @@
 
 			// Setup Intersection Observer for Scroll Animations
 			const observerOptions = {
-			root: null,
-			rootMargin: '0px 0px -50px 0px',
-			threshold: 0.1
+				root: null,
+				rootMargin: '0px 0px -50px 0px',
+				threshold: 0.1
 			};
 
 			const scrollObserver = new IntersectionObserver((entries, observer) => {
-			entries.forEach(entry => {
-			if (entry.isIntersecting) {
-			entry.target.classList.add('scrolled');
-			observer.unobserve(entry.target);
-			}
-			});
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('scrolled');
+						observer.unobserve(entry.target);
+					}
+				});
 			}, observerOptions);
 
 			// Observe elements using the zoom-from-point class
