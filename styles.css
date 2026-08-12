@@ -3,203 +3,225 @@
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   
-  /* Radii */
-  --radius: 0.75rem;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 6px);
-  --radius-2xl: calc(var(--radius) + 12px);
-  --radius-3xl: calc(var(--radius) + 18px);
-  
-  /* Default Light Theme Colors */
-  --background: oklch(0.96 0.012 160);
-  --foreground: oklch(0.22 0.03 160);
-  --card: oklch(0.97 0.01 160);
-  --card-foreground: oklch(0.22 0.03 160);
-  --primary: oklch(0.48 0.16 155);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.92 0.02 160);
-  --secondary-foreground: oklch(0.25 0.03 160);
-  --muted: oklch(0.90 0.015 160);
-  --muted-foreground: oklch(0.45 0.02 160);
-  --accent: oklch(0.62 0.18 45);
-  --accent-foreground: oklch(0.99 0 0);
-  --border: oklch(0.89 0.015 160);
+  /* Tactical Color Palette */
+  --val-purple: #8b5cf6;
+  --val-purple-dark: #6d28d9;
+  --val-dark: #0f1923;
+  --val-bg: #ece8e1;
+  --val-card: #ffffff;
+  --val-gray: #5e686e;
+  --val-border: rgba(15, 25, 35, 0.18);
 
-  /* Shadows & Gradients */
-  --gradient-hero: radial-gradient(120% 90% at 15% 0%, color-mix(in oklab, var(--primary) 12%, transparent) 0%, transparent 60%);
-  
-  /* High-Intensity Claymorphism Shadows for Deeper 3D Pop */
-  --clay-shadow: 
-    16px 18px 36px -2px rgba(135, 155, 175, 0.75),
-    -14px -14px 28px 0px rgba(255, 255, 255, 1),
-    inset 4px 4px 8px 0px rgba(255, 255, 255, 0.95),
-    inset -5px -5px 10px 0px rgba(135, 155, 175, 0.5);
-    
-  --clay-shadow-hover: 
-    22px 26px 44px -2px rgba(115, 140, 165, 0.85),
-    -16px -16px 32px 0px rgba(255, 255, 255, 1),
-    inset 5px 5px 10px 0px rgba(255, 255, 255, 1),
-    inset -6px -6px 12px 0px rgba(115, 140, 165, 0.6);
-
-  --clay-shadow-inset: 
-    inset 8px 8px 16px 0px rgba(135, 155, 175, 0.65),
-    inset -8px -8px 16px 0px rgba(255, 255, 255, 1);
+  /* Animations & Transitions */
+  --ease-heavy-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-heavy-zoom: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Base Styles */
-* {
-  border-color: var(--border);
-  outline: none;
+/* Custom Cursor Reset */
+*, html, body, a, button, input, select, textarea {
+  cursor: none !important;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--val-bg);
+  color: var(--val-dark);
   font-family: var(--font-sans);
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-h1, h2, h3, .font-display {
+/* Tactical Crosshair */
+#val-crosshair {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--val-purple);
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s, height 0.15s, border-color 0.15s, background-color 0.15s;
+}
+
+#val-crosshair::before,
+#val-crosshair::after {
+  content: '';
+  position: absolute;
+  background-color: var(--val-purple);
+}
+
+#val-crosshair::before {
+  top: 50%;
+  left: -6px;
+  right: -6px;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+#val-crosshair::after {
+  left: 50%;
+  top: -6px;
+  bottom: -6px;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+a:hover ~ #val-crosshair,
+button:hover ~ #val-crosshair,
+.val-card:hover ~ #val-crosshair {
+  width: 42px;
+  height: 42px;
+  border-color: #ffffff;
+  background-color: rgba(139, 92, 246, 0.2);
+}
+
+/* Floating White Background HUD Accent Objects */
+.white-float-obj {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--val-border);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.float-obj-1 { top: 15%; left: 8%; width: 60px; height: 60px; clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%); }
+.float-obj-2 { top: 45%; right: 5%; width: 90px; height: 90px; clip-path: polygon(20% 0, 100% 0, 100% 80%, 0 100%); }
+.float-obj-3 { bottom: 20%; left: 12%; width: 50px; height: 50px; clip-path: polygon(0 0, 100% 20%, 80% 100%, 0 80%); }
+.float-obj-4 { top: 75%; right: 18%; width: 75px; height: 75px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+
+/* Pinpoint Zoom Elements */
+.pin-zoom-element {
+  opacity: 0;
+  transform: scale(0) rotate(-12deg);
+  transform-origin: center center;
+  transition: opacity 0.85s var(--ease-heavy-zoom), 
+              transform 0.85s var(--ease-heavy-spring), 
+              filter 0.85s ease;
+  filter: blur(12px);
+  will-change: transform, opacity, filter;
+}
+
+.pin-zoom-element.is-zoomed-in {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  filter: blur(0px);
+}
+
+.pin-zoom-element.is-zoomed-out {
+  opacity: 0;
+  transform: scale(0) rotate(12deg);
+  filter: blur(16px);
+}
+
+/* Preloader Screen */
+#intro-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: var(--val-dark);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform-origin: center center;
+  transition: transform 0.9s var(--ease-heavy-zoom), opacity 0.8s ease;
+}
+
+#intro-loader.zoom-out-exit {
+  opacity: 0;
+  transform: scale(0) rotate(45deg);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.val-start-side-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.glitch-text {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.glitch-text span {
+  color: var(--val-purple);
+}
+
+/* Tactical UI Components */
+.val-card {
+  background-color: var(--val-card) !important;
+  border: 1px solid var(--val-border) !important;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  position: relative;
+  transition: transform 0.4s var(--ease-heavy-spring), box-shadow 0.4s ease !important;
+}
+
+.val-card:hover {
+  transform: scale(1.05) rotate(1deg) !important;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.4) !important;
+  z-index: 20;
+}
+
+.val-btn {
+  background-color: var(--val-dark);
+  color: #ffffff;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.val-btn:hover {
+  background-color: var(--val-purple);
+  transform: translateY(-2px);
+}
+
+.val-btn-outline {
+  border: 2px solid var(--val-dark);
+  color: var(--val-dark);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: all 0.2s ease;
+}
+
+.val-btn-outline:hover {
+  background-color: var(--val-dark);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.val-badge {
+  background-color: var(--val-dark);
+  color: #ffffff;
   font-family: var(--font-display);
 }
 
-/* Tailwind Extensions Configuration for CDN */
-@layer tailwind-config {
-  @config {
-    theme: {
-      extend: {
-        colors: {
-          background: "var(--background)",
-          foreground: "var(--foreground)",
-          card: "var(--card)",
-          "card-foreground": "var(--card-foreground)",
-          primary: "var(--primary)",
-          "primary-foreground": "var(--primary-foreground)",
-          secondary: "var(--secondary)",
-          "secondary-foreground": "var(--secondary-foreground)",
-          muted: "var(--muted)",
-          "muted-foreground": "var(--muted-foreground)",
-          accent: "var(--accent)",
-          border: "var(--border)",
-        },
-      }
-    }
-  }
+.val-badge-purple {
+  background-color: var(--val-purple);
 }
 
-/* Custom UI Classes */
-.hero-glow {
-  position: relative;
-  background-image: var(--gradient-hero);
-  isolation: isolate;
+.val-chip {
+  background-color: rgba(15, 25, 35, 0.06);
+  border: 1px solid var(--val-border);
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.hero-glow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image: radial-gradient(80% 60% at 85% 10%, color-mix(in oklab, var(--accent) 10%, transparent) 0%, transparent 65%), linear-gradient(to bottom, transparent 70%, color-mix(in oklab, var(--background) 100%, transparent) 100%);
-}
-
-.grid-lines {
-  background-image: linear-gradient(to right, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(90% 70% at 50% 0%, black 0%, transparent 75%);
-}
-
-.text-gradient {
-  background-image: linear-gradient(100deg, var(--foreground) 10%, var(--primary) 60%, var(--accent) 100%);
-  background-clip: text;
-  color: transparent;
-}
-
-.rule-gradient {
-  background-image: linear-gradient(to right, color-mix(in oklab, var(--primary) 40%, transparent), transparent);
-}
-
-/* Tactile Claymorphism Elements */
-.clay {
-  border-radius: var(--radius-2xl);
-  background-color: var(--card);
-  box-shadow: var(--clay-shadow);
-  transition: box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.clay:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--clay-shadow-hover);
-}
-
-.clay-pressed {
-  border-radius: var(--radius-xl);
-  background-color: var(--background);
-  box-shadow: var(--clay-shadow-inset);
-}
-
-.panel {
-  position: relative;
-  background-color: var(--card);
-  border-radius: var(--radius-3xl);
-  box-shadow: var(--clay-shadow);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  overflow: hidden;
-}
-
-.panel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  background-image: radial-gradient(70% 100% at 0% 0%, color-mix(in oklab, var(--primary) 8%, transparent), transparent 70%);
-}
-
-.panel:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--clay-shadow-hover);
-}
-
-.panel:hover::after {
-  opacity: 1;
-}
-
-.chip {
-  border-radius: var(--radius-xl);
-  background-color: var(--card);
-  color: var(--secondary-foreground);
-  box-shadow: var(--clay-shadow);
-  transition: color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-}
-
-.chip:hover {
-  transform: translateY(-2px);
-  color: var(--primary);
-  box-shadow: var(--clay-shadow-hover);
-}
-
-@keyframes rise-in {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; }
-}
-
-.rise {
-  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* 2s Scroll Zoom Animation Expanding directly from a Single Focal Point */
-.scroll-zoom-point {
-  opacity: 0;
-  transform: scale(0);
-  transform-origin: center center;
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.scroll-zoom-point.scrolled {
-  opacity: 1;
-  transform: scale(1);
+#digital-clock {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--val-border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }

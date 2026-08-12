@@ -13,451 +13,463 @@
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Space+Grotesk:wght@500;700;800;900&display=swap" rel="stylesheet">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+				<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Space+Grotesk:wght@500;700;800;900&display=swap" rel="stylesheet">
 
-		<!-- Tailwind CSS CDN -->
-		<script src="https://cdn.tailwindcss.com"></script>
+					<!-- Tailwind CSS CDN -->
+					<script src="https://cdn.tailwindcss.com"></script>
 
-		<!-- Custom Valorant Purple Theme, Interactive Motion & Animations -->
-		<style>
-			:root {
-				--val-purple: #8b5cf6;
-				--val-dark: #0f1923;
-				--val-bg: #ece8e1;
-				--val-card: #ffffff;
-				--val-gray: #5e686e;
-				--val-border: rgba(15, 25, 35, 0.18);
-			}
+					<!-- Custom Valorant Purple Theme, Interactive Motion & Animations -->
+					<style>
+						:root {
+						--val-purple: #8b5cf6;
+						--val-dark: #0f1923;
+						--val-bg: #ece8e1;
+						--val-card: #ffffff;
+						--val-gray: #5e686e;
+						--val-border: rgba(15, 25, 35, 0.18);
+						}
 
-			/* HIDE ALL DEFAULT WINDOWS CURSORS ACROSS WINDOW HOVER */
-			*, html, body, a, button, input, select, textarea {
-				cursor: none !important;
-			}
+						/* HIDE ALL DEFAULT WINDOWS CURSORS ACROSS WINDOW HOVER */
+						*, html, body, a, button, input, select, textarea {
+						cursor: none !important;
+						}
 
-			/* Force Scroll Reset */
-			html, body {
-				scroll-behavior: auto !important;
-			}
+						/* Force Scroll Reset */
+						html, body {
+						scroll-behavior: auto !important;
+						}
 
-			body.loading {
-				overflow: hidden !important;
-			}
+						body.loading {
+						overflow: hidden !important;
+						}
 
-			body {
-				background-color: var(--val-bg);
-				color: var(--val-dark);
-				font-family: 'DM Sans', sans-serif;
-				position: relative;
-				min-height: 100vh;
-				/* Animated Background Grid Pattern */
-				background-image: 
-					linear-gradient(rgba(15, 25, 35, 0.04) 1px, transparent 1px),
-					linear-gradient(90deg, rgba(15, 25, 35, 0.04) 1px, transparent 1px);
-				background-size: 32px 32px;
-				animation: bgGridMove 20s linear infinite;
-			}
+						body {
+						background-color: var(--val-bg);
+						color: var(--val-dark);
+						font-family: 'DM Sans', sans-serif;
+						position: relative;
+						min-height: 100vh;
+						/* Animated Background Grid Pattern */
+						background-image:
+						linear-gradient(rgba(15, 25, 35, 0.04) 1px, transparent 1px),
+						linear-gradient(90deg, rgba(15, 25, 35, 0.04) 1px, transparent 1px);
+						background-size: 32px 32px;
+						animation: bgGridMove 20s linear infinite;
+						}
 
-			@keyframes bgGridMove {
-				0% { background-position: 0 0; }
-				100% { background-position: 32px 32px; }
-			}
+						@keyframes bgGridMove {
+						0% { background-position: 0 0; }
+						100% { background-position: 32px 32px; }
+						}
 
-			/* CUSTOM VALORANT PURPLE MOUSE CROSSHAIR */
-			#val-crosshair {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 32px;
-				height: 32px;
-				border: 1.5px solid var(--val-purple);
-				pointer-events: none;
-				z-index: 999999;
-				transform: translate(-50%, -50%);
-				transition: width 0.15s, height 0.15s, border-color 0.15s;
-			}
+						/* CUSTOM VALORANT PURPLE MOUSE CROSSHAIR */
+						#val-crosshair {
+						position: fixed;
+						top: 0;
+						left: 0;
+						width: 32px;
+						height: 32px;
+						border: 1.5px solid var(--val-purple);
+						pointer-events: none;
+						z-index: 999999;
+						transform: translate(-50%, -50%);
+						transition: width 0.15s, height 0.15s, border-color 0.15s;
+						}
 
-			#val-crosshair::before {
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				width: 4px;
-				height: 4px;
-				background: var(--val-purple);
-				transform: translate(-50%, -50%);
-			}
+						#val-crosshair::before {
+						content: '';
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						width: 4px;
+						height: 4px;
+						background: var(--val-purple);
+						transform: translate(-50%, -50%);
+						}
 
-			#val-crosshair::after {
-				content: '';
-				position: absolute;
-				inset: -5px;
-				border: 1px dashed rgba(139, 92, 246, 0.6);
-				animation: crosshairSpin 8s linear infinite;
-			}
+						#val-crosshair::after {
+						content: '';
+						position: absolute;
+						inset: -5px;
+						border: 1px dashed rgba(139, 92, 246, 0.6);
+						animation: crosshairSpin 8s linear infinite;
+						}
 
-			@keyframes crosshairSpin {
-				100% { transform: rotate(360deg); }
-			}
+						@keyframes crosshairSpin {
+						100% { transform: rotate(360deg); }
+						}
 
-			/* WHITE FLOATING BACKGROUND OBJECTS (INTERACTIVE HOVER & SCROLL MOTION) */
-			.white-float-obj {
-				position: fixed;
-				pointer-events: auto !important;
-				z-index: 2;
-				background: #ffffff;
-				box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-				transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease;
-				will-change: transform;
-			}
+						/* WHITE FLOATING BACKGROUND OBJECTS (INTERACTIVE HOVER & SCROLL MOTION) */
+						.white-float-obj {
+						position: fixed;
+						pointer-events: auto !important;
+						z-index: 2;
+						background: #ffffff;
+						box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+						transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease;
+						will-change: transform;
+						}
 
-			.white-float-obj:hover {
-				transform: scale(1.6) rotate(45deg) translate(0, -10px) !important;
-				box-shadow: 0 0 25px rgba(139, 92, 246, 0.9), 0 0 10px #ffffff !important;
-				background: #ffffff;
-				border-color: var(--val-purple) !important;
-			}
+						.white-float-obj:hover {
+						transform: scale(1.6) rotate(45deg) translate(0, -10px) !important;
+						box-shadow: 0 0 25px rgba(139, 92, 246, 0.9), 0 0 10px #ffffff !important;
+						background: #ffffff;
+						border-color: var(--val-purple) !important;
+						}
 
-			.float-obj-1 {
-				top: 15%;
-				left: 5%;
-				width: 28px;
-				height: 28px;
-				border: 2px solid var(--val-dark);
-				clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-				animation: floatY 8s ease-in-out infinite alternate;
-			}
+						.float-obj-1 {
+						top: 15%;
+						left: 5%;
+						width: 28px;
+						height: 28px;
+						border: 2px solid var(--val-dark);
+						clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+						animation: floatY 8s ease-in-out infinite alternate;
+						}
 
-			.float-obj-2 {
-				top: 45%;
-				right: 6%;
-				width: 38px;
-				height: 38px;
-				border: 2px solid var(--val-purple);
-				clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
-				animation: floatY 10s ease-in-out infinite alternate;
-			}
+						.float-obj-2 {
+						top: 45%;
+						right: 6%;
+						width: 38px;
+						height: 38px;
+						border: 2px solid var(--val-purple);
+						clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+						animation: floatY 10s ease-in-out infinite alternate;
+						}
 
-			.float-obj-3 {
-				bottom: 25%;
-				left: 8%;
-				width: 48px;
-				height: 14px;
-				border: 2px solid var(--val-dark);
-				animation: floatY 6s ease-in-out infinite alternate;
-			}
+						.float-obj-3 {
+						bottom: 25%;
+						left: 8%;
+						width: 48px;
+						height: 14px;
+						border: 2px solid var(--val-dark);
+						animation: floatY 6s ease-in-out infinite alternate;
+						}
 
-			.float-obj-4 {
-				top: 70%;
-				right: 18%;
-				width: 24px;
-				height: 24px;
-				border: 2px solid #ffffff;
-				background: var(--val-dark);
-				clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-				animation: floatY 12s ease-in-out infinite alternate;
-			}
+						.float-obj-4 {
+						top: 70%;
+						right: 18%;
+						width: 24px;
+						height: 24px;
+						border: 2px solid #ffffff;
+						background: var(--val-dark);
+						clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+						animation: floatY 12s ease-in-out infinite alternate;
+						}
 
-			@keyframes floatY {
-				0% { transform: translateY(0px) rotate(0deg); }
-				50% { transform: translateY(-35px) rotate(45deg); }
-				100% { transform: translateY(25px) rotate(90deg); }
-			}
+						@keyframes floatY {
+						0% { transform: translateY(0px) rotate(0deg); }
+						50% { transform: translateY(-35px) rotate(45deg); }
+						100% { transform: translateY(25px) rotate(90deg); }
+						}
 
-			/* Hardcore Valorant Preloader */
-			#intro-loader {
-				position: fixed;
-				inset: 0;
-				z-index: 99999;
-				background-color: #0f1923;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				overflow: hidden;
-			}
+						/* Hardcore Valorant Preloader */
+						#intro-loader {
+						position: fixed;
+						inset: 0;
+						z-index: 99999;
+						background-color: #0f1923;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						overflow: hidden;
+						}
 
-			.loader-shutter-top, .loader-shutter-bottom {
-				position: absolute;
-				left: 0;
-				width: 100%;
-				height: 50%;
-				background-color: #0f1923;
-				z-index: 10;
-				transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
-			}
+						.loader-shutter-top, .loader-shutter-bottom {
+						position: absolute;
+						left: 0;
+						width: 100%;
+						height: 50%;
+						background-color: #0f1923;
+						z-index: 10;
+						transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+						}
 
-			.loader-shutter-top { top: 0; transform-origin: top; }
-			.loader-shutter-bottom { bottom: 0; transform-origin: bottom; }
+						.loader-shutter-top { top: 0; transform-origin: top; }
+						.loader-shutter-bottom { bottom: 0; transform-origin: bottom; }
 
-			body:not(.loading) .loader-shutter-top { transform: translateY(-100%); }
-			body:not(.loading) .loader-shutter-bottom { transform: translateY(100%); }
+						body:not(.loading) .loader-shutter-top { transform: translateY(-100%); }
+						body:not(.loading) .loader-shutter-bottom { transform: translateY(100%); }
 
-			.loader-content {
-				position: relative;
-				z-index: 20;
-				text-align: center;
-			}
+						.loader-content {
+						position: relative;
+						z-index: 20;
+						text-align: center;
+						}
 
-			/* VALORANT IN-GAME SIDE BRACKETS / LINES FOR NAME */
-			.val-start-side-wrapper {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				gap: 1.5rem;
-			}
+						/* VALORANT IN-GAME SIDE BRACKETS / LINES FOR NAME */
+						.val-start-side-wrapper {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						gap: 1.5rem;
+						}
 
-			.val-side-bracket {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				gap: 4px;
-			}
+						.val-side-bracket {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						gap: 4px;
+						}
 
-			.val-side-bar-main {
-				width: 4px;
-				height: 75px;
-				background: var(--val-purple);
-				position: relative;
-				box-shadow: 0 0 12px var(--val-purple);
-			}
+						.val-side-bar-main {
+						width: 4px;
+						height: 75px;
+						background: var(--val-purple);
+						position: relative;
+						box-shadow: 0 0 12px var(--val-purple);
+						}
 
-			.val-side-bar-main::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				width: 14px;
-				height: 4px;
-				background: #ffffff;
-			}
+						.val-side-bar-main::before {
+						content: '';
+						position: absolute;
+						top: 0;
+						width: 14px;
+						height: 4px;
+						background: #ffffff;
+						}
 
-			.val-side-bar-main::after {
-				content: '';
-				position: absolute;
-				bottom: 0;
-				width: 14px;
-				height: 4px;
-				background: #ffffff;
-			}
+						.val-side-bar-main::after {
+						content: '';
+						position: absolute;
+						bottom: 0;
+						width: 14px;
+						height: 4px;
+						background: #ffffff;
+						}
 
-			.left-bracket .val-side-bar-main::before, .left-bracket .val-side-bar-main::after { right: 0; }
-			.right-bracket .val-side-bar-main::before, .right-bracket .val-side-bar-main::after { left: 0; }
+						.left-bracket .val-side-bar-main::before, .left-bracket .val-side-bar-main::after { right: 0; }
+						.right-bracket .val-side-bar-main::before, .right-bracket .val-side-bar-main::after { left: 0; }
 
-			.val-side-ticks {
-				display: flex;
-				flex-direction: column;
-				gap: 3px;
-			}
+						.val-side-ticks {
+						display: flex;
+						flex-direction: column;
+						gap: 3px;
+						}
 
-			.val-side-tick {
-				width: 10px;
-				height: 2px;
-				background: rgba(255, 255, 255, 0.6);
-			}
+						.val-side-tick {
+						width: 10px;
+						height: 2px;
+						background: rgba(255, 255, 255, 0.6);
+						}
 
-			.glitch-text {
-				font-family: 'Space Grotesk', sans-serif;
-				font-size: clamp(2.5rem, 8vw, 6.5rem);
-				font-weight: 900;
-				letter-spacing: 0.15em;
-				color: #ece8e1;
-				text-transform: uppercase;
-				position: relative;
-				display: inline-block;
-				animation: valGlitch 0.4s infinite alternate;
-			}
+						.glitch-text {
+						font-family: 'Space Grotesk', sans-serif;
+						font-size: clamp(2.5rem, 8vw, 6.5rem);
+						font-weight: 900;
+						letter-spacing: 0.15em;
+						color: #ece8e1;
+						text-transform: uppercase;
+						position: relative;
+						display: inline-block;
+						animation: valGlitch 0.4s infinite alternate;
+						}
 
-			.glitch-text span {
-				color: var(--val-purple);
-			}
+						.glitch-text span {
+						color: var(--val-purple);
+						}
 
-			@keyframes valGlitch {
-				0% { transform: translate(0); text-shadow: 2px 0 var(--val-purple), -2px 0 cyan; }
-				20% { transform: translate(-3px, 3px); }
-				40% { transform: translate(-3px, -3px); text-shadow: -2px 0 var(--val-purple), 2px 0 cyan; }
-				60% { transform: translate(3px, 1px); }
-				80% { transform: translate(1px, -2px); text-shadow: 2px 0 var(--val-purple), -2px 0 cyan; }
-				100% { transform: translate(0); }
-			}
+						@keyframes valGlitch {
+						0% { transform: translate(0); text-shadow: 2px 0 var(--val-purple), -2px 0 cyan; }
+						20% { transform: translate(-3px, 3px); }
+						40% { transform: translate(-3px, -3px); text-shadow: -2px 0 var(--val-purple), 2px 0 cyan; }
+						60% { transform: translate(3px, 1px); }
+						80% { transform: translate(1px, -2px); text-shadow: 2px 0 var(--val-purple), -2px 0 cyan; }
+						100% { transform: translate(0); }
+						}
 
-			/* Purple Laser Scanner Effect across sections */
-			.laser-scanner {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 3px;
-				background: linear-gradient(90deg, transparent, var(--val-purple), transparent);
-				box-shadow: 0 0 15px var(--val-purple);
-				animation: scanline 4s ease-in-out infinite;
-				pointer-events: none;
-			}
+						/* Purple Laser Scanner Effect across sections */
+						.laser-scanner {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 3px;
+						background: linear-gradient(90deg, transparent, var(--val-purple), transparent);
+						box-shadow: 0 0 15px var(--val-purple);
+						animation: scanline 4s ease-in-out infinite;
+						pointer-events: none;
+						}
 
-			@keyframes scanline {
-				0% { top: 0%; opacity: 0; }
-				15% { opacity: 1; }
-				85% { opacity: 1; }
-				100% { top: 100%; opacity: 0; }
-			}
+						@keyframes scanline {
+						0% { top: 0%; opacity: 0; }
+						15% { opacity: 1; }
+						85% { opacity: 1; }
+						100% { top: 100%; opacity: 0; }
+						}
 
-			/* High Contrast Valorant Cards */
-			.val-card {
-				background-color: var(--val-card) !important;
-				border: 1px solid var(--val-border) !important;
-				clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
-				position: relative;
-				transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-				box-shadow: 0 4px 20px rgba(15, 25, 35, 0.05);
-				overflow: hidden;
-			}
+						/* High Contrast Valorant Cards */
+						.val-card {
+						background-color: var(--val-card) !important;
+						border: 1px solid var(--val-border) !important;
+						clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+						position: relative;
+						box-shadow: 0 4px 20px rgba(15, 25, 35, 0.05);
+						overflow: hidden;
+						}
 
-			.val-card::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 5px;
-				height: 100%;
-				background: var(--val-dark);
-				transition: background 0.3s ease, width 0.3s ease;
-			}
+						.val-card::before {
+						content: '';
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 5px;
+						height: 100%;
+						background: var(--val-dark);
+						transition: background 0.3s ease, width 0.3s ease;
+						}
 
-			.val-card:hover {
-				transform: translateY(-6px) scale(1.01) skewX(-1deg) !important;
-				border-color: var(--val-purple) !important;
-				box-shadow: 12px 12px 0px var(--val-dark) !important;
-			}
+						.val-card:hover {
+						transform: translateY(-6px) scale(1.01) skewX(-1deg) !important;
+						border-color: var(--val-purple) !important;
+						box-shadow: 12px 12px 0px var(--val-dark) !important;
+						}
 
-			.val-card:hover::before {
-				background: var(--val-purple);
-				width: 8px;
-			}
+						.val-card:hover::before {
+						background: var(--val-purple);
+						width: 8px;
+						}
 
-			/* Tactical Hover Corner Accents */
-			.val-card::after {
-				content: '';
-				position: absolute;
-				bottom: 0;
-				right: 0;
-				width: 20px;
-				height: 20px;
-				background: var(--val-purple);
-				clip-path: polygon(100% 0, 100% 100%, 0 100%);
-				opacity: 0;
-				transition: opacity 0.2s ease, transform 0.2s ease;
-				transform: translate(10px, 10px);
-			}
+						/* Tactical Hover Corner Accents */
+						.val-card::after {
+						content: '';
+						position: absolute;
+						bottom: 0;
+						right: 0;
+						width: 20px;
+						height: 20px;
+						background: var(--val-purple);
+						clip-path: polygon(100% 0, 100% 100%, 0 100%);
+						opacity: 0;
+						transition: opacity 0.2s ease, transform 0.2s ease;
+						transform: translate(10px, 10px);
+						}
 
-			.val-card:hover::after {
-				opacity: 1;
-				transform: translate(0, 0);
-			}
+						.val-card:hover::after {
+						opacity: 1;
+						transform: translate(0, 0);
+						}
 
-			/* Kinetic Angular Purple Buttons */
-			.val-btn {
-				background-color: var(--val-purple) !important;
-				color: #ffffff !important;
-				font-family: 'Space Grotesk', sans-serif !important;
-				font-weight: 800 !important;
-				text-transform: uppercase !important;
-				letter-spacing: 0.12em !important;
-				clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-				transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-				position: relative;
-				overflow: hidden;
-			}
+						/* SCROLL REVEAL ANIMATIONS FOR INFORMATION BOXES */
+						.scroll-reveal {
+						opacity: 0;
+						transform: translateY(50px) scale(0.95) skewY(1.5deg);
+						transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+						will-change: opacity, transform;
+						}
 
-			.val-btn:hover {
-				background-color: var(--val-dark) !important;
-				color: var(--val-purple) !important;
-				transform: scale(1.04);
-				box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
-			}
+						.scroll-reveal.is-visible {
+						opacity: 1;
+						transform: translateY(0) scale(1) skewY(0deg);
+						}
 
-			.val-btn-outline {
-				background-color: transparent !important;
-				color: var(--val-dark) !important;
-				border: 2px solid var(--val-dark) !important;
-				font-family: 'Space Grotesk', sans-serif !important;
-				font-weight: 700 !important;
-				text-transform: uppercase !important;
-				letter-spacing: 0.1em !important;
-				clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-				transition: all 0.2s ease !important;
-			}
+						/* Kinetic Angular Purple Buttons */
+						.val-btn {
+						background-color: var(--val-purple) !important;
+						color: #ffffff !important;
+						font-family: 'Space Grotesk', sans-serif !important;
+						font-weight: 800 !important;
+						text-transform: uppercase !important;
+						letter-spacing: 0.12em !important;
+						clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+						transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+						position: relative;
+						overflow: hidden;
+						}
 
-			.val-btn-outline:hover {
-				background-color: var(--val-dark) !important;
-				color: #ffffff !important;
-				border-color: var(--val-dark) !important;
-			}
+						.val-btn:hover {
+						background-color: var(--val-dark) !important;
+						color: var(--val-purple) !important;
+						transform: scale(1.04);
+						box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+						}
 
-			/* Valorant Badges */
-			.val-badge {
-				background: var(--val-dark);
-				color: #ffffff;
-				font-family: 'Space Grotesk', sans-serif;
-				font-weight: 800;
-				letter-spacing: 0.15em;
-				clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
-			}
+						.val-btn-outline {
+						background-color: transparent !important;
+						color: var(--val-dark) !important;
+						border: 2px solid var(--val-dark) !important;
+						font-family: 'Space Grotesk', sans-serif !important;
+						font-weight: 700 !important;
+						text-transform: uppercase !important;
+						letter-spacing: 0.1em !important;
+						clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+						transition: all 0.2s ease !important;
+						}
 
-			.val-badge-purple {
-				background: var(--val-purple);
-				color: #ffffff;
-			}
+						.val-btn-outline:hover {
+						background-color: var(--val-dark) !important;
+						color: #ffffff !important;
+						border-color: var(--val-dark) !important;
+						}
 
-			/* Skill Chips */
-			.val-chip {
-				background: #ffffff;
-				border: 1px solid var(--val-dark);
-				color: var(--val-dark);
-				font-family: 'Space Grotesk', sans-serif;
-				font-weight: 700;
-				clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-				transition: all 0.2s ease;
-			}
+						/* Valorant Badges */
+						.val-badge {
+						background: var(--val-dark);
+						color: #ffffff;
+						font-family: 'Space Grotesk', sans-serif;
+						font-weight: 800;
+						letter-spacing: 0.15em;
+						clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+						}
 
-			.val-chip:hover {
-				background: var(--val-purple);
-				color: #ffffff;
-				border-color: var(--val-purple);
-				transform: translateY(-3px) rotate(-1deg);
-			}
+						.val-badge-purple {
+						background: var(--val-purple);
+						color: #ffffff;
+						}
 
-			/* Headings */
-			h1, h2, h3 {
-				font-family: 'Space Grotesk', sans-serif !important;
-			}
+						/* Skill Chips */
+						.val-chip {
+						background: #ffffff;
+						border: 1px solid var(--val-dark);
+						color: var(--val-dark);
+						font-family: 'Space Grotesk', sans-serif;
+						font-weight: 700;
+						clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+						transition: all 0.2s ease;
+						}
 
-			/* Tactical Clock Display */
-			#digital-clock {
-				background: var(--val-dark) !important;
-				border: 2px solid var(--val-purple) !important;
-				clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-				color: #ffffff !important;
-				box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-			}
+						.val-chip:hover {
+						background: var(--val-purple);
+						color: #ffffff;
+						border-color: var(--val-purple);
+						transform: translateY(-3px) rotate(-1deg);
+						}
 
-			/* Hardcore Slash Entrance Animations */
-			.kinetic-entry {
-				animation: kineticSlash 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-			}
+						/* Headings */
+						h1, h2, h3 {
+						font-family: 'Space Grotesk', sans-serif !important;
+						}
 
-			@keyframes kineticSlash {
-				0% {
-					opacity: 0;
-					transform: translateY(40px) skewY(3deg);
-				}
-				100% {
-					opacity: 1;
-					transform: translateY(0) skewY(0);
-				}
-			}
-		</style>
+						/* Tactical Clock Display */
+						#digital-clock {
+						background: var(--val-dark) !important;
+						border: 2px solid var(--val-purple) !important;
+						clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+						color: #ffffff !important;
+						box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+						}
 
-		<!-- Lucide Icons -->
-		<script src="https://unpkg.com/lucide@latest"></script>
-	</head>
+						/* Hardcore Slash Entrance Animations */
+						.kinetic-entry {
+						animation: kineticSlash 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+						}
+
+						@keyframes kineticSlash {
+						0% {
+						opacity: 0;
+						transform: translateY(40px) skewY(3deg);
+						}
+						100% {
+						opacity: 1;
+						transform: translateY(0) skewY(0);
+						}
+						}
+					</style>
+
+					<!-- Lucide Icons -->
+					<script src="https://unpkg.com/lucide@latest"></script>
+				</head>
 	<body class="loading min-h-screen">
 
 		<!-- Custom Purple Tactical Crosshair -->
@@ -492,7 +504,9 @@
 						</div>
 					</div>
 
-					<h1 class="glitch-text">JASH <span>SAHA</span></h1>
+					<h1 class="glitch-text">
+						JASH <span>SAHA</span>
+					</h1>
 
 					<div class="val-side-bracket right-bracket">
 						<div class="val-side-ticks">
@@ -525,7 +539,7 @@
 			<section class="relative overflow-hidden border-b-2 border-[var(--val-dark)] bg-white/50 backdrop-blur-sm">
 				<div class="laser-scanner"></div>
 				<div class="relative mx-auto max-w-5xl px-6 py-20 sm:py-32">
-					
+
 					<div class="kinetic-entry flex items-center gap-4">
 						<span class="val-badge val-badge-purple flex size-12 items-center justify-center text-lg font-black">
 							⚡
@@ -574,19 +588,19 @@
 
 					<!-- Stat Counters -->
 					<dl class="kinetic-entry mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4">
-						<div class="val-card p-6">
+						<div class="val-card scroll-reveal p-6">
 							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">03 🚀</dt>
 							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Flagship Projects</dd>
 						</div>
-						<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card p-6 block">
+						<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card scroll-reveal p-6 block">
 							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">01 📜</dt>
 							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Published Patent</dd>
 						</a>
-						<div class="val-card p-6">
+						<div class="val-card scroll-reveal p-6">
 							<dt class="font-display text-xl font-black text-[var(--val-dark)] uppercase leading-tight">🔬 Research</dt>
 							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-purple)]">Coming Soon</dd>
 						</div>
-						<div class="val-card p-6">
+						<div class="val-card scroll-reveal p-6">
 							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">2027 🎓</dt>
 							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Graduation Year</dd>
 						</div>
@@ -606,7 +620,7 @@
 				</div>
 
 				<div class="space-y-8">
-					<article class="val-card p-8">
+					<article class="val-card scroll-reveal p-8">
 						<div class="flex items-center gap-3">
 							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
 								📜 Published Patent
@@ -619,7 +633,7 @@
 						</ul>
 					</article>
 
-					<article class="val-card p-8">
+					<article class="val-card scroll-reveal p-8">
 						<div class="flex items-center gap-3">
 							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
 								🧠 Deep Learning
@@ -632,7 +646,7 @@
 						</ul>
 					</article>
 
-					<article class="val-card p-8">
+					<article class="val-card scroll-reveal p-8">
 						<div class="flex items-center gap-3">
 							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
 								👁️ Computer Vision
@@ -656,7 +670,7 @@
 					</h2>
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
-				<div class="val-card p-10 text-center border-2 border-dashed border-[var(--val-purple)]">
+				<div class="val-card scroll-reveal p-10 text-center border-2 border-dashed border-[var(--val-purple)]">
 					<p class="font-display text-2xl font-black text-[var(--val-purple)] uppercase tracking-widest">// COMING SOON ⚡</p>
 					<p class="mt-2 text-base font-bold text-[var(--val-dark)]">Research papers focusing on AI architectures and Computer Vision are actively in progress.</p>
 				</div>
@@ -672,7 +686,7 @@
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
 				<div class="grid gap-8 sm:grid-cols-2">
-					<div class="val-card p-6">
+					<div class="val-card scroll-reveal p-6">
 						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
 							⚙️ Core Languages
 						</h3>
@@ -684,7 +698,7 @@
 							<span class="val-chip px-4 py-2 text-xs">HTML & CSS 🌐</span>
 						</div>
 					</div>
-					<div class="val-card p-6">
+					<div class="val-card scroll-reveal p-6">
 						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
 							🧠 ML & Data Stack
 						</h3>
@@ -697,7 +711,7 @@
 							<span class="val-chip px-4 py-2 text-xs">NumPy 🔢</span>
 						</div>
 					</div>
-					<div class="val-card p-6">
+					<div class="val-card scroll-reveal p-6">
 						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
 							📊 Technical Practice
 						</h3>
@@ -708,7 +722,7 @@
 							<span class="val-chip px-4 py-2 text-xs">Data Visualization 📉</span>
 						</div>
 					</div>
-					<div class="val-card p-6">
+					<div class="val-card scroll-reveal p-6">
 						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
 							🤝 Leadership & Soft Skills
 						</h3>
@@ -732,7 +746,7 @@
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
 				<div class="space-y-6">
-					<div class="val-card p-7">
+					<div class="val-card scroll-reveal p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
 							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
 								💼 Indian Institute of Internship
@@ -741,7 +755,7 @@
 						</div>
 						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Completed a Business Analytics project using Power BI. 📊</p>
 					</div>
-					<div class="val-card p-7">
+					<div class="val-card scroll-reveal p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
 							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
 								🎓 Meghnad Saha Institute of Technology
@@ -750,7 +764,7 @@
 						</div>
 						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">B.Tech in Computer Science and Business Systems 💻</p>
 					</div>
-					<div class="val-card p-7">
+					<div class="val-card scroll-reveal p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
 							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
 								🏫 Delhi Public School, Ruby Park
@@ -772,7 +786,7 @@
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
 				<div class="grid gap-8 sm:grid-cols-2">
-					<div class="val-card p-7">
+					<div class="val-card scroll-reveal p-7">
 						<img src="phoenix_test_2.3.jpg" alt="Phoenix Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
 						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
 							👑 President & Ex-Vice President — Phoenix, CSBS
@@ -782,7 +796,7 @@
 							<li>— Managed Farewell ceremonies for graduating batches. 🎓</li>
 						</ul>
 					</div>
-					<div class="val-card p-7">
+					<div class="val-card scroll-reveal p-7">
 						<img src="Greenovation club.jpg" alt="Greenovation Club Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
 						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
 							🌿 Vice President — Greenovation Club, GCMSIT
@@ -796,48 +810,67 @@
 			</section>
 		</main>
 
-		<!-- Script for Custom Crosshair, Interactive Scroll & Hover Motion, Clock & Refresh Reset -->
+		<!-- Script for Custom Crosshair, Scroll Reveal Animations, Interactive Scroll & Hover Motion, Clock & Refresh Reset -->
 		<script>
 			// Force Page Scroll Reset on Refresh
 			if ('scrollRestoration' in history) {
-				history.scrollRestoration = 'manual';
+			history.scrollRestoration = 'manual';
 			}
 			window.scrollTo(0, 0);
 
 			// Interactive Mouse-Tracking Crosshair
 			const crosshair = document.getElementById('val-crosshair');
 			document.addEventListener('mousemove', (e) => {
-				crosshair.style.left = `${e.clientX}px`;
-				crosshair.style.top = `${e.clientY}px`;
+			crosshair.style.left = `${e.clientX}px`;
+			crosshair.style.top = `${e.clientY}px`;
 			});
 
 			// Dynamic Scroll & Hover Physics for Floating Objects
 			let lastScrollY = window.scrollY;
 
 			window.addEventListener('scroll', () => {
-				const scrollY = window.scrollY;
-				document.querySelectorAll('.scroll-float').forEach((el) => {
-					const speedX = parseFloat(el.getAttribute('data-speed-x')) || 0.1;
-					const speedY = parseFloat(el.getAttribute('data-speed-y')) || 0.1;
-					
-					// Calculate dynamic offset based on scroll velocity and position
-					const offsetX = scrollY * speedX;
-					const offsetY = scrollY * speedY;
-					
-					el.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0px)`;
-				});
-				lastScrollY = scrollY;
+			const scrollY = window.scrollY;
+			document.querySelectorAll('.scroll-float').forEach((el) => {
+			const speedX = parseFloat(el.getAttribute('data-speed-x')) || 0.1;
+			const speedY = parseFloat(el.getAttribute('data-speed-y')) || 0.1;
+
+			// Calculate dynamic offset based on scroll velocity and position
+			const offsetX = scrollY * speedX;
+			const offsetY = scrollY * speedY;
+
+			el.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0px)`;
+			});
+			lastScrollY = scrollY;
+			});
+
+			// Intersection Observer for Card Scroll Animations
+			const observerOptions = {
+			root: null,
+			rootMargin: '0px 0px -60px 0px',
+			threshold: 0.15
+			};
+
+			const revealObserver = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+			entry.target.classList.add('is-visible');
+			}
+			});
+			}, observerOptions);
+
+			document.querySelectorAll('.scroll-reveal').forEach((card) => {
+			revealObserver.observe(card);
 			});
 
 			// Intro Preloader Animation Dismissal
 			setTimeout(() => {
-				document.body.classList.remove('loading');
-				const loader = document.getElementById('intro-loader');
-				if (loader) {
-					loader.style.opacity = '0';
-					loader.style.transition = 'opacity 0.5s ease';
-					setTimeout(() => loader.style.display = 'none', 500);
-				}
+			document.body.classList.remove('loading');
+			const loader = document.getElementById('intro-loader');
+			if (loader) {
+			loader.style.opacity = '0';
+			loader.style.transition = 'opacity 0.5s ease';
+			setTimeout(() => loader.style.display = 'none', 500);
+			}
 			}, 2200);
 
 			// Initialize Lucide Icons
@@ -845,17 +878,17 @@
 
 			// Digital Clock Updates
 			function updateClock() {
-				const now = new Date();
-				let hours = now.getHours();
-				const minutes = String(now.getMinutes()).padStart(2, '0');
-				const seconds = String(now.getSeconds()).padStart(2, '0');
-				const ampm = hours >= 12 ? 'PM' : 'AM';
+			const now = new Date();
+			let hours = now.getHours();
+			const minutes = String(now.getMinutes()).padStart(2, '0');
+			const seconds = String(now.getSeconds()).padStart(2, '0');
+			const ampm = hours >= 12 ? 'PM' : 'AM';
 
-				hours = hours % 12;
-				hours = hours ? hours : 12;
-				const hoursStr = String(hours).padStart(2, '0');
+			hours = hours % 12;
+			hours = hours ? hours : 12;
+			const hoursStr = String(hours).padStart(2, '0');
 
-				document.getElementById('clock-time').textContent = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
+			document.getElementById('clock-time').textContent = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
 			}
 
 			updateClock();
