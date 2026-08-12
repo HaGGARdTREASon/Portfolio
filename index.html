@@ -19,7 +19,7 @@
 		<!-- Tailwind CSS CDN -->
 		<script src="https://cdn.tailwindcss.com"></script>
 
-		<!-- Custom Valorant Purple Theme & Animations -->
+		<!-- Custom Valorant Purple Theme, Interactive Motion & Animations -->
 		<style>
 			:root {
 				--val-purple: #8b5cf6;
@@ -100,70 +100,68 @@
 				100% { transform: rotate(360deg); }
 			}
 
-			/* WHITE FLOATING BACKGROUND OBJECTS (HORIZONTAL & VERTICAL ANIMATIONS) */
+			/* WHITE FLOATING BACKGROUND OBJECTS (INTERACTIVE HOVER & SCROLL MOTION) */
 			.white-float-obj {
 				position: fixed;
-				pointer-events: none;
-				z-index: 1;
+				pointer-events: auto !important;
+				z-index: 2;
 				background: #ffffff;
 				box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+				transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease;
 				will-change: transform;
+			}
+
+			.white-float-obj:hover {
+				transform: scale(1.6) rotate(45deg) translate(0, -10px) !important;
+				box-shadow: 0 0 25px rgba(139, 92, 246, 0.9), 0 0 10px #ffffff !important;
+				background: #ffffff;
+				border-color: var(--val-purple) !important;
 			}
 
 			.float-obj-1 {
 				top: 15%;
 				left: 5%;
-				width: 24px;
-				height: 24px;
+				width: 28px;
+				height: 28px;
 				border: 2px solid var(--val-dark);
 				clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-				animation: floatX 14s ease-in-out infinite alternate, floatY 8s ease-in-out infinite alternate;
+				animation: floatY 8s ease-in-out infinite alternate;
 			}
 
 			.float-obj-2 {
 				top: 45%;
 				right: 6%;
-				width: 35px;
-				height: 35px;
+				width: 38px;
+				height: 38px;
 				border: 2px solid var(--val-purple);
 				clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
-				animation: floatXRev 18s ease-in-out infinite alternate, floatY 10s ease-in-out infinite alternate;
+				animation: floatY 10s ease-in-out infinite alternate;
 			}
 
 			.float-obj-3 {
 				bottom: 25%;
-				left: 10%;
-				width: 45px;
-				height: 12px;
-				border: 1px solid var(--val-dark);
-				animation: floatX 20s ease-in-out infinite alternate, floatY 6s ease-in-out infinite alternate;
+				left: 8%;
+				width: 48px;
+				height: 14px;
+				border: 2px solid var(--val-dark);
+				animation: floatY 6s ease-in-out infinite alternate;
 			}
 
 			.float-obj-4 {
 				top: 70%;
 				right: 18%;
-				width: 20px;
-				height: 20px;
+				width: 24px;
+				height: 24px;
 				border: 2px solid #ffffff;
 				background: var(--val-dark);
 				clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-				animation: floatXRev 12s ease-in-out infinite alternate, floatY 12s ease-in-out infinite alternate;
-			}
-
-			@keyframes floatX {
-				0% { left: 5%; }
-				100% { left: 25%; }
-			}
-
-			@keyframes floatXRev {
-				0% { right: 5%; }
-				100% { right: 28%; }
+				animation: floatY 12s ease-in-out infinite alternate;
 			}
 
 			@keyframes floatY {
 				0% { transform: translateY(0px) rotate(0deg); }
-				50% { transform: translateY(-40px) rotate(45deg); }
-				100% { transform: translateY(30px) rotate(90deg); }
+				50% { transform: translateY(-35px) rotate(45deg); }
+				100% { transform: translateY(25px) rotate(90deg); }
 			}
 
 			/* Hardcore Valorant Preloader */
@@ -200,9 +198,65 @@
 				text-align: center;
 			}
 
+			/* VALORANT IN-GAME SIDE BRACKETS / LINES FOR NAME */
+			.val-start-side-wrapper {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 1.5rem;
+			}
+
+			.val-side-bracket {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 4px;
+			}
+
+			.val-side-bar-main {
+				width: 4px;
+				height: 75px;
+				background: var(--val-purple);
+				position: relative;
+				box-shadow: 0 0 12px var(--val-purple);
+			}
+
+			.val-side-bar-main::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				width: 14px;
+				height: 4px;
+				background: #ffffff;
+			}
+
+			.val-side-bar-main::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				width: 14px;
+				height: 4px;
+				background: #ffffff;
+			}
+
+			.left-bracket .val-side-bar-main::before, .left-bracket .val-side-bar-main::after { right: 0; }
+			.right-bracket .val-side-bar-main::before, .right-bracket .val-side-bar-main::after { left: 0; }
+
+			.val-side-ticks {
+				display: flex;
+				flex-direction: column;
+				gap: 3px;
+			}
+
+			.val-side-tick {
+				width: 10px;
+				height: 2px;
+				background: rgba(255, 255, 255, 0.6);
+			}
+
 			.glitch-text {
 				font-family: 'Space Grotesk', sans-serif;
-				font-size: clamp(3rem, 10vw, 7.5rem);
+				font-size: clamp(2.5rem, 8vw, 6.5rem);
 				font-weight: 900;
 				letter-spacing: 0.15em;
 				color: #ece8e1;
@@ -268,7 +322,7 @@
 			}
 
 			.val-card:hover {
-				transform: translateY(-5px) skewX(-1deg) !important;
+				transform: translateY(-6px) scale(1.01) skewX(-1deg) !important;
 				border-color: var(--val-purple) !important;
 				box-shadow: 12px 12px 0px var(--val-dark) !important;
 			}
@@ -367,7 +421,7 @@
 				background: var(--val-purple);
 				color: #ffffff;
 				border-color: var(--val-purple);
-				transform: translateY(-2px) rotate(-1deg);
+				transform: translateY(-3px) rotate(-1deg);
 			}
 
 			/* Headings */
@@ -409,25 +463,52 @@
 		<!-- Custom Purple Tactical Crosshair -->
 		<div id="val-crosshair"></div>
 
-		<!-- Animated White Floating HUD Objects Moving Horizontally & Vertically -->
-		<div class="white-float-obj float-obj-1 scroll-float" data-speed-x="0.08" data-speed-y="0.12"></div>
-		<div class="white-float-obj float-obj-2 scroll-float" data-speed-x="-0.12" data-speed-y="0.18"></div>
-		<div class="white-float-obj float-obj-3 scroll-float" data-speed-x="0.15" data-speed-y="-0.1"></div>
-		<div class="white-float-obj float-obj-4 scroll-float" data-speed-x="-0.09" data-speed-y="0.15"></div>
+		<!-- Animated White Floating HUD Objects (Dynamic Hover & Parallax Scroll Motion) -->
+		<div class="white-float-obj float-obj-1 scroll-float" data-speed-x="0.12" data-speed-y="0.18"></div>
+		<div class="white-float-obj float-obj-2 scroll-float" data-speed-x="-0.15" data-speed-y="0.22"></div>
+		<div class="white-float-obj float-obj-3 scroll-float" data-speed-x="0.2" data-speed-y="-0.14"></div>
+		<div class="white-float-obj float-obj-4 scroll-float" data-speed-x="-0.11" data-speed-y="0.19"></div>
 
-		<!-- Hardcore Glitch Opening Preloader -->
+		<!-- Valorant Intro Preloader with In-Game Start Side Lines -->
 		<div id="intro-loader" aria-hidden="true">
 			<div class="loader-shutter-top"></div>
 			<div class="loader-shutter-bottom"></div>
 			<div class="loader-content">
-				<div class="mb-4 inline-block bg-[var(--val-purple)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
-					SYSTEM INITIALIZATION // TAC-HUD
+				<div class="mb-5 inline-block bg-[var(--val-purple)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
+					⚡ SYSTEM INITIALIZATION // TAC-HUD
 				</div>
-				<div>
+
+				<!-- Valorant Start-Side UI Bracket Lines -->
+				<div class="val-start-side-wrapper">
+					<div class="val-side-bracket left-bracket">
+						<div class="val-side-ticks">
+							<div class="val-side-tick"></div>
+							<div class="val-side-tick"></div>
+						</div>
+						<div class="val-side-bar-main"></div>
+						<div class="val-side-ticks">
+							<div class="val-side-tick"></div>
+							<div class="val-side-tick"></div>
+						</div>
+					</div>
+
 					<h1 class="glitch-text">JASH <span>SAHA</span></h1>
+
+					<div class="val-side-bracket right-bracket">
+						<div class="val-side-ticks">
+							<div class="val-side-tick"></div>
+							<div class="val-side-tick"></div>
+						</div>
+						<div class="val-side-bar-main"></div>
+						<div class="val-side-ticks">
+							<div class="val-side-tick"></div>
+							<div class="val-side-tick"></div>
+						</div>
+					</div>
 				</div>
+
 				<p class="mt-4 font-mono text-sm tracking-[0.3em] text-[#768079] uppercase">
-					[ LOCKED & LOADED ] — COMPUTER SCIENCE ENGINEER
+					🎯 [ LOCKED & LOADED ] — COMPUTER SCIENCE ENGINEER
 				</p>
 			</div>
 		</div>
@@ -435,6 +516,7 @@
 		<!-- Floating Tactical HUD Purple Clock -->
 		<div id="digital-clock" class="fixed right-4 top-4 z-50 flex items-center gap-2.5 px-5 py-2.5 font-display text-sm font-black tracking-widest sm:right-6 sm:top-6">
 			<i data-lucide="crosshair" class="size-4 animate-spin text-[var(--val-purple)]"></i>
+			<span>⏱️</span>
 			<span id="clock-time">00:00:00 AM</span>
 		</div>
 
@@ -446,18 +528,18 @@
 					
 					<div class="kinetic-entry flex items-center gap-4">
 						<span class="val-badge val-badge-purple flex size-12 items-center justify-center text-lg font-black">
-							JS
+							⚡
 						</span>
 						<p class="font-display text-xs uppercase leading-relaxed tracking-[0.35em] text-[var(--val-dark)] font-black">
-							// AGENT CLASSIFICATION: CSBS ENGINEER
-							<span class="block text-[var(--val-gray)] font-semibold">DEPLOYMENT LOCATION: KOLKATA, INDIA</span>
+							// AGENT CLASSIFICATION: CSBS ENGINEER 💻
+							<span class="block text-[var(--val-gray)] font-semibold">📍 DEPLOYMENT LOCATION: KOLKATA, INDIA</span>
 						</p>
 					</div>
 
 					<!-- Name & Profile Picture -->
 					<div class="kinetic-entry mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
 						<h1 class="text-6xl font-black uppercase leading-[0.9] tracking-tight text-[var(--val-dark)] sm:text-8xl hover:skew-x-2 transition-transform">
-							Jash <span class="text-[var(--val-purple)]">Saha</span>
+							Jash <span class="text-[var(--val-purple)]">Saha</span> 🚀
 						</h1>
 						<div class="relative group">
 							<div class="absolute -inset-1 bg-[var(--val-purple)] clip-path-polygon rotate-3 transition-transform group-hover:rotate-6"></div>
@@ -471,45 +553,41 @@
 					</div>
 
 					<p class="kinetic-entry mt-8 max-w-2xl text-lg font-medium leading-relaxed text-[var(--val-dark)]">
-						A disciplined, high-execution engineering student who builds practical AI systems and computer vision models. My background merges technical rigor with structured project execution for real-world impact.
+						A disciplined, high-execution engineering student who builds practical AI systems and computer vision models 🎯. My background merges technical rigor with structured project execution for real-world impact.
 					</p>
 
 					<!-- Action Buttons -->
 					<div class="kinetic-entry mt-10 flex flex-wrap gap-4">
 						<a href="mailto:jashsaha917@gmail.com" class="val-btn inline-flex items-center gap-2 px-7 py-3.5 text-sm font-black">
-							<i data-lucide="mail" class="size-4"></i>
-							jashsaha917@gmail.com
+							✉️ jashsaha917@gmail.com
 						</a>
 						<a href="tel:+917980236608" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
-							<i data-lucide="phone" class="size-4 text-[var(--val-purple)]"></i>
-							+91 79802 36608
+							📞 +91 79802 36608
 						</a>
 						<a href="https://www.linkedin.com/in/jash-saha" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
-							<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="size-4 object-contain" />
-							LinkedIn
+							🔗 LinkedIn
 						</a>
 						<a href="https://github.com/HaGGARdTREASon" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
-							<img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="size-4 object-contain" />
-							GitHub
+							💻 GitHub
 						</a>
 					</div>
 
 					<!-- Stat Counters -->
 					<dl class="kinetic-entry mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4">
 						<div class="val-card p-6">
-							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">03</dt>
+							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">03 🚀</dt>
 							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Flagship Projects</dd>
 						</div>
 						<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card p-6 block">
-							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">01</dt>
+							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">01 📜</dt>
 							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Published Patent</dd>
 						</a>
 						<div class="val-card p-6">
-							<dt class="font-display text-xl font-black text-[var(--val-dark)] uppercase leading-tight">Research</dt>
+							<dt class="font-display text-xl font-black text-[var(--val-dark)] uppercase leading-tight">🔬 Research</dt>
 							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-purple)]">Coming Soon</dd>
 						</div>
 						<div class="val-card p-6">
-							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">2027</dt>
+							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">2027 🎓</dt>
 							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Graduation Year</dd>
 						</div>
 					</dl>
@@ -522,7 +600,7 @@
 				<div class="mb-12 flex items-center gap-4">
 					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 01</span>
 					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Tactical Projects
+						Tactical Projects 🎯
 					</h2>
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
@@ -531,10 +609,10 @@
 					<article class="val-card p-8">
 						<div class="flex items-center gap-3">
 							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
-								<i data-lucide="award" class="size-3.5 text-[var(--val-purple)]"></i> Published Patent
+								📜 Published Patent
 							</span>
 						</div>
-						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">Sign Language Translation System</h3>
+						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🤟 Sign Language Translation System</h3>
 						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
 							<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed">Bridges communication between sign language users and non-signers, eliminating real-time audio-visual communication barriers.</li>
 							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Real-time hand gesture detection via computer vision, converted instantly into spoken audio responses.</li>
@@ -544,10 +622,10 @@
 					<article class="val-card p-8">
 						<div class="flex items-center gap-3">
 							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
-								<i data-lucide="brain-circuit" class="size-3.5 text-[var(--val-purple)]"></i> Deep Learning
+								🧠 Deep Learning
 							</span>
 						</div>
-						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">Agricultural Price & Market Risk AI</h3>
+						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🌾 Agricultural Price & Market Risk AI</h3>
 						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
 							<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed">Custom PyTorch neural network utilizing a Multi-Algorithm Ensemble (MoE) architecture to predict localized commodity prices.</li>
 							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Dynamic risk-assessment algorithm categorizing supply chain risk — Critical Shortage, Elevated Risk — and forecasting trends.</li>
@@ -557,10 +635,10 @@
 					<article class="val-card p-8">
 						<div class="flex items-center gap-3">
 							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
-								<i data-lucide="eye" class="size-3.5 text-[var(--val-purple)]"></i> Computer Vision
+								👁️ Computer Vision
 							</span>
 						</div>
-						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">Bad Touch Detection System</h3>
+						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🛡️ Bad Touch Detection System</h3>
 						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
 							<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed">OpenCV + MediaPipe pipeline tracking skeletal landmarks to distinguish self-touch from unsafe foreign contact.</li>
 							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Geometric safety zones around the torso trigger an immediate Pygame audio alarm upon unauthorized proximity.</li>
@@ -574,12 +652,12 @@
 				<div class="mb-10 flex items-center gap-4">
 					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 02</span>
 					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Research Papers
+						Research Papers 🔬
 					</h2>
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
 				<div class="val-card p-10 text-center border-2 border-dashed border-[var(--val-purple)]">
-					<p class="font-display text-2xl font-black text-[var(--val-purple)] uppercase tracking-widest">// COMING SOON</p>
+					<p class="font-display text-2xl font-black text-[var(--val-purple)] uppercase tracking-widest">// COMING SOON ⚡</p>
 					<p class="mt-2 text-base font-bold text-[var(--val-dark)]">Research papers focusing on AI architectures and Computer Vision are actively in progress.</p>
 				</div>
 			</section>
@@ -589,56 +667,56 @@
 				<div class="mb-12 flex items-center gap-4">
 					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 03</span>
 					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Agent Skills
+						Agent Skills 🛠️
 					</h2>
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
 				<div class="grid gap-8 sm:grid-cols-2">
 					<div class="val-card p-6">
 						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
-							<i data-lucide="code-2" class="size-4"></i> Core Languages
+							⚙️ Core Languages
 						</h3>
 						<div class="mt-4 flex flex-wrap gap-2.5">
-							<span class="val-chip px-4 py-2 text-xs">C</span>
-							<span class="val-chip px-4 py-2 text-xs">C++</span>
-							<span class="val-chip px-4 py-2 text-xs">Python</span>
-							<span class="val-chip px-4 py-2 text-xs">SQL</span>
-							<span class="val-chip px-4 py-2 text-xs">HTML & CSS</span>
+							<span class="val-chip px-4 py-2 text-xs">C 💻</span>
+							<span class="val-chip px-4 py-2 text-xs">C++ ⚡</span>
+							<span class="val-chip px-4 py-2 text-xs">Python 🐍</span>
+							<span class="val-chip px-4 py-2 text-xs">SQL 🗄️</span>
+							<span class="val-chip px-4 py-2 text-xs">HTML & CSS 🌐</span>
 						</div>
 					</div>
 					<div class="val-card p-6">
 						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
-							<i data-lucide="brain-circuit" class="size-4"></i> ML & Data Stack
+							🧠 ML & Data Stack
 						</h3>
 						<div class="mt-4 flex flex-wrap gap-2.5">
-							<span class="val-chip px-4 py-2 text-xs">PyTorch</span>
-							<span class="val-chip px-4 py-2 text-xs">Scikit-Learn</span>
-							<span class="val-chip px-4 py-2 text-xs">OpenCV</span>
-							<span class="val-chip px-4 py-2 text-xs">MediaPipe</span>
-							<span class="val-chip px-4 py-2 text-xs">Pandas</span>
-							<span class="val-chip px-4 py-2 text-xs">NumPy</span>
+							<span class="val-chip px-4 py-2 text-xs">PyTorch 🔥</span>
+							<span class="val-chip px-4 py-2 text-xs">Scikit-Learn 🤖</span>
+							<span class="val-chip px-4 py-2 text-xs">OpenCV 👁️</span>
+							<span class="val-chip px-4 py-2 text-xs">MediaPipe 🖐️</span>
+							<span class="val-chip px-4 py-2 text-xs">Pandas 🐼</span>
+							<span class="val-chip px-4 py-2 text-xs">NumPy 🔢</span>
 						</div>
 					</div>
 					<div class="val-card p-6">
 						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
-							<i data-lucide="line-chart" class="size-4"></i> Technical Practice
+							📊 Technical Practice
 						</h3>
 						<div class="mt-4 flex flex-wrap gap-2.5">
-							<span class="val-chip px-4 py-2 text-xs">CAD</span>
-							<span class="val-chip px-4 py-2 text-xs">Data Engineering</span>
-							<span class="val-chip px-4 py-2 text-xs">Power BI</span>
-							<span class="val-chip px-4 py-2 text-xs">Data Visualization</span>
+							<span class="val-chip px-4 py-2 text-xs">CAD 📐</span>
+							<span class="val-chip px-4 py-2 text-xs">Data Engineering 🛠️</span>
+							<span class="val-chip px-4 py-2 text-xs">Power BI 📈</span>
+							<span class="val-chip px-4 py-2 text-xs">Data Visualization 📉</span>
 						</div>
 					</div>
 					<div class="val-card p-6">
 						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
-							<i data-lucide="users" class="size-4"></i> Leadership & Soft Skills
+							🤝 Leadership & Soft Skills
 						</h3>
 						<div class="mt-4 flex flex-wrap gap-2.5">
-							<span class="val-chip px-4 py-2 text-xs">Public Speaking</span>
-							<span class="val-chip px-4 py-2 text-xs">Leadership</span>
-							<span class="val-chip px-4 py-2 text-xs">Communication</span>
-							<span class="val-chip px-4 py-2 text-xs">Team Management</span>
+							<span class="val-chip px-4 py-2 text-xs">Public Speaking 🎙️</span>
+							<span class="val-chip px-4 py-2 text-xs">Leadership 👑</span>
+							<span class="val-chip px-4 py-2 text-xs">Communication 💬</span>
+							<span class="val-chip px-4 py-2 text-xs">Team Management 👥</span>
 						</div>
 					</div>
 				</div>
@@ -649,7 +727,7 @@
 				<div class="mb-12 flex items-center gap-4">
 					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 04</span>
 					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Track Record
+						Track Record 🏆
 					</h2>
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
@@ -657,29 +735,29 @@
 					<div class="val-card p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
 							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
-								<i data-lucide="line-chart" class="size-5 text-[var(--val-purple)]"></i> Indian Institute of Internship
+								💼 Indian Institute of Internship
 							</h3>
 							<span class="font-display text-sm font-black text-[var(--val-purple)]">Aug 2025 — Oct 2025</span>
 						</div>
-						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Completed a Business Analytics project using Power BI.</p>
+						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Completed a Business Analytics project using Power BI. 📊</p>
 					</div>
 					<div class="val-card p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
 							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
-								<i data-lucide="graduation-cap" class="size-5 text-[var(--val-purple)]"></i> Meghnad Saha Institute of Technology
+								🎓 Meghnad Saha Institute of Technology
 							</h3>
 							<span class="font-display text-sm font-black text-[var(--val-purple)]">Aug 2023 — Jul 2027</span>
 						</div>
-						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">B.Tech in Computer Science and Business Systems</p>
+						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">B.Tech in Computer Science and Business Systems 💻</p>
 					</div>
 					<div class="val-card p-7">
 						<div class="flex flex-wrap items-baseline justify-between gap-2">
 							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
-								<i data-lucide="graduation-cap" class="size-5 text-[var(--val-purple)]"></i> Delhi Public School, Ruby Park
+								🏫 Delhi Public School, Ruby Park
 							</h3>
 							<span class="font-display text-sm font-black text-[var(--val-purple)]">Feb 2009 — Feb 2023</span>
 						</div>
-						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">High School Diploma in Science</p>
+						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">High School Diploma in Science 🔬</p>
 					</div>
 				</div>
 			</section>
@@ -689,7 +767,7 @@
 				<div class="mb-12 flex items-center gap-4">
 					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 05</span>
 					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Command & Leadership
+						Command & Leadership 👑
 					</h2>
 					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 				</div>
@@ -697,28 +775,28 @@
 					<div class="val-card p-7">
 						<img src="phoenix_test_2.3.jpg" alt="Phoenix Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
 						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
-							President & Ex-Vice President — Phoenix, CSBS
+							👑 President & Ex-Vice President — Phoenix, CSBS
 						</h3>
 						<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
-							<li>— Organized Teacher's Day celebrations in 2025 and 2026.</li>
-							<li>— Managed Farewell ceremonies for graduating batches.</li>
+							<li>— Organized Teacher's Day celebrations in 2025 and 2026. 🎉</li>
+							<li>— Managed Farewell ceremonies for graduating batches. 🎓</li>
 						</ul>
 					</div>
 					<div class="val-card p-7">
 						<img src="Greenovation club.jpg" alt="Greenovation Club Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
 						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
-							Vice President — Greenovation Club, GCMSIT
+							🌿 Vice President — Greenovation Club, GCMSIT
 						</h3>
 						<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
-							<li>— Collected 10kg+ of e-waste during recycling drive.</li>
-							<li>— Hosted waste-to-handicrafts competition with 75+ entries.</li>
+							<li>— Collected 10kg+ of e-waste during recycling drive. ♻️</li>
+							<li>— Hosted waste-to-handicrafts competition with 75+ entries. 🎨</li>
 						</ul>
 					</div>
 				</div>
 			</section>
 		</main>
 
-		<!-- Script for Custom Crosshair, Scroll Animations, Clock & Refresh Reset -->
+		<!-- Script for Custom Crosshair, Interactive Scroll & Hover Motion, Clock & Refresh Reset -->
 		<script>
 			// Force Page Scroll Reset on Refresh
 			if ('scrollRestoration' in history) {
@@ -733,14 +811,22 @@
 				crosshair.style.top = `${e.clientY}px`;
 			});
 
-			// Scroll-Driven Parallax Motion for Floating White Objects
+			// Dynamic Scroll & Hover Physics for Floating Objects
+			let lastScrollY = window.scrollY;
+
 			window.addEventListener('scroll', () => {
 				const scrollY = window.scrollY;
 				document.querySelectorAll('.scroll-float').forEach((el) => {
 					const speedX = parseFloat(el.getAttribute('data-speed-x')) || 0.1;
 					const speedY = parseFloat(el.getAttribute('data-speed-y')) || 0.1;
-					el.style.transform = `translate3d(${scrollY * speedX}px, ${scrollY * speedY}px, 0px)`;
+					
+					// Calculate dynamic offset based on scroll velocity and position
+					const offsetX = scrollY * speedX;
+					const offsetY = scrollY * speedY;
+					
+					el.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0px)`;
 				});
+				lastScrollY = scrollY;
 			});
 
 			// Intro Preloader Animation Dismissal
