@@ -415,6 +415,28 @@
 						transform: translate(0, 0);
 						}
 
+						/* DYNAMIC GLOWING QUICK ANIMATION FOR PATENT CARD */
+						.patent-card-highlight {
+						border: 2px solid var(--val-purple) !important;
+						animation: patentGlowPulse 1.2s infinite ease-in-out;
+						}
+
+						.patent-card-highlight::before {
+						background: var(--val-purple) !important;
+						width: 8px !important;
+						}
+
+						@keyframes patentGlowPulse {
+						0%, 100% {
+						box-shadow: 0 0 15px rgba(139, 92, 246, 0.5), inset 0 0 10px rgba(139, 92, 246, 0.2);
+						border-color: var(--val-purple) !important;
+						}
+						50% {
+						box-shadow: 0 0 35px rgba(139, 92, 246, 0.95), 0 0 60px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(139, 92, 246, 0.4);
+						border-color: #c084fc !important;
+						}
+						}
+
 						/* SCROLL REVEAL ANIMATIONS */
 						.scroll-reveal {
 						opacity: 0;
@@ -700,10 +722,11 @@
 				</div>
 
 				<div class="space-y-8">
-					<article class="val-card scroll-reveal p-8">
+					<!-- HIGHLIGHTED PATENTED PROJECT WITH DYNAMIC GLOW ANIMATION -->
+					<article class="val-card scroll-reveal patent-card-highlight p-8">
 						<div class="flex items-center gap-3">
-							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
-								📜 Published Patent
+							<span class="val-badge val-badge-purple px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5 animate-pulse">
+								⚡ 📜 Published Patent
 							</span>
 						</div>
 						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🤟 Sign Language Translation System</h3>
