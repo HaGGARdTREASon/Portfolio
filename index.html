@@ -19,11 +19,12 @@
 					<!-- Tailwind CSS CDN -->
 					<script src="https://cdn.tailwindcss.com"></script>
 
-					<!-- Custom Styling, Interactive Animations & Curtain Transitions -->
+					<!-- Custom Styling, Dynamic Neural Networks & Curtain Transitions -->
 					<style>
 						:root {
 						--val-purple: #8b5cf6;
 						--val-purple-glow: rgba(139, 92, 246, 0.6);
+						--val-cyan: #06b6d4;
 						--val-dark: #0f1923;
 						--val-bg: #ece8e1;
 						--val-card: #ffffff;
@@ -200,64 +201,13 @@
 						100% { width: 120px; height: 120px; opacity: 0; border-width: 1px; transform: translate(-50%, -50%) rotate(225deg) scale(1.5); }
 						}
 
-						/* FLOATING HUD OBJECTS */
-						.white-float-obj {
-						position: fixed;
-						pointer-events: auto !important;
-						z-index: 12;
-						background: #ffffff;
-						box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-						transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease;
-						will-change: transform;
-						}
-
-						.white-float-obj:hover {
-						transform: scale(1.6) rotate(45deg) translate(0, -10px) !important;
-						box-shadow: 0 0 25px var(--val-purple), 0 0 10px #ffffff !important;
-						background: #ffffff;
-						border-color: var(--val-purple) !important;
-						}
-
-						.float-obj-1 {
-						top: 15%; left: 5%; width: 28px; height: 28px;
-						border: 2px solid var(--val-dark);
-						clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-						animation: floatY 8s ease-in-out infinite alternate;
-						}
-
-						.float-obj-2 {
-						top: 45%; right: 6%; width: 38px; height: 38px;
-						border: 2px solid var(--val-purple);
-						clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
-						animation: floatY 10s ease-in-out infinite alternate;
-						}
-
-						.float-obj-3 {
-						bottom: 25%; left: 8%; width: 48px; height: 14px;
-						border: 2px solid var(--val-dark);
-						animation: floatY 6s ease-in-out infinite alternate;
-						}
-
-						.float-obj-4 {
-						top: 70%; right: 18%; width: 24px; height: 24px;
-						border: 2px solid #ffffff; background: var(--val-dark);
-						clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-						animation: floatY 12s ease-in-out infinite alternate;
-						}
-
-						@keyframes floatY {
-						0% { transform: translateY(0px) rotate(0deg); }
-						50% { transform: translateY(-35px) rotate(45deg); }
-						100% { transform: translateY(25px) rotate(90deg); }
-						}
-
-						/* PRELOADER WITH GLASSMORPHIC BACKGROUND FOR CONSTELLATION VISIBILITY */
+						/* PRELOADER WITH NEURAL NETWORK GRAPH CONSTRAINTS */
 						#intro-loader {
 						position: fixed;
 						inset: 0;
 						z-index: 99998;
-						background-color: rgba(15, 25, 35, 0.88);
-						backdrop-filter: blur(8px);
+						background-color: rgba(15, 25, 35, 0.92);
+						backdrop-filter: blur(10px);
 						display: flex;
 						align-items: center;
 						justify-content: center;
@@ -267,7 +217,7 @@
 						will-change: transform;
 						}
 
-						.geom-transition-wrapper {
+						.nn-transition-wrapper {
 						position: absolute;
 						inset: 0;
 						pointer-events: none;
@@ -277,58 +227,94 @@
 						justify-content: center;
 						}
 
-						.geom-figure {
+						/* SVG NEURAL NETWORK STYLING */
+						.nn-figure {
 						position: absolute;
-						border: 2px solid var(--val-purple);
-						background: rgba(139, 92, 246, 0.08);
-						box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
-						backdrop-filter: blur(2px);
-						will-change: transform, clip-path, opacity;
+						filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.5));
+						will-change: transform, opacity;
 						}
 
-						.geom-fig-1 {
-						width: 320px; height: 320px;
-						animation: geomMorphCenter 6s ease-in-out infinite alternate;
+						.nn-fig-center {
+						width: 440px;
+						height: 440px;
+						animation: nnMorphCenter 8s ease-in-out infinite alternate;
 						}
 
-						.geom-fig-2 {
-						top: 10%; left: 10%; width: 140px; height: 140px;
-						animation: geomMorphTL 7s var(--ease-out-expo) infinite alternate;
+						.nn-fig-tl {
+						top: 8%; left: 8%; width: 220px; height: 220px;
+						animation: nnMorphTL 9s var(--ease-out-expo) infinite alternate;
 						}
 
-						.geom-fig-3 {
-						bottom: 12%; right: 10%; width: 180px; height: 180px;
-						animation: geomMorphBR 8s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+						.nn-fig-br {
+						bottom: 8%; right: 8%; width: 260px; height: 260px;
+						animation: nnMorphBR 10s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
 						}
 
-						.geom-fig-4 {
-						top: 20%; right: 15%; width: 90px; height: 90px;
-						animation: geomSpinTR 5s linear infinite;
+						.nn-fig-tr {
+						top: 12%; right: 12%; width: 180px; height: 180px;
+						animation: nnSpinTR 12s linear infinite;
 						}
 
-						@keyframes geomMorphCenter {
-						0% { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); transform: scale(0.8) rotate(0deg); border-color: var(--val-purple); }
-						33% { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); transform: scale(1.15) rotate(90deg); border-color: #ffffff; }
-						66% { clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); transform: scale(0.95) rotate(180deg); border-color: var(--val-purple); }
-						100% { clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); transform: scale(1.25) rotate(270deg); border-color: #a78bfa; }
+						/* SYNAPSE & NODE ANIMATIONS */
+						.synapse-line {
+						fill: none;
+						stroke-dasharray: 8 6;
+						animation: synapseFlow 2.5s linear infinite;
 						}
 
-						@keyframes geomMorphTL {
-						0% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: rotate(0deg) scale(0.9); }
-						50% { clip-path: polygon(50% 0%, 100% 100%, 0% 100%); transform: rotate(180deg) scale(1.3); border-color: #ffffff; }
-						100% { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); transform: rotate(360deg) scale(0.9); }
+						.synapse-line-fast {
+						stroke-dasharray: 6 4;
+						animation: synapseFlow 1.5s linear infinite reverse;
 						}
 
-						@keyframes geomMorphBR {
-						0% { clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%); transform: rotate(0deg) translateY(0); }
-						50% { clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: rotate(-180deg) translateY(-20px); border-color: #c084fc; }
-						100% { clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); transform: rotate(-360deg) translateY(0); }
+						@keyframes synapseFlow {
+						from { stroke-dashoffset: 28; }
+						to { stroke-dashoffset: 0; }
 						}
 
-						@keyframes geomSpinTR {
-						0% { transform: rotate(0deg) scale(1); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
-						50% { transform: rotate(180deg) scale(1.4); clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
-						100% { transform: rotate(360deg) scale(1); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+						.nn-node {
+						fill: #0f1923;
+						stroke: var(--val-purple);
+						stroke-width: 2.5;
+						transition: all 0.3s ease;
+						animation: nodePulse 2s ease-in-out infinite alternate;
+						}
+
+						.nn-node-cyan {
+						stroke: var(--val-cyan) !important;
+						}
+
+						.nn-node-white {
+						stroke: #ffffff !important;
+						}
+
+						@keyframes nodePulse {
+						0% { r: 5px; filter: drop-shadow(0 0 2px var(--val-purple)); }
+						100% { r: 8px; filter: drop-shadow(0 0 10px var(--val-purple)); }
+						}
+
+						@keyframes nnMorphCenter {
+						0% { transform: scale(0.85) rotate(0deg); opacity: 0.7; }
+						50% { transform: scale(1.15) rotate(90deg); opacity: 1; }
+						100% { transform: scale(0.9) rotate(180deg); opacity: 0.8; }
+						}
+
+						@keyframes nnMorphTL {
+						0% { transform: rotate(0deg) scale(0.9); }
+						50% { transform: rotate(180deg) scale(1.2); }
+						100% { transform: rotate(360deg) scale(0.9); }
+						}
+
+						@keyframes nnMorphBR {
+						0% { transform: rotate(0deg) translateY(0); }
+						50% { transform: rotate(-180deg) translateY(-25px); }
+						100% { transform: rotate(-360deg) translateY(0); }
+						}
+
+						@keyframes nnSpinTR {
+						0% { transform: rotate(0deg) scale(1); }
+						50% { transform: rotate(180deg) scale(1.3); }
+						100% { transform: rotate(360deg) scale(1); }
 						}
 
 						body.shutter-exit #intro-loader {
@@ -653,7 +639,7 @@
 				</head>
 	<body class="loading min-h-screen">
 
-		<!-- HIGH-DENSITY INTERACTIVE CONSTELLATION NETWORK CANVAS (ACTIVE ON LOADING & MAIN PAGE) -->
+		<!-- HIGH-DENSITY INTERACTIVE CONSTELLATION NETWORK CANVAS -->
 		<canvas id="constellation-canvas"></canvas>
 
 		<!-- MODERN MULTI-PANEL SKEWED CURTAIN WIPE TRANSITION -->
@@ -669,25 +655,92 @@
 		<!-- Custom Purple Tactical Crosshair -->
 		<div id="val-crosshair"></div>
 
-		<!-- Animated White Floating HUD Objects -->
-		<div class="white-float-obj float-obj-1 scroll-float" data-speed-x="0.12" data-speed-y="0.18"></div>
-		<div class="white-float-obj float-obj-2 scroll-float" data-speed-x="-0.15" data-speed-y="0.22"></div>
-		<div class="white-float-obj float-obj-3 scroll-float" data-speed-x="0.2" data-speed-y="-0.14"></div>
-		<div class="white-float-obj float-obj-4 scroll-float" data-speed-x="-0.11" data-speed-y="0.19"></div>
-
-		<!-- Multi-Stage Realistic Valorant Intro Preloader with Dynamic Geometric Transitions -->
+		<!-- Multi-Stage Valorant Intro Preloader with Neural Network SVG Figures -->
 		<div id="intro-loader" aria-hidden="true">
-			<!-- Dynamic Morphing Geometric Figures Container -->
-			<div class="geom-transition-wrapper">
-				<div class="geom-figure geom-fig-1"></div>
-				<div class="geom-figure geom-fig-2"></div>
-				<div class="geom-figure geom-fig-3"></div>
-				<div class="geom-figure geom-fig-4"></div>
+
+			<!-- Dynamic SVG Neural Network Architecture Figures -->
+			<div class="nn-transition-wrapper">
+				<!-- Central Deep Neural Network Graph -->
+				<svg class="nn-figure nn-fig-center" viewBox="0 0 400 400">
+					<!-- Synapses (Connection Lines) -->
+					<g opacity="0.6">
+						<!-- Input to Hidden Layer 1 -->
+						<path class="synapse-line" d="M60,100 L180,60 M60,100 L180,150 M60,100 L180,250 M60,100 L180,340" stroke="#8b5cf6" stroke-width="1.5"/>
+						<path class="synapse-line" d="M60,200 L180,60 M60,200 L180,150 M60,200 L180,250 M60,200 L180,340" stroke="#8b5cf6" stroke-width="1.5"/>
+						<path class="synapse-line" d="M60,300 L180,60 M60,300 L180,150 M60,300 L180,250 M60,300 L180,340" stroke="#8b5cf6" stroke-width="1.5"/>
+
+						<!-- Hidden Layer 1 to Hidden Layer 2 -->
+						<path class="synapse-line-fast" d="M180,60 L280,100 M180,60 L280,200 M180,60 L280,300" stroke="#06b6d4" stroke-width="1.5"/>
+						<path class="synapse-line-fast" d="M180,150 L280,100 M180,150 L280,200 M180,150 L280,300" stroke="#06b6d4" stroke-width="1.5"/>
+						<path class="synapse-line-fast" d="M180,250 L280,100 M180,250 L280,200 M180,250 L280,300" stroke="#06b6d4" stroke-width="1.5"/>
+						<path class="synapse-line-fast" d="M180,340 L280,100 M180,340 L280,200 M180,340 L280,300" stroke="#06b6d4" stroke-width="1.5"/>
+
+						<!-- Hidden Layer 2 to Output Layer -->
+						<path class="synapse-line" d="M280,100 L350,150 M280,100 L350,250" stroke="#ffffff" stroke-width="1.8"/>
+						<path class="synapse-line" d="M280,200 L350,150 M280,200 L350,250" stroke="#ffffff" stroke-width="1.8"/>
+						<path class="synapse-line" d="M280,300 L350,150 M280,300 L350,250" stroke="#ffffff" stroke-width="1.8"/>
+					</g>
+
+					<!-- Layer Nodes -->
+					<!-- Input Layer (3 Nodes) -->
+					<circle class="nn-node" cx="60" cy="100" r="7"/>
+					<circle class="nn-node" cx="60" cy="200" r="7"/>
+					<circle class="nn-node" cx="60" cy="300" r="7"/>
+
+					<!-- Hidden Layer 1 (4 Nodes) -->
+					<circle class="nn-node nn-node-cyan" cx="180" cy="60" r="8"/>
+					<circle class="nn-node nn-node-cyan" cx="180" cy="150" r="8"/>
+					<circle class="nn-node nn-node-cyan" cx="180" cy="250" r="8"/>
+					<circle class="nn-node nn-node-cyan" cx="180" cy="340" r="8"/>
+
+					<!-- Hidden Layer 2 (3 Nodes) -->
+					<circle class="nn-node nn-node-cyan" cx="280" cy="100" r="8"/>
+					<circle class="nn-node nn-node-cyan" cx="280" cy="200" r="8"/>
+					<circle class="nn-node nn-node-cyan" cx="280" cy="300" r="8"/>
+
+					<!-- Output Layer (2 Nodes) -->
+					<circle class="nn-node nn-node-white" cx="350" cy="150" r="9"/>
+					<circle class="nn-node nn-node-white" cx="350" cy="250" r="9"/>
+				</svg>
+
+				<!-- Top-Left Convolutional Cluster SVG -->
+				<svg class="nn-figure nn-fig-tl" viewBox="0 0 200 200">
+					<path class="synapse-line" d="M30,100 L100,30 M30,100 L100,100 M30,100 L100,170 M100,30 L170,100 M100,100 L170,100 M100,170 L170,100" stroke="#8b5cf6" stroke-width="1.2"/>
+					<circle class="nn-node" cx="30" cy="100" r="6"/>
+					<circle class="nn-node nn-node-cyan" cx="100" cy="30" r="6"/>
+					<circle class="nn-node nn-node-cyan" cx="100" cy="100" r="6"/>
+					<circle class="nn-node nn-node-cyan" cx="100" cy="170" r="6"/>
+					<circle class="nn-node nn-node-white" cx="170" cy="100" r="7"/>
+				</svg>
+
+				<!-- Bottom-Right Synaptic Net Matrix SVG -->
+				<svg class="nn-figure nn-fig-br" viewBox="0 0 220 220">
+					<path class="synapse-line-fast" d="M40,40 L110,40 M40,40 L40,110 M110,40 L180,40 M110,40 L110,110 M40,110 L110,110 M40,110 L40,180 M110,110 L180,110 M110,110 L110,180 M180,110 L180,180 M110,180 L180,180" stroke="#06b6d4" stroke-width="1.2"/>
+					<circle class="nn-node" cx="40" cy="40" r="5"/>
+					<circle class="nn-node nn-node-cyan" cx="110" cy="40" r="5"/>
+					<circle class="nn-node" cx="180" cy="40" r="5"/>
+					<circle class="nn-node nn-node-cyan" cx="40" cy="110" r="5"/>
+					<circle class="nn-node nn-node-white" cx="110" cy="110" r="7"/>
+					<circle class="nn-node nn-node-cyan" cx="180" cy="110" r="5"/>
+					<circle class="nn-node" cx="40" cy="180" r="5"/>
+					<circle class="nn-node nn-node-cyan" cx="110" cy="180" r="5"/>
+					<circle class="nn-node" cx="180" cy="180" r="5"/>
+				</svg>
+
+				<!-- Top-Right Circular Node Ring SVG -->
+				<svg class="nn-figure nn-fig-tr" viewBox="0 0 150 150">
+					<path class="synapse-line" d="M75,20 L130,75 M130,75 L75,130 M75,130 L20,75 M20,75 L75,20 M75,20 L75,130 M20,75 L130,75" stroke="#8b5cf6" stroke-width="1.2"/>
+					<circle class="nn-node" cx="75" cy="20" r="5"/>
+					<circle class="nn-node nn-node-cyan" cx="130" cy="75" r="5"/>
+					<circle class="nn-node" cx="75" cy="130" r="5"/>
+					<circle class="nn-node nn-node-cyan" cx="20" cy="75" r="5"/>
+					<circle class="nn-node nn-node-white" cx="75" cy="75" r="6"/>
+				</svg>
 			</div>
 
 			<div class="loader-content">
 				<div class="mb-5 inline-block bg-[var(--val-purple)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
-					⚡ SYSTEM INITIALIZATION // TAC-HUD
+					⚡ NEURAL NETWORK SYSTEM INITIALIZATION // TAC-HUD
 				</div>
 
 				<!-- Valorant Start-Side UI Bracket Lines -->
@@ -722,7 +775,7 @@
 				</div>
 
 				<p id="loader-subtext" class="mt-4 font-mono text-sm tracking-[0.3em] text-[#768079] uppercase">
-					🎯 INITIALIZING MATCH PROTOCOL...
+					🧠 LOADING NEURAL WEIGHTS & SYNAPSE NODES...
 				</p>
 
 				<!-- Realistic Loading Progress Bar & Percentage Counter -->
@@ -827,7 +880,7 @@
 				</div>
 
 				<div class="space-y-8">
-					<!-- HIGHLIGHTED PATENTED PROJECT WITH DYNAMIC GLOW ANIMATION -->
+					<!-- HIGHLIGHTED PATENTED PROJECT -->
 					<article class="val-card scroll-reveal patent-card-highlight p-8">
 						<div class="flex items-center gap-3">
 							<span class="val-badge val-badge-purple px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5 animate-pulse">
@@ -1017,7 +1070,7 @@
 			</section>
 		</main>
 
-		<!-- JAVASCRIPT: ENHANCED DENSE CONSTELLATION NETWORK & SYSTEM LOGIC -->
+		<!-- JAVASCRIPT: ENHANCED CONSTELLATION NETWORK & SYSTEM LOGIC -->
 		<script>
 			// Force Page Scroll Reset
 			if ('scrollRestoration' in history) {
@@ -1161,14 +1214,14 @@
 
 				fill.style.width = '100%';
 				counter.textContent = '100% — ACCESS GRANTED';
-				subtext.textContent = '🎯 AGENT LOCKED IN. DEPLOYING HUD...';
+				subtext.textContent = '🎯 NEURAL AGENT LOCKED IN. DEPLOYING HUD...';
 				subtext.style.color = '#8b5cf6';
 
 				setTimeout(() => {
 					// Trigger Modern Multi-Panel Skewed Curtain Wipe
 					curtainWipe.classList.add('active-wipe');
 
-					// Seamlessly reveal main UI at the exact moment dark panel covers the viewport (~600ms)
+					// Reveal main UI at exact midpoint when the dark curtain covers the viewport (~550ms)
 					setTimeout(() => {
 						document.body.classList.add('shutter-exit');
 						document.body.classList.remove('loading');
@@ -1184,18 +1237,6 @@
 				counter.textContent = `${progress}%`;
 			}
 			}, 70);
-
-			// Dynamic Scroll Physics for Floating Elements
-			window.addEventListener('scroll', () => {
-			const scrollY = window.scrollY;
-			document.querySelectorAll('.scroll-float').forEach((el) => {
-				const speedX = parseFloat(el.getAttribute('data-speed-x')) || 0.1;
-				const speedY = parseFloat(el.getAttribute('data-speed-y')) || 0.1;
-				const offsetX = scrollY * speedX;
-				const offsetY = scrollY * speedY;
-				el.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0px)`;
-			});
-			});
 
 			// 3D Card Interactive Tilt Effects
 			document.querySelectorAll('.val-card').forEach((card) => {
