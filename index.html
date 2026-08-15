@@ -1,933 +1,1029 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-		<title>Jash Saha — Computer Science & Business Systems Engineer</title>
-		<meta name="description" content="Portfolio of Jash Saha: AI, computer vision and data engineering projects, including a patented sign-language translation system." />
-		<meta property="og:title" content="Jash Saha — Computer Science & Business Systems Engineer" />
-		<meta property="og:description" content="Portfolio of Jash Saha: AI, computer vision and data engineering projects, including a patented sign-language translation system." />
-		<meta property="og:type" content="profile" />
-		<meta name="twitter:card" content="summary_large_image" />
-
-		<!-- Google Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-				<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Space+Grotesk:wght@500;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
-
-					<!-- Tailwind CSS CDN -->
-					<script src="https://cdn.tailwindcss.com"></script>
-
-					<!-- Custom Styling & Curtain Transitions -->
-					<style>
-						:root {
-						--val-purple: #8b5cf6;
-						--val-purple-glow: rgba(139, 92, 246, 0.6);
-						--val-cyan: #06b6d4;
-						--val-dark: #0f1923;
-						--val-bg: #ece8e1;
-						--val-card: #ffffff;
-						--val-gray: #5e686e;
-						--val-border: rgba(15, 25, 35, 0.18);
-						--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-						--ease-tactical: cubic-bezier(0.87, 0, 0.13, 1);
-						--ease-cinematic: cubic-bezier(0.77, 0, 0.175, 1);
-						}
-
-						/* HIDE DEFAULT CURSORS */
-						*, html, body, a, button, input, select, textarea {
-						cursor: none !important;
-						}
-
-						html, body {
-						scroll-behavior: auto !important;
-						overflow-x: hidden;
-						}
-
-						body.loading {
-						overflow: hidden !important;
-						}
-
-						body {
-						background-color: var(--val-bg);
-						color: var(--val-dark);
-						font-family: 'DM Sans', sans-serif;
-						position: relative;
-						min-height: 100vh;
-						background-image:
-						linear-gradient(rgba(15, 25, 35, 0.04) 1px, transparent 1px),
-						linear-gradient(90deg, rgba(15, 25, 35, 0.04) 1px, transparent 1px);
-						background-size: 32px 32px;
-						animation: bgGridMove 20s linear infinite;
-						}
-
-						@keyframes bgGridMove {
-						0% { background-position: 0 0; }
-						100% { background-position: 32px 32px; }
-						}
-
-						/* FIXED FULLSCREEN CONSTELLATION CANVAS */
-						#constellation-canvas {
-						position: fixed;
-						inset: 0;
-						pointer-events: none;
-						z-index: 10;
-						}
-
-						/* FLASHBANG OVERLAY */
-						#flash-overlay {
-						position: fixed;
-						inset: 0;
-						background: #ffffff;
-						z-index: 999999;
-						pointer-events: none;
-						opacity: 0;
-						transition: opacity 0.4s ease-out;
-						}
-
-						/* MODERN MULTI-PANEL SKEWED CURTAIN WIPE TRANSITION */
-						#curtain-wipe {
-						position: fixed;
-						inset: 0;
-						z-index: 99999;
-						pointer-events: none;
-						overflow: hidden;
-						display: none;
-						}
-
-						#curtain-wipe.active-wipe {
-						display: block;
-						}
-
-						.curtain-panel {
-						position: absolute;
-						top: -20%;
-						bottom: -20%;
-						width: 140vw;
-						left: -140vw;
-						transform: skewX(-15deg);
-						will-change: transform;
-						}
-
-						.panel-1 {
-						background: var(--val-purple);
-						z-index: 1;
-						box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
-						}
-
-						.panel-2 {
-						background: #06b6d4;
-						z-index: 2;
-						box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
-						}
-
-						.panel-3 {
-						background: #090e14;
-						z-index: 3;
-						box-shadow: -15px 0 50px rgba(0, 0, 0, 0.8), -5px 0 20px var(--val-purple);
-						}
-
-						#curtain-wipe.active-wipe .panel-1 {
-						animation: modernDirectSweep 1.1s var(--ease-cinematic) forwards;
-						}
-
-						#curtain-wipe.active-wipe .panel-2 {
-						animation: modernDirectSweep 1.1s var(--ease-cinematic) 0.08s forwards;
-						}
-
-						#curtain-wipe.active-wipe .panel-3 {
-						animation: modernDirectSweep 1.1s var(--ease-cinematic) 0.16s forwards;
-						}
-
-						@keyframes modernDirectSweep {
-						0% {
-						transform: translateX(0) skewX(-15deg);
-						}
-						100% {
-						transform: translateX(280vw) skewX(-15deg);
-						}
-						}
-
-						/* CUSTOM PURPLE CROSSHAIR & RIPPLE */
-						#val-crosshair {
-						position: fixed;
-						top: 0;
-						left: 0;
-						width: 32px;
-						height: 32px;
-						border: 1.5px solid var(--val-purple);
-						pointer-events: none;
-						z-index: 9999999;
-						transform: translate(-50%, -50%);
-						transition: width 0.15s, height 0.15s, border-color 0.15s, background-color 0.15s;
-						}
-
-						#val-crosshair::before {
-						content: '';
-						position: absolute;
-						top: 50%;
-						left: 50%;
-						width: 4px;
-						height: 4px;
-						background: var(--val-purple);
-						transform: translate(-50%, -50%);
-						}
-
-						#val-crosshair::after {
-						content: '';
-						position: absolute;
-						inset: -5px;
-						border: 1px dashed var(--val-purple-glow);
-						animation: crosshairSpin 8s linear infinite;
-						}
-
-						@keyframes crosshairSpin {
-						100% { transform: rotate(360deg); }
-						}
-
-						.click-ripple {
-						position: fixed;
-						border: 2px solid var(--val-purple);
-						border-radius: 0%;
-						transform: translate(-50%, -50%) rotate(45deg) scale(0);
-						pointer-events: none;
-						z-index: 999998;
-						animation: rippleAnim 0.6s var(--ease-out-expo) forwards;
-						}
-
-						@keyframes rippleAnim {
-						0% { width: 0px; height: 0px; opacity: 1; border-width: 4px; }
-						100% { width: 120px; height: 120px; opacity: 0; border-width: 1px; transform: translate(-50%, -50%) rotate(225deg) scale(1.5); }
-						}
-
-						/* PRELOADER INTRO SCREEN */
-						#intro-loader {
-						position: fixed;
-						inset: 0;
-						z-index: 99998;
-						background-color: rgba(15, 25, 35, 0.92);
-						backdrop-filter: blur(10px);
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						overflow: hidden;
-						perspective: 1200px;
-						transition: transform 0.85s var(--ease-cinematic);
-						will-change: transform;
-						}
-
-						body.shutter-exit #intro-loader {
-						opacity: 0;
-						pointer-events: none;
-						}
-
-						.loader-content {
-						position: relative;
-						z-index: 20;
-						text-align: center;
-						transition: opacity 0.5s cubic-bezier(0.4, 0, 1, 1);
-						transform-origin: center center;
-						}
-
-						main {
-						perspective: 1200px;
-						transition: transform 1s var(--ease-out-expo), filter 0.8s ease;
-						transform: scale(1.15);
-						filter: blur(8px);
-						will-change: transform, filter;
-						}
-
-						body.deployed main {
-						transform: scale(1);
-						filter: blur(0px);
-						}
-
-						.load-progress-bar {
-						width: 280px;
-						height: 4px;
-						background: rgba(255, 255, 255, 0.1);
-						margin: 1.5rem auto 0;
-						position: relative;
-						overflow: hidden;
-						border: 1px solid rgba(255, 255, 255, 0.2);
-						}
-
-						.load-progress-fill {
-						width: 0%;
-						height: 100%;
-						background: var(--val-purple);
-						box-shadow: 0 0 12px var(--val-purple);
-						transition: width 0.1s linear;
-						}
-
-						.val-start-side-wrapper {
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						gap: 1.5rem;
-						}
-
-						.val-side-bracket {
-						display: flex;
-						flex-direction: column;
-						align-items: center;
-						gap: 4px;
-						}
-
-						.val-side-bar-main {
-						width: 4px;
-						height: 75px;
-						background: var(--val-purple);
-						position: relative;
-						box-shadow: 0 0 12px var(--val-purple);
-						}
-
-						.val-side-bar-main::before, .val-side-bar-main::after {
-						content: '';
-						position: absolute;
-						width: 14px;
-						height: 4px;
-						background: #ffffff;
-						}
-
-						.val-side-bar-main::before { top: 0; }
-						.val-side-bar-main::after { bottom: 0; }
-
-						.left-bracket .val-side-bar-main::before, .left-bracket .val-side-bar-main::after { right: 0; }
-						.right-bracket .val-side-bar-main::before, .right-bracket .val-side-bar-main::after { left: 0; }
-
-						.val-side-ticks {
-						display: flex;
-						flex-direction: column;
-						gap: 3px;
-						}
-
-						.val-side-tick {
-						width: 10px;
-						height: 2px;
-						background: rgba(255, 255, 255, 0.6);
-						}
-
-						.glitch-text {
-						font-family: 'Space Grotesk', sans-serif;
-						font-size: clamp(2.5rem, 8vw, 6.5rem);
-						font-weight: 900;
-						letter-spacing: 0.15em;
-						color: #ece8e1;
-						text-transform: uppercase;
-						position: relative;
-						display: inline-block;
-						animation: valGlitch 0.3s infinite alternate;
-						}
-
-						.glitch-text span {
-						color: var(--val-purple);
-						}
-
-						@keyframes valGlitch {
-						0% { transform: translate(0); text-shadow: 3px 0 var(--val-purple), -3px 0 cyan; }
-						25% { transform: translate(-2px, 2px); }
-						50% { transform: translate(-2px, -2px); text-shadow: -3px 0 var(--val-purple), 3px 0 cyan; }
-						75% { transform: translate(2px, 1px); }
-						100% { transform: translate(0); }
-						}
-
-						.laser-scanner {
-						position: absolute;
-						top: 0; left: 0; width: 100%; height: 3px;
-						background: linear-gradient(90deg, transparent, var(--val-purple), transparent);
-						box-shadow: 0 0 15px var(--val-purple);
-						animation: scanline 4s ease-in-out infinite;
-						pointer-events: none;
-						}
-
-						@keyframes scanline {
-						0% { top: 0%; opacity: 0; }
-						15% { opacity: 1; }
-						85% { opacity: 1; }
-						100% { top: 100%; opacity: 0; }
-						}
-
-						.val-card {
-						background-color: var(--val-card) !important;
-						border: 1px solid var(--val-border) !important;
-						clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
-						position: relative;
-						box-shadow: 0 4px 20px rgba(15, 25, 35, 0.05);
-						overflow: hidden;
-						transform-style: preserve-3d;
-						transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
-						will-change: transform;
-						}
-
-						.val-card::before {
-						content: '';
-						position: absolute;
-						top: 0; left: 0; width: 5px; height: 100%;
-						background: var(--val-dark);
-						transition: background 0.3s ease, width 0.3s ease;
-						}
-
-						.val-card:hover {
-						border-color: var(--val-purple) !important;
-						box-shadow: 12px 12px 0px var(--val-dark), 0 0 25px var(--val-purple-glow) !important;
-						}
-
-						.val-card:hover::before {
-						background: var(--val-purple);
-						width: 8px;
-						}
-
-						.val-card::after {
-						content: '';
-						position: absolute;
-						bottom: 0; right: 0; width: 20px; height: 20px;
-						background: var(--val-purple);
-						clip-path: polygon(100% 0, 100% 100%, 0 100%);
-						opacity: 0;
-						transition: opacity 0.2s ease, transform 0.2s ease;
-						transform: translate(10px, 10px);
-						}
-
-						.val-card:hover::after {
-						opacity: 1;
-						transform: translate(0, 0);
-						}
-
-						.patent-card-highlight {
-						border: 2px solid var(--val-purple) !important;
-						animation: patentGlowPulse 1.2s infinite ease-in-out;
-						}
-
-						.patent-card-highlight::before {
-						background: var(--val-purple) !important;
-						width: 8px !important;
-						}
-
-						@keyframes patentGlowPulse {
-						0%, 100% {
-						box-shadow: 0 0 15px rgba(139, 92, 246, 0.5), inset 0 0 10px rgba(139, 92, 246, 0.2);
-						border-color: var(--val-purple) !important;
-						}
-						50% {
-						box-shadow: 0 0 35px rgba(139, 92, 246, 0.95), 0 0 60px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(139, 92, 246, 0.4);
-						border-color: #c084fc !important;
-						}
-						}
-
-						.scroll-reveal {
-						opacity: 0;
-						transform: translateY(60px) scale(0.92) rotateX(15deg);
-						transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-						will-change: opacity, transform;
-						}
-
-						.scroll-reveal.is-visible {
-						opacity: 1;
-						transform: translateY(0) scale(1) rotateX(0deg);
-						}
-
-						.hero-deploy-item {
-						opacity: 0;
-						transform: translateY(50px) translateZ(-100px) rotateX(25deg) skewY(2deg);
-						transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
-						will-change: opacity, transform;
-						}
-
-						body.deployed .hero-deploy-item {
-						opacity: 1;
-						transform: translateY(0) translateZ(0) rotateX(0deg) skewY(0deg);
-						}
-
-						body.deployed .hero-deploy-item:nth-child(1) { transition-delay: 0.1s; }
-						body.deployed .hero-deploy-item:nth-child(2) { transition-delay: 0.25s; }
-						body.deployed .hero-deploy-item:nth-child(3) { transition-delay: 0.4s; }
-						body.deployed .hero-deploy-item:nth-child(4) { transition-delay: 0.55s; }
-						body.deployed .hero-deploy-item:nth-child(5) { transition-delay: 0.7s; }
-
-						.val-btn {
-						background-color: var(--val-purple) !important;
-						color: #ffffff !important;
-						font-family: 'Space Grotesk', sans-serif !important;
-						font-weight: 800 !important;
-						text-transform: uppercase !important;
-						letter-spacing: 0.12em !important;
-						clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-						transition: all 0.2s var(--ease-out-expo) !important;
-						}
-
-						.val-btn:hover {
-						background-color: var(--val-dark) !important;
-						color: var(--val-purple) !important;
-						transform: translateY(-3px) scale(1.04);
-						box-shadow: 0 0 25px var(--val-purple-glow);
-						}
-
-						.val-btn-outline {
-						background-color: transparent !important;
-						color: var(--val-dark) !important;
-						border: 2px solid var(--val-dark) !important;
-						font-family: 'Space Grotesk', sans-serif !important;
-						font-weight: 700 !important;
-						text-transform: uppercase !important;
-						letter-spacing: 0.1em !important;
-						clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-						transition: all 0.2s ease !important;
-						}
-
-						.val-btn-outline:hover {
-						background-color: var(--val-dark) !important;
-						color: #ffffff !important;
-						transform: translateY(-3px);
-						}
-
-						.val-badge {
-						background: var(--val-dark);
-						color: #ffffff;
-						font-family: 'Space Grotesk', sans-serif;
-						font-weight: 800;
-						letter-spacing: 0.15em;
-						clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
-						}
-
-						.val-badge-purple {
-						background: var(--val-purple);
-						color: #ffffff;
-						}
-
-						.val-chip {
-						background: #ffffff;
-						border: 1px solid var(--val-dark);
-						color: var(--val-dark);
-						font-family: 'Space Grotesk', sans-serif;
-						font-weight: 700;
-						clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-						transition: all 0.2s ease;
-						}
-
-						.val-chip:hover {
-						background: var(--val-purple);
-						color: #ffffff;
-						border-color: var(--val-purple);
-						transform: translateY(-3px) rotate(-1deg);
-						}
-
-						h1, h2, h3 {
-						font-family: 'Space Grotesk', sans-serif !important;
-						}
-
-						#digital-clock {
-						background: var(--val-dark) !important;
-						border: 2px solid var(--val-purple) !important;
-						clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-						color: #ffffff !important;
-						box-shadow: 0 4px 15px var(--val-purple-glow);
-						opacity: 0;
-						transform: translateY(-30px);
-						transition: all 0.6s var(--ease-out-expo);
-						}
-
-						body.deployed #digital-clock {
-						opacity: 1;
-						transform: translateY(0);
-						}
-					</style>
-
-					<!-- Lucide Icons -->
-					<script src="https://unpkg.com/lucide@latest"></script>
-				</head>
-	<body class="loading min-h-screen">
-
-		<!-- HIGH-DENSITY INTERACTIVE CONSTELLATION NETWORK CANVAS -->
-		<canvas id="constellation-canvas"></canvas>
-
-		<!-- MODERN MULTI-PANEL SKEWED CURTAIN WIPE TRANSITION -->
-		<div id="curtain-wipe">
-			<div class="curtain-panel panel-1"></div>
-			<div class="curtain-panel panel-2"></div>
-			<div class="curtain-panel panel-3"></div>
-		</div>
-
-		<!-- Dynamic Flash Overlay -->
-		<div id="flash-overlay"></div>
-
-		<!-- Custom Purple Tactical Crosshair -->
-		<div id="val-crosshair"></div>
-
-		<!-- Multi-Stage Valorant Intro Preloader -->
-		<div id="intro-loader" aria-hidden="true">
-			<div class="loader-content">
-				<div class="mb-5 inline-block bg-[var(--val-purple)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
-					⚡ SYSTEM INITIALIZATION // TAC-HUD
-				</div>
-
-				<!-- Valorant Start-Side UI Bracket Lines -->
-				<div class="val-start-side-wrapper">
-					<div class="val-side-bracket left-bracket">
-						<div class="val-side-ticks">
-							<div class="val-side-tick"></div>
-							<div class="val-side-tick"></div>
-						</div>
-						<div class="val-side-bar-main"></div>
-						<div class="val-side-ticks">
-							<div class="val-side-tick"></div>
-							<div class="val-side-tick"></div>
-						</div>
-					</div>
-
-					<h1 class="glitch-text">
-						JASH <span>SAHA</span>
-					</h1>
-
-					<div class="val-side-bracket right-bracket">
-						<div class="val-side-ticks">
-							<div class="val-side-tick"></div>
-							<div class="val-side-tick"></div>
-						</div>
-						<div class="val-side-bar-main"></div>
-						<div class="val-side-ticks">
-							<div class="val-side-tick"></div>
-							<div class="val-side-tick"></div>
-						</div>
-					</div>
-				</div>
-
-				<p id="loader-subtext" class="mt-4 font-mono text-sm tracking-[0.3em] text-[#768079] uppercase">
-					⚡ INITIALIZING SYSTEM ASSETS...
-				</p>
-
-				<!-- Realistic Loading Progress Bar & Percentage Counter -->
-				<div class="load-progress-bar">
-					<div id="load-progress-fill" class="load-progress-fill"></div>
-				</div>
-				<p id="load-counter" class="mt-2 font-mono text-xs font-bold text-[var(--val-purple)] tracking-widest">
-					0%
-				</p>
-			</div>
-		</div>
-
-		<!-- Floating Tactical HUD Purple Clock -->
-		<div id="digital-clock" class="fixed right-4 top-4 z-50 flex items-center gap-2.5 px-5 py-2.5 font-display text-sm font-black tracking-widest sm:right-6 sm:top-6">
-			<i data-lucide="crosshair" class="size-4 animate-spin text-[var(--val-purple)]"></i>
-			<span id="clock-time">00:00:00 AM</span>
-		</div>
-
-		<main class="relative z-10">
-			<!-- Hero Section -->
-			<section class="relative overflow-hidden bg-white/40 backdrop-blur-sm">
-				<div class="laser-scanner"></div>
-				<div class="relative mx-auto max-w-5xl px-6 py-20 sm:py-32">
-
-					<div class="hero-deploy-item flex items-center gap-4">
-						<span class="val-badge val-badge-purple flex size-12 items-center justify-center text-lg font-black">
-							⚡
-						</span>
-						<p class="font-display text-xs uppercase leading-relaxed tracking-[0.35em] text-[var(--val-dark)] font-black">
-							// CSBS ENGINEER 💻
-							<span class="block text-[var(--val-gray)] font-semibold">📍 DEPLOYMENT LOCATION: KOLKATA, INDIA</span>
-						</p>
-					</div>
-
-					<!-- Name & Profile Picture -->
-					<div class="hero-deploy-item mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
-						<h1 class="text-6xl font-black uppercase leading-[0.9] tracking-tight text-[var(--val-dark)] sm:text-8xl hover:skew-x-2 transition-transform">
-							Jash <span class="text-[var(--val-purple)]">Saha</span> 🚀
-						</h1>
-						<div class="relative group">
-							<div class="absolute -inset-1 bg-[var(--val-purple)] clip-path-polygon rotate-3 transition-transform group-hover:rotate-6"></div>
-							<img
-							  src="1775580373561.jpg"
-							  alt="Jash Saha"
-							  class="relative size-32 sm:size-40 rounded-none object-cover shrink-0 border-4 border-[var(--val-dark)] bg-white"
-							  style="clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);"
-							/>
-						</div>
-					</div>
-
-					<p class="hero-deploy-item mt-8 max-w-2xl text-lg font-medium leading-relaxed text-[var(--val-dark)]">
-						A disciplined, high-execution engineering student who builds practical AI systems and computer vision models 🎯. My background merges technical rigor with structured project execution for real-world impact.
-					</p>
-
-					<!-- Action Buttons -->
-					<div class="hero-deploy-item mt-10 flex flex-wrap gap-4">
-						<a href="mailto:jashsaha917@gmail.com" class="val-btn inline-flex items-center gap-2 px-7 py-3.5 text-sm font-black">
-							✉️ jashsaha917@gmail.com
-						</a>
-						<a href="tel:+917980236608" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
-							📞 +91 79802 36608
-						</a>
-						<a href="https://www.linkedin.com/in/jash-saha" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
-							🔗 LinkedIn
-						</a>
-						<a href="https://github.com/HaGGARdTREASon" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
-							💻 GitHub
-						</a>
-					</div>
-
-					<!-- Stat Counters -->
-					<dl class="hero-deploy-item mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4">
-						<div class="val-card scroll-reveal p-6">
-							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">03 🚀</dt>
-							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Flagship Projects</dd>
-						</div>
-						<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card scroll-reveal p-6 block">
-							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">01 📜</dt>
-							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Published Patent</dd>
-						</a>
-						<div class="val-card scroll-reveal p-6">
-							<dt class="font-display text-xl font-black text-[var(--val-dark)] uppercase leading-tight">🔬 Research</dt>
-							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-purple)]">In Progress</dd>
-						</div>
-						<div class="val-card scroll-reveal p-6">
-							<dt class="font-display text-4xl font-black text-[var(--val-purple)]">2027 🎓</dt>
-							<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Graduation Year</dd>
-						</div>
-					</dl>
-				</div>
-			</section>
-
-			<!-- Projects Section -->
-			<section class="relative mx-auto max-w-5xl px-6 py-20">
-				<div class="laser-scanner"></div>
-				<div class="mb-12 flex items-center gap-4">
-					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 01</span>
-					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Tactical Projects 🎯
-					</h2>
-					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
-				</div>
-
-				<div class="space-y-8">
-					<!-- HIGHLIGHTED PATENTED PROJECT -->
-					<article class="val-card scroll-reveal patent-card-highlight p-8">
-						<div class="flex items-center gap-3">
-							<span class="val-badge val-badge-purple px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5 animate-pulse">
-								⚡ 📜 Published Patent
-							</span>
-						</div>
-						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🤟 Sign Language Translation System</h3>
-						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
-							<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed">Bridges communication between sign language users and non-signers, eliminating real-time audio-visual communication barriers.</li>
-							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Real-time hand gesture detection via computer vision, converted instantly into spoken audio responses.</li>
-						</ul>
-					</article>
-
-					<article class="val-card scroll-reveal p-8">
-						<div class="flex items-center gap-3">
-							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
-								🧠 Deep Learning
-							</span>
-						</div>
-						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🌾 Agricultural Price & Market Risk AI</h3>
-						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
-							<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed">Custom PyTorch neural network utilizing a Multi-Algorithm Ensemble (MoE) architecture to predict localized commodity prices.</li>
-							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Dynamic risk-assessment algorithm categorizing supply chain risk — Critical Shortage, Elevated Risk — and forecasting trends.</li>
-						</ul>
-					</article>
-
-					<article class="val-card scroll-reveal p-8">
-						<div class="flex items-center gap-3">
-							<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
-								👁️ Computer Vision
-							</span>
-						</div>
-						<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🛡️ Bad Touch Detection System</h3>
-						<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
-							<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed">OpenCV + MediaPipe pipeline tracking skeletal landmarks to distinguish self-touch from unsafe foreign contact.</li>
-							<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Geometric safety zones around the torso trigger an immediate Pygame audio alarm upon unauthorized proximity.</li>
-						</ul>
-					</article>
-				</div>
-			</section>
-
-			<!-- Research Section -->
-			<section class="mx-auto max-w-5xl px-6 py-12">
-				<div class="mb-10 flex items-center gap-4">
-					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 02</span>
-					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Research Papers 🔬
-					</h2>
-					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
-				</div>
-				<div class="val-card scroll-reveal p-10 text-center border-2 border-dashed border-[var(--val-purple)]">
-					<p class="font-display text-2xl font-black text-[var(--val-purple)] uppercase tracking-widest">// IN PROGRESS ⚡</p>
-				</div>
-			</section>
-
-			<!-- Skills Section -->
-			<section class="mx-auto max-w-5xl px-6 py-20">
-				<div class="mb-12 flex items-center gap-4">
-					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 03</span>
-					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Agent Skills 🛠️
-					</h2>
-					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
-				</div>
-				<div class="grid gap-8 sm:grid-cols-2">
-					<div class="val-card scroll-reveal p-6">
-						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
-							⚙️ Core Languages
-						</h3>
-						<div class="mt-4 flex flex-wrap gap-2.5">
-							<span class="val-chip px-4 py-2 text-xs">C 💻</span>
-							<span class="val-chip px-4 py-2 text-xs">C++ ⚡</span>
-							<span class="val-chip px-4 py-2 text-xs">Python 🐍</span>
-							<span class="val-chip px-4 py-2 text-xs">SQL 🗄️</span>
-							<span class="val-chip px-4 py-2 text-xs">HTML & CSS 🌐</span>
-						</div>
-					</div>
-					<div class="val-card scroll-reveal p-6">
-						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
-							🧠 ML & Data Stack
-						</h3>
-						<div class="mt-4 flex flex-wrap gap-2.5">
-							<span class="val-chip px-4 py-2 text-xs">PyTorch 🔥</span>
-							<span class="val-chip px-4 py-2 text-xs">Scikit-Learn 🤖</span>
-							<span class="val-chip px-4 py-2 text-xs">OpenCV 👁️</span>
-							<span class="val-chip px-4 py-2 text-xs">MediaPipe 🖐️</span>
-							<span class="val-chip px-4 py-2 text-xs">Pandas 🐼</span>
-							<span class="val-chip px-4 py-2 text-xs">NumPy 🔢</span>
-						</div>
-					</div>
-					<div class="val-card scroll-reveal p-6">
-						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
-							📊 Technical Practice
-						</h3>
-						<div class="mt-4 flex flex-wrap gap-2.5">
-							<span class="val-chip px-4 py-2 text-xs">CAD 📐</span>
-							<span class="val-chip px-4 py-2 text-xs">Data Engineering 🛠️</span>
-							<span class="val-chip px-4 py-2 text-xs">Power BI 📈</span>
-							<span class="val-chip px-4 py-2 text-xs">Data Visualization 📉</span>
-						</div>
-					</div>
-					<div class="val-card scroll-reveal p-6">
-						<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
-							🤝 Leadership & Soft Skills
-						</h3>
-						<div class="mt-4 flex flex-wrap gap-2.5">
-							<span class="val-chip px-4 py-2 text-xs">Public Speaking 🎙️</span>
-							<span class="val-chip px-4 py-2 text-xs">Leadership 👑</span>
-							<span class="val-chip px-4 py-2 text-xs">Communication 💬</span>
-							<span class="val-chip px-4 py-2 text-xs">Team Management 👥</span>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<!-- Experience & Education -->
-			<section class="mx-auto max-w-5xl px-6 py-20">
-				<div class="mb-12 flex items-center gap-4">
-					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 04</span>
-					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Track Record 🏆
-					</h2>
-					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
-				</div>
-				<div class="space-y-6">
-					<div class="val-card scroll-reveal p-7">
-						<div class="flex flex-wrap items-baseline justify-between gap-2">
-							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
-								💼 Indian Institute of Internship
-							</h3>
-							<span class="font-display text-sm font-black text-[var(--val-purple)]">Aug 2025 — Oct 2025</span>
-						</div>
-						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Completed a Business Analytics project using Power BI. 📊</p>
-					</div>
-					<div class="val-card scroll-reveal p-7">
-						<div class="flex flex-wrap items-baseline justify-between gap-2">
-							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
-								🎓 Meghnad Saha Institute of Technology
-							</h3>
-							<span class="font-display text-sm font-black text-[var(--val-purple)]">Aug 2023 — Jul 2027</span>
-						</div>
-						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">B.Tech in Computer Science and Business Systems 💻</p>
-					</div>
-					<div class="val-card scroll-reveal p-7">
-						<div class="flex flex-wrap items-baseline justify-between gap-2">
-							<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
-								🏫 Delhi Public School, Ruby Park
-							</h3>
-							<span class="font-display text-sm font-black text-[var(--val-purple)]">Feb 2009 — Feb 2023</span>
-						</div>
-						<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">High School Diploma in Science 🔬</p>
-					</div>
-				</div>
-			</section>
-
-			<!-- Leadership -->
-			<section class="mx-auto max-w-5xl px-6 py-20 pb-36">
-				<div class="mb-12 flex items-center gap-4">
-					<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 05</span>
-					<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
-						Command & Leadership 👑
-					</h2>
-					<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
-				</div>
-				<div class="grid gap-8 sm:grid-cols-2">
-					<div class="val-card scroll-reveal p-7">
-						<img src="phoenix_test_2.3.jpg" alt="Phoenix Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
-						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
-							👑 President & Ex-Vice President — Phoenix, CSBS
-						</h3>
-						<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
-							<li>— Organized Teacher's Day celebrations in 2025 and 2026. 🎉</li>
-							<li>— Managed Farewell ceremonies for graduating batches. 🎓</li>
-						</ul>
-					</div>
-					<div class="val-card scroll-reveal p-7">
-						<img src="Greenovation club.jpg" alt="Greenovation Club Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
-						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
-							🌿 Vice President — Greenovation Club, GCMSIT
-						</h3>
-						<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
-							<li>— Collected 10kg+ of e-waste during recycling drive. ♻️</li>
-							<li>— Hosted waste-to-handicrafts competition with 75+ entries. 🎨</li>
-						</ul>
-					</div>
-				</div>
-			</section>
-		</main>
-
-		<!-- JAVASCRIPT: ENHANCED CONSTELLATION NETWORK & SYSTEM LOGIC -->
-		<script>
-			// Force Page Scroll Reset
-			if ('scrollRestoration' in history) {
-			history.scrollRestoration = 'manual';
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Jash Saha — Computer Science & Business Systems Engineer</title>
+	<meta name="description" content="Portfolio of Jash Saha: AI, computer vision and data engineering projects, including a patented sign-language translation system." />
+	<meta property="og:title" content="Jash Saha — Computer Science & Business Systems Engineer" />
+	<meta property="og:description" content="Portfolio of Jash Saha: AI, computer vision and data engineering projects, including a patented sign-language translation system." />
+	<meta property="og:type" content="profile" />
+	<meta name="twitter:card" content="summary_large_image" />
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Space+Grotesk:wght@500;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+
+	<!-- Tailwind CSS CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- Custom Styling & Curtain Transitions -->
+	<style>
+		:root {
+			--val-purple: #8b5cf6;
+			--val-purple-glow: rgba(139, 92, 246, 0.6);
+			--val-cyan: #06b6d4;
+			--val-dark: #0f1923;
+			--val-bg: #ece8e1;
+			--val-card: #ffffff;
+			--val-gray: #5e686e;
+			--val-border: rgba(15, 25, 35, 0.18);
+			--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+			--ease-tactical: cubic-bezier(0.87, 0, 0.13, 1);
+			--ease-cinematic: cubic-bezier(0.77, 0, 0.175, 1);
+		}
+
+		/* HIDE DEFAULT CURSORS */
+		*, html, body, a, button, input, select, textarea {
+			cursor: none !important;
+		}
+
+		html, body {
+			scroll-behavior: auto !important;
+			overflow-x: hidden;
+		}
+
+			body.loading {
+				overflow: hidden !important;
 			}
-			window.scrollTo(0, 0);
 
-			/* -------------------------------------------------------------
-			HIGH-DENSITY DYNAMIC INTERACTIVE CONSTELLATION NETWORK
-			------------------------------------------------------------- */
-			const canvas = document.getElementById('constellation-canvas');
-			const ctx = canvas.getContext('2d');
-			let width, height;
-			let particles = [];
-			const particleCount = 160;
-			const maxDistance = 160;
-			let mouse = { x: null, y: null, radius: 220 };
+		body {
+			background-color: var(--val-bg);
+			color: var(--val-dark);
+			font-family: 'DM Sans', sans-serif;
+			position: relative;
+			min-height: 100vh;
+			background-image: linear-gradient(rgba(15, 25, 35, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 25, 35, 0.04) 1px, transparent 1px);
+			background-size: 32px 32px;
+			animation: bgGridMove 20s linear infinite;
+		}
 
-			function resizeCanvas() {
+		@keyframes bgGridMove {
+			0% {
+				background-position: 0 0;
+			}
+
+			100% {
+				background-position: 32px 32px;
+			}
+		}
+
+		/* FIXED FULLSCREEN CONSTELLATION CANVAS */
+		#constellation-canvas {
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			z-index: 10;
+		}
+
+		/* FLASHBANG OVERLAY */
+		#flash-overlay {
+			position: fixed;
+			inset: 0;
+			background: #ffffff;
+			z-index: 999999;
+			pointer-events: none;
+			opacity: 0;
+			transition: opacity 0.4s ease-out;
+		}
+
+		/* MODERN MULTI-PANEL SKEWED CURTAIN WIPE TRANSITION */
+		#curtain-wipe {
+			position: fixed;
+			inset: 0;
+			z-index: 99999;
+			pointer-events: none;
+			overflow: hidden;
+			display: none;
+		}
+
+			#curtain-wipe.active-wipe {
+				display: block;
+			}
+
+		.curtain-panel {
+			position: absolute;
+			top: -20%;
+			bottom: -20%;
+			width: 140vw;
+			left: -140vw;
+			transform: skewX(-15deg);
+			will-change: transform;
+		}
+
+		.panel-1 {
+			background: var(--val-purple);
+			z-index: 1;
+			box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+		}
+
+		.panel-2 {
+			background: #06b6d4;
+			z-index: 2;
+			box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+		}
+
+		.panel-3 {
+			background: #090e14;
+			z-index: 3;
+			box-shadow: -15px 0 50px rgba(0, 0, 0, 0.8), -5px 0 20px var(--val-purple);
+		}
+
+		#curtain-wipe.active-wipe .panel-1 {
+			animation: modernDirectSweep 1.1s var(--ease-cinematic) forwards;
+		}
+
+		#curtain-wipe.active-wipe .panel-2 {
+			animation: modernDirectSweep 1.1s var(--ease-cinematic) 0.08s forwards;
+		}
+
+		#curtain-wipe.active-wipe .panel-3 {
+			animation: modernDirectSweep 1.1s var(--ease-cinematic) 0.16s forwards;
+		}
+
+		@keyframes modernDirectSweep {
+			0% {
+				transform: translateX(0) skewX(-15deg);
+			}
+
+			100% {
+				transform: translateX(280vw) skewX(-15deg);
+			}
+		}
+
+		/* CUSTOM PURPLE CROSSHAIR & RIPPLE */
+		#val-crosshair {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 32px;
+			height: 32px;
+			border: 1.5px solid var(--val-purple);
+			pointer-events: none;
+			z-index: 9999999;
+			transform: translate(-50%, -50%);
+			transition: width 0.15s, height 0.15s, border-color 0.15s, background-color 0.15s;
+		}
+
+			#val-crosshair::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 4px;
+				height: 4px;
+				background: var(--val-purple);
+				transform: translate(-50%, -50%);
+			}
+
+			#val-crosshair::after {
+				content: '';
+				position: absolute;
+				inset: -5px;
+				border: 1px dashed var(--val-purple-glow);
+				animation: crosshairSpin 8s linear infinite;
+			}
+
+		@keyframes crosshairSpin {
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		.click-ripple {
+			position: fixed;
+			border: 2px solid var(--val-purple);
+			border-radius: 0%;
+			transform: translate(-50%, -50%) rotate(45deg) scale(0);
+			pointer-events: none;
+			z-index: 999998;
+			animation: rippleAnim 0.6s var(--ease-out-expo) forwards;
+		}
+
+		@keyframes rippleAnim {
+			0% {
+				width: 0px;
+				height: 0px;
+				opacity: 1;
+				border-width: 4px;
+			}
+
+			100% {
+				width: 120px;
+				height: 120px;
+				opacity: 0;
+				border-width: 1px;
+				transform: translate(-50%, -50%) rotate(225deg) scale(1.5);
+			}
+		}
+
+		/* PRELOADER INTRO SCREEN */
+		#intro-loader {
+			position: fixed;
+			inset: 0;
+			z-index: 99998;
+			background-color: rgba(15, 25, 35, 0.92);
+			backdrop-filter: blur(10px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			perspective: 1200px;
+			transition: transform 0.85s var(--ease-cinematic);
+			will-change: transform;
+		}
+
+		body.shutter-exit #intro-loader {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.loader-content {
+			position: relative;
+			z-index: 20;
+			text-align: center;
+			transition: opacity 0.5s cubic-bezier(0.4, 0, 1, 1);
+			transform-origin: center center;
+		}
+
+		main {
+			perspective: 1200px;
+			transition: transform 1s var(--ease-out-expo), filter 0.8s ease;
+			transform: scale(1.15);
+			filter: blur(8px);
+			will-change: transform, filter;
+		}
+
+		body.deployed main {
+			transform: scale(1);
+			filter: blur(0px);
+		}
+
+		.load-progress-bar {
+			width: 280px;
+			height: 4px;
+			background: rgba(255, 255, 255, 0.1);
+			margin: 1.5rem auto 0;
+			position: relative;
+			overflow: hidden;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		}
+
+		.load-progress-fill {
+			width: 0%;
+			height: 100%;
+			background: var(--val-purple);
+			box-shadow: 0 0 12px var(--val-purple);
+			transition: width 0.1s linear;
+		}
+
+		.val-start-side-wrapper {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 1.5rem;
+		}
+
+		.val-side-bracket {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 4px;
+		}
+
+		.val-side-bar-main {
+			width: 4px;
+			height: 75px;
+			background: var(--val-purple);
+			position: relative;
+			box-shadow: 0 0 12px var(--val-purple);
+		}
+
+			.val-side-bar-main::before, .val-side-bar-main::after {
+				content: '';
+				position: absolute;
+				width: 14px;
+				height: 4px;
+				background: #ffffff;
+			}
+
+			.val-side-bar-main::before {
+				top: 0;
+			}
+
+			.val-side-bar-main::after {
+				bottom: 0;
+			}
+
+		.left-bracket .val-side-bar-main::before, .left-bracket .val-side-bar-main::after {
+			right: 0;
+		}
+
+		.right-bracket .val-side-bar-main::before, .right-bracket .val-side-bar-main::after {
+			left: 0;
+		}
+
+		.val-side-ticks {
+			display: flex;
+			flex-direction: column;
+			gap: 3px;
+		}
+
+		.val-side-tick {
+			width: 10px;
+			height: 2px;
+			background: rgba(255, 255, 255, 0.6);
+		}
+
+		.glitch-text {
+			font-family: 'Space Grotesk', sans-serif;
+			font-size: clamp(2.5rem, 8vw, 6.5rem);
+			font-weight: 900;
+			letter-spacing: 0.15em;
+			color: #ece8e1;
+			text-transform: uppercase;
+			position: relative;
+			display: inline-block;
+			animation: valGlitch 0.3s infinite alternate;
+		}
+
+			.glitch-text span {
+				color: var(--val-purple);
+			}
+
+		@keyframes valGlitch {
+			0% {
+				transform: translate(0);
+				text-shadow: 3px 0 var(--val-purple), -3px 0 cyan;
+			}
+
+			25% {
+				transform: translate(-2px, 2px);
+			}
+
+			50% {
+				transform: translate(-2px, -2px);
+				text-shadow: -3px 0 var(--val-purple), 3px 0 cyan;
+			}
+
+			75% {
+				transform: translate(2px, 1px);
+			}
+
+			100% {
+				transform: translate(0);
+			}
+		}
+
+		.laser-scanner {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 3px;
+			background: linear-gradient(90deg, transparent, var(--val-purple), transparent);
+			box-shadow: 0 0 15px var(--val-purple);
+			animation: scanline 4s ease-in-out infinite;
+			pointer-events: none;
+		}
+
+		@keyframes scanline {
+			0% {
+				top: 0%;
+				opacity: 0;
+			}
+
+			15% {
+				opacity: 1;
+			}
+
+			85% {
+				opacity: 1;
+			}
+
+			100% {
+				top: 100%;
+				opacity: 0;
+			}
+		}
+
+		.val-card {
+			background-color: var(--val-card) !important;
+			border: 1px solid var(--val-border) !important;
+			clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+			position: relative;
+			box-shadow: 0 4px 20px rgba(15, 25, 35, 0.05);
+			overflow: hidden;
+			transform-style: preserve-3d;
+			transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+			will-change: transform;
+		}
+
+			.val-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 5px;
+				height: 100%;
+				background: var(--val-dark);
+				transition: background 0.3s ease, width 0.3s ease;
+			}
+
+			.val-card:hover {
+				border-color: var(--val-purple) !important;
+				box-shadow: 12px 12px 0px var(--val-dark), 0 0 25px var(--val-purple-glow) !important;
+			}
+
+				.val-card:hover::before {
+					background: var(--val-purple);
+					width: 8px;
+				}
+
+			.val-card::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				width: 20px;
+				height: 20px;
+				background: var(--val-purple);
+				clip-path: polygon(100% 0, 100% 100%, 0 100%);
+				opacity: 0;
+				transition: opacity 0.2s ease, transform 0.2s ease;
+				transform: translate(10px, 10px);
+			}
+
+			.val-card:hover::after {
+				opacity: 1;
+				transform: translate(0, 0);
+			}
+
+		.patent-card-highlight {
+			border: 2px solid var(--val-purple) !important;
+			animation: patentGlowPulse 1.2s infinite ease-in-out;
+		}
+
+			.patent-card-highlight::before {
+				background: var(--val-purple) !important;
+				width: 8px !important;
+			}
+
+		@keyframes patentGlowPulse {
+			0%, 100% {
+				box-shadow: 0 0 15px rgba(139, 92, 246, 0.5), inset 0 0 10px rgba(139, 92, 246, 0.2);
+				border-color: var(--val-purple) !important;
+			}
+
+			50% {
+				box-shadow: 0 0 35px rgba(139, 92, 246, 0.95), 0 0 60px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(139, 92, 246, 0.4);
+				border-color: #c084fc !important;
+			}
+		}
+
+		.scroll-reveal {
+			opacity: 0;
+			transform: translateY(60px) scale(0.92) rotateX(15deg);
+			transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+			will-change: opacity, transform;
+		}
+
+			.scroll-reveal.is-visible {
+				opacity: 1;
+				transform: translateY(0) scale(1) rotateX(0deg);
+			}
+
+		.hero-deploy-item {
+			opacity: 0;
+			transform: translateY(50px) translateZ(-100px) rotateX(25deg) skewY(2deg);
+			transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+			will-change: opacity, transform;
+		}
+
+		body.deployed .hero-deploy-item {
+			opacity: 1;
+			transform: translateY(0) translateZ(0) rotateX(0deg) skewY(0deg);
+		}
+
+			body.deployed .hero-deploy-item:nth-child(1) {
+				transition-delay: 0.1s;
+			}
+
+			body.deployed .hero-deploy-item:nth-child(2) {
+				transition-delay: 0.25s;
+			}
+
+			body.deployed .hero-deploy-item:nth-child(3) {
+				transition-delay: 0.4s;
+			}
+
+			body.deployed .hero-deploy-item:nth-child(4) {
+				transition-delay: 0.55s;
+			}
+
+			body.deployed .hero-deploy-item:nth-child(5) {
+				transition-delay: 0.7s;
+			}
+
+		.val-btn {
+			background-color: var(--val-purple) !important;
+			color: #ffffff !important;
+			font-family: 'Space Grotesk', sans-serif !important;
+			font-weight: 800 !important;
+			text-transform: uppercase !important;
+			letter-spacing: 0.12em !important;
+			clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+			transition: all 0.2s var(--ease-out-expo) !important;
+		}
+
+			.val-btn:hover {
+				background-color: var(--val-dark) !important;
+				color: var(--val-purple) !important;
+				transform: translateY(-3px) scale(1.04);
+				box-shadow: 0 0 25px var(--val-purple-glow);
+			}
+
+		.val-btn-outline {
+			background-color: transparent !important;
+			color: var(--val-dark) !important;
+			border: 2px solid var(--val-dark) !important;
+			font-family: 'Space Grotesk', sans-serif !important;
+			font-weight: 700 !important;
+			text-transform: uppercase !important;
+			letter-spacing: 0.1em !important;
+			clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+			transition: all 0.2s ease !important;
+		}
+
+			.val-btn-outline:hover {
+				background-color: var(--val-dark) !important;
+				color: #ffffff !important;
+				transform: translateY(-3px);
+			}
+
+		.val-badge {
+			background: var(--val-dark);
+			color: #ffffff;
+			font-family: 'Space Grotesk', sans-serif;
+			font-weight: 800;
+			letter-spacing: 0.15em;
+			clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+		}
+
+		.val-badge-purple {
+			background: var(--val-purple);
+			color: #ffffff;
+		}
+
+		.val-chip {
+			background: #ffffff;
+			border: 1px solid var(--val-dark);
+			color: var(--val-dark);
+			font-family: 'Space Grotesk', sans-serif;
+			font-weight: 700;
+			clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+			transition: all 0.2s ease;
+		}
+
+			.val-chip:hover {
+				background: var(--val-purple);
+				color: #ffffff;
+				border-color: var(--val-purple);
+				transform: translateY(-3px) rotate(-1deg);
+			}
+
+		h1, h2, h3 {
+			font-family: 'Space Grotesk', sans-serif !important;
+		}
+
+		#digital-clock {
+			background: var(--val-dark) !important;
+			border: 2px solid var(--val-purple) !important;
+			clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+			color: #ffffff !important;
+			box-shadow: 0 4px 15px var(--val-purple-glow);
+			opacity: 0;
+			transform: translateY(-30px);
+			transition: all 0.6s var(--ease-out-expo);
+		}
+
+		body.deployed #digital-clock {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	</style>
+
+	<!-- Lucide Icons -->
+	<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="loading min-h-screen">
+
+	<!-- HIGH-DENSITY INTERACTIVE CONSTELLATION NETWORK CANVAS -->
+	<canvas id="constellation-canvas"></canvas>
+
+	<!-- MODERN MULTI-PANEL SKEWED CURTAIN WIPE TRANSITION -->
+	<div id="curtain-wipe">
+		<div class="curtain-panel panel-1"></div>
+		<div class="curtain-panel panel-2"></div>
+		<div class="curtain-panel panel-3"></div>
+	</div>
+
+	<!-- Dynamic Flash Overlay -->
+	<div id="flash-overlay"></div>
+
+	<!-- Custom Purple Tactical Crosshair -->
+	<div id="val-crosshair"></div>
+
+	<!-- Multi-Stage Valorant Intro Preloader -->
+	<div id="intro-loader" aria-hidden="true">
+		<div class="loader-content">
+			<div class="mb-5 inline-block bg-[var(--val-purple)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
+				⚡ SYSTEM INITIALIZATION // TAC-HUD
+			</div>
+
+			<!-- Valorant Start-Side UI Bracket Lines -->
+			<div class="val-start-side-wrapper">
+				<div class="val-side-bracket left-bracket">
+					<div class="val-side-ticks">
+						<div class="val-side-tick"></div>
+						<div class="val-side-tick"></div>
+					</div>
+					<div class="val-side-bar-main"></div>
+					<div class="val-side-ticks">
+						<div class="val-side-tick"></div>
+						<div class="val-side-tick"></div>
+					</div>
+				</div>
+
+				<h1 class="glitch-text">
+					JASH <span>SAHA</span>
+				</h1>
+
+				<div class="val-side-bracket right-bracket">
+					<div class="val-side-ticks">
+						<div class="val-side-tick"></div>
+						<div class="val-side-tick"></div>
+					</div>
+					<div class="val-side-bar-main"></div>
+					<div class="val-side-ticks">
+						<div class="val-side-tick"></div>
+						<div class="val-side-tick"></div>
+					</div>
+				</div>
+			</div>
+
+			<p id="loader-subtext" class="mt-4 font-mono text-sm tracking-[0.3em] text-[#768079] uppercase">
+				⚡ INITIALIZING SYSTEM ASSETS...
+			</p>
+
+			<!-- Realistic Loading Progress Bar & Percentage Counter -->
+			<div class="load-progress-bar">
+				<div id="load-progress-fill" class="load-progress-fill"></div>
+			</div>
+			<p id="load-counter" class="mt-2 font-mono text-xs font-bold text-[var(--val-purple)] tracking-widest">
+				0%
+			</p>
+		</div>
+	</div>
+
+	<!-- Floating Tactical HUD Purple Clock -->
+	<div id="digital-clock" class="fixed right-4 top-4 z-50 flex items-center gap-2.5 px-5 py-2.5 font-display text-sm font-black tracking-widest sm:right-6 sm:top-6">
+		<i data-lucide="crosshair" class="size-4 animate-spin text-[var(--val-purple)]"></i>
+		<span id="clock-time">00:00:00 AM</span>
+	</div>
+
+	<main class="relative z-10">
+		<!-- Hero Section -->
+		<section class="relative overflow-hidden bg-white/40 backdrop-blur-sm">
+			<div class="laser-scanner"></div>
+			<div class="relative mx-auto max-w-5xl px-6 py-20 sm:py-32">
+
+				<div class="hero-deploy-item flex items-center gap-4">
+					<span class="val-badge val-badge-purple flex size-12 items-center justify-center text-lg font-black">
+						⚡
+					</span>
+					<p class="font-display text-xs uppercase leading-relaxed tracking-[0.35em] text-[var(--val-dark)] font-black">
+						// CSBS ENGINEER 💻
+						<span class="block text-[var(--val-gray)] font-semibold">📍 DEPLOYMENT LOCATION: KOLKATA, INDIA</span>
+					</p>
+				</div>
+
+				<!-- Name & Profile Picture -->
+				<div class="hero-deploy-item mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
+					<h1 class="text-6xl font-black uppercase leading-[0.9] tracking-tight text-[var(--val-dark)] sm:text-8xl hover:skew-x-2 transition-transform">
+						Jash <span class="text-[var(--val-purple)]">Saha</span> 🚀
+					</h1>
+					<div class="relative group">
+						<div class="absolute -inset-1 bg-[var(--val-purple)] clip-path-polygon rotate-3 transition-transform group-hover:rotate-6"></div>
+						<img src="1775580373561.jpg"
+							 alt="Jash Saha"
+							 class="relative size-32 sm:size-40 rounded-none object-cover shrink-0 border-4 border-[var(--val-dark)] bg-white"
+							 style="clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);" />
+					</div>
+				</div>
+
+				<p class="hero-deploy-item mt-8 max-w-2xl text-lg font-medium leading-relaxed text-[var(--val-dark)]">
+					A responsible Engineering student with strong problem-solving and project management skills. Focused on solving practical problems by combining technical rigor with a structured approach to project management for efficient, business-aligned delivery.
+				</p>
+
+				<!-- Action Buttons -->
+				<div class="hero-deploy-item mt-10 flex flex-wrap gap-4">
+					<a href="mailto:jashsaha917@gmail.com" class="val-btn inline-flex items-center gap-2 px-7 py-3.5 text-sm font-black">
+						✉️ jashsaha917@gmail.com
+					</a>
+					<a href="tel:+917980236608" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
+						📞 +91 79802 36608
+					</a>
+					<a href="https://www.linkedin.com/in/jash-saha" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
+						🔗 LinkedIn
+					</a>
+					<a href="https://github.com/HaGGARdTREASon" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
+						💻 GitHub
+					</a>
+				</div>
+
+				<!-- Stat Counters -->
+				<dl class="hero-deploy-item mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4">
+					<div class="val-card scroll-reveal p-6">
+						<dt class="font-display text-4xl font-black text-[var(--val-purple)]">03 🚀</dt>
+						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Flagship Projects</dd>
+					</div>
+					<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card scroll-reveal p-6 block">
+					<dt class="font-display text-4xl font-black text-[var(--val-purple)]">01 📜</dt>
+					<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Published Patent</dd>
+					</a>
+					<div class="val-card scroll-reveal p-6">
+						<dt class="font-display text-xl font-black text-[var(--val-dark)] uppercase leading-tight">🔬 Research</dt>
+						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-purple)]">In Progress</dd>
+					</div>
+					<div class="val-card scroll-reveal p-6">
+						<dt class="font-display text-4xl font-black text-[var(--val-purple)]">2027 🎓</dt>
+						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Graduation Year</dd>
+					</div>
+				</dl>
+			</div>
+		</section>
+
+		<!-- Projects Section -->
+		<section class="relative mx-auto max-w-5xl px-6 py-20">
+			<div class="laser-scanner"></div>
+			<div class="mb-12 flex items-center gap-4">
+				<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 01</span>
+				<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+					Tactical Projects 🎯
+				</h2>
+				<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
+			</div>
+
+			<div class="space-y-8">
+				<!-- HIGHLIGHTED PATENTED PROJECT -->
+				<article class="val-card scroll-reveal patent-card-highlight p-8">
+					<div class="flex items-center gap-3">
+						<span class="val-badge val-badge-purple px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5 animate-pulse">
+							⚡ 📜 Published Patent (27th March 2026)
+						</span>
+					</div>
+					<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🤟 Sign Language Translation System for Speech Impaired People</h3>
+					<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+						<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-purple)] font-bold">Bridging the Gap:</strong> Facilitates seamless communication between sign language users and non-signers by eliminating language barriers.</li>
+						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Real-Time Translation:</strong> Instantly detects hand gestures using computer vision and converts them into spoken audio.</li>
+					</ul>
+				</article>
+
+				<article class="val-card scroll-reveal p-8">
+					<div class="flex items-center gap-3">
+						<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
+							🧠 Deep Learning & Market Intelligence
+						</span>
+					</div>
+					<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🌾 End-to-End AI System for Agricultural Commodity Prices & Market Risk Assessment</h3>
+					<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+						<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed">Designed and trained a custom PyTorch Neural Network utilizing a Multi-Algorithm Ensemble (MoE) architecture to predict localized agricultural commodity prices.</li>
+						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Developed a dynamic risk-assessment algorithm that translates AI predictions into actionable market intelligence, categorizing supply chain risks (e.g., Critical Shortage, Elevated Risk) and forecasting price trends.</li>
+					</ul>
+				</article>
+
+				<article class="val-card scroll-reveal p-8">
+					<div class="flex items-center gap-3">
+						<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
+							👁️ Computer Vision
+						</span>
+					</div>
+					<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🛡️ Bad Touch Detection System</h3>
+					<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+						<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-purple)] font-bold">Real-Time Computer Vision Pipeline:</strong> Engineered a safety monitoring system using OpenCV and MediaPipe tracking skeletal landmarks to differentiate between "self-touch" and potentially unsafe "foreign contact" with high precision.</li>
+						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Automated Threat Response:</strong> Implemented a geometric logic algorithm defining safety zones around the torso, triggering an immediate audio alarm via Pygame if unauthorized proximity is detected, ensuring proactive personal safety.</li>
+					</ul>
+				</article>
+			</div>
+		</section>
+
+		<!-- Research Section -->
+		<section class="mx-auto max-w-5xl px-6 py-12">
+			<div class="mb-10 flex items-center gap-4">
+				<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 02</span>
+				<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+					Research Papers 🔬
+				</h2>
+				<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
+			</div>
+			<div class="val-card scroll-reveal p-8 border-2 border-dashed border-[var(--val-purple)]">
+				<div class="flex items-center gap-3">
+					<span class="val-badge val-badge-purple px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5 animate-pulse">
+						🔬 Research In Progress
+					</span>
+				</div>
+				<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🧪 ML-Based Prediction Model for Sensitivity of a Gate Overlapped Heterojunction TFET Biosensor</h3>
+				<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+					<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-purple)] font-bold">Ensemble Machine Learning:</strong> Implemented a Random Forest Regressor to model complex non-linear dependencies in multi-variable datasets, optimizing feature selection for accurate predictive modeling.</li>
+					<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Automated Data Filtering:</strong> Automatically detects and removes statistical outliers by validating experimental data.</li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- Skills Section -->
+		<section class="mx-auto max-w-5xl px-6 py-20">
+			<div class="mb-12 flex items-center gap-4">
+				<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 03</span>
+				<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+					Agent Skills 🛠️
+				</h2>
+				<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
+			</div>
+			<div class="grid gap-8 sm:grid-cols-2">
+				<div class="val-card scroll-reveal p-6">
+					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
+						⚙️ Core Languages & Tools
+					</h3>
+					<div class="mt-4 flex flex-wrap gap-2.5">
+						<span class="val-chip px-4 py-2 text-xs">C 💻</span>
+						<span class="val-chip px-4 py-2 text-xs">C++ ⚡</span>
+						<span class="val-chip px-4 py-2 text-xs">Python 🐍</span>
+						<span class="val-chip px-4 py-2 text-xs">SQL 🗄️</span>
+						<span class="val-chip px-4 py-2 text-xs">HTML & CSS 🌐</span>
+						<span class="val-chip px-4 py-2 text-xs">Power BI 📊</span>
+					</div>
+				</div>
+				<div class="val-card scroll-reveal p-6">
+					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
+						🧠 ML & Data Stack
+					</h3>
+					<div class="mt-4 flex flex-wrap gap-2.5">
+						<span class="val-chip px-4 py-2 text-xs">PyTorch 🔥</span>
+						<span class="val-chip px-4 py-2 text-xs">Scikit-Learn 🤖</span>
+						<span class="val-chip px-4 py-2 text-xs">OpenCV 👁️</span>
+						<span class="val-chip px-4 py-2 text-xs">MediaPipe 🖐️</span>
+						<span class="val-chip px-4 py-2 text-xs">Pandas 🐼</span>
+						<span class="val-chip px-4 py-2 text-xs">NumPy 🔢</span>
+						<span class="val-chip px-4 py-2 text-xs">Matplotlib 📈</span>
+					</div>
+				</div>
+				<div class="val-card scroll-reveal p-6">
+					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
+						📊 Technical Practice
+					</h3>
+					<div class="mt-4 flex flex-wrap gap-2.5">
+						<span class="val-chip px-4 py-2 text-xs">Data Cleaning 🧹</span>
+						<span class="val-chip px-4 py-2 text-xs">Data Engineering 🛠️</span>
+						<span class="val-chip px-4 py-2 text-xs">Data Visualization & Analysis 📉</span>
+					</div>
+				</div>
+				<div class="val-card scroll-reveal p-6">
+					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
+						🤝 Leadership & Soft Skills
+					</h3>
+					<div class="mt-4 flex flex-wrap gap-2.5">
+						<span class="val-chip px-4 py-2 text-xs">Public Speaking 🎙️</span>
+						<span class="val-chip px-4 py-2 text-xs">Leadership 👑</span>
+						<span class="val-chip px-4 py-2 text-xs">Communication 💬</span>
+						<span class="val-chip px-4 py-2 text-xs">Team Work & Management 👥</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Experience & Education -->
+		<section class="mx-auto max-w-5xl px-6 py-20">
+			<div class="mb-12 flex items-center gap-4">
+				<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 04</span>
+				<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+					Track Record 🏆
+				</h2>
+				<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
+			</div>
+			<div class="space-y-6">
+				<div class="val-card scroll-reveal p-7">
+					<div class="flex flex-wrap items-baseline justify-between gap-2">
+						<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
+							💼 Indian Institute of Internship (Business Analytics Intern)
+						</h3>
+						<span class="font-display text-sm font-black text-[var(--val-purple)]">Aug 2025 — Oct 2025</span>
+					</div>
+					<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Built Power BI dashboards to analyze sales data & improve reporting efficiency. 📊</p>
+				</div>
+				<div class="val-card scroll-reveal p-7">
+					<div class="flex flex-wrap items-baseline justify-between gap-2">
+						<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
+							🎓 Meghnad Saha Institute of Technology Kolkata
+						</h3>
+						<span class="font-display text-sm font-black text-[var(--val-purple)]">Aug 2023 — Jul 2027</span>
+					</div>
+					<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Bachelor of Technology in Computer Science and Business Systems 💻</p>
+				</div>
+				<div class="val-card scroll-reveal p-7">
+					<div class="flex flex-wrap items-baseline justify-between gap-2">
+						<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
+							🏫 Delhi Public School, Ruby Park
+						</h3>
+						<span class="font-display text-sm font-black text-[var(--val-purple)]">Feb 2009 — Feb 2023</span>
+					</div>
+					<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">High School Diploma in Science 🔬</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Leadership -->
+		<section class="mx-auto max-w-5xl px-6 py-20 pb-36">
+			<div class="mb-12 flex items-center gap-4">
+				<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 05</span>
+				<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
+					Command & Leadership 👑
+				</h2>
+				<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
+			</div>
+			<div class="grid gap-8 sm:grid-cols-2">
+				<div class="val-card scroll-reveal p-7">
+					<img src="phoenix_test_2.3.jpg" alt="Phoenix Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
+					<div class="flex flex-wrap items-baseline justify-between gap-2">
+						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
+							👑 President & Ex-Vice President — Phoenix (Cultural Committee of CSBS)
+						</h3>
+						<span class="font-display text-xs font-black text-[var(--val-purple)]">Nov 2024 – Current</span>
+					</div>
+					<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
+						<li>— Organized Teacher's Day celebrations in 2025 and 2026. 🎉</li>
+						<li>— Organized Farewell ceremony in 2025 and 2026. 🎓</li>
+					</ul>
+				</div>
+				<div class="val-card scroll-reveal p-7">
+					<img src="Greenovation club.jpg" alt="Greenovation Club Logo" class="mb-4 h-24 w-auto object-contain border-2 border-[var(--val-dark)] p-1 bg-white" />
+					<div class="flex flex-wrap items-baseline justify-between gap-2">
+						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
+							🌿 Vice President & Ex-Speaker — Greenovation Club (GCMSIT)
+						</h3>
+						<span class="font-display text-xs font-black text-[var(--val-purple)]">April 2025 – Current</span>
+					</div>
+					<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
+						<li>— Organized E-waste Recycle Campaign with accumulation of 10kg+ e-waste. ♻️</li>
+						<li>— Organized Handicrafts using wastes competition with 75+ submissions. 🎨</li>
+						<li>— Organized the AQI workshop. 🫁</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- JAVASCRIPT: ENHANCED CONSTELLATION NETWORK & SYSTEM LOGIC -->
+	<script>
+		// Force Page Scroll Reset
+		if ('scrollRestoration' in history) {
+			history.scrollRestoration = 'manual';
+		}
+		window.scrollTo(0, 0);
+
+		/* -------------------------------------------------------------
+		HIGH-DENSITY DYNAMIC INTERACTIVE CONSTELLATION NETWORK
+		------------------------------------------------------------- */
+		const canvas = document.getElementById('constellation-canvas');
+		const ctx = canvas.getContext('2d');
+		let width, height;
+		let particles = [];
+		const particleCount = 160;
+		const maxDistance = 160;
+		let mouse = { x: null, y: null, radius: 220 };
+
+		function resizeCanvas() {
 			width = canvas.width = window.innerWidth;
 			height = canvas.height = window.innerHeight;
-			}
-			window.addEventListener('resize', resizeCanvas);
-			resizeCanvas();
+		}
+		window.addEventListener('resize', resizeCanvas);
+		resizeCanvas();
 
-			class Particle {
+		class Particle {
 			constructor() {
-			this.x = Math.random() * width;
-			this.y = Math.random() * height;
-			this.vx = (Math.random() - 0.5) * 1.4;
-			this.vy = (Math.random() - 0.5) * 1.4;
-			this.radius = Math.random() * 2.8 + 1;
-			this.color = Math.random() > 0.3 ? 'rgba(139, 92, 246, ' : 'rgba(6, 182, 212, ';
-			this.pulse = Math.random() * Math.PI * 2;
-			this.pulseSpeed = 0.03 + Math.random() * 0.02;
+				this.x = Math.random() * width;
+				this.y = Math.random() * height;
+				this.vx = (Math.random() - 0.5) * 1.4;
+				this.vy = (Math.random() - 0.5) * 1.4;
+				this.radius = Math.random() * 2.8 + 1;
+				this.color = Math.random() > 0.3 ? 'rgba(139, 92, 246, ' : 'rgba(6, 182, 212, ';
+				this.pulse = Math.random() * Math.PI * 2;
+				this.pulseSpeed = 0.03 + Math.random() * 0.02;
 			}
 			update() {
-			if (this.x < 0 || this.x > width) this.vx *= -1;
+				if (this.x < 0 || this.x > width) this.vx *= -1;
 				if (this.y < 0 || this.y > height) this.vy *= -1;
 				this.x += this.vx;
 				this.y += this.vy;
@@ -943,13 +1039,13 @@
 				ctx.fill();
 				ctx.shadowBlur = 0;
 			}
-			}
+		}
 
-			for (let i = 0; i < particleCount; i++) {
+		for (let i = 0; i < particleCount; i++) {
 			particles.push(new Particle());
-			}
+		}
 
-			function renderConstellation() {
+		function renderConstellation() {
 			ctx.clearRect(0, 0, width, height);
 
 			for (let i = 0; i < particles.length; i++) {
@@ -975,10 +1071,10 @@
 
 				// Interactive Mouse Cursor Constellation Web Connections
 				if (mouse.x !== null && mouse.y !== null) {
-			const mdx = particles[i].x - mouse.x;
-			const mdy = particles[i].y - mouse.y;
-			const mdist = Math.hypot(mdx, mdy);
-			if (mdist < mouse.radius) {
+					const mdx = particles[i].x - mouse.x;
+					const mdy = particles[i].y - mouse.y;
+					const mdist = Math.hypot(mdx, mdy);
+					if (mdist < mouse.radius) {
 						ctx.beginPath();
 						ctx.moveTo(particles[i].x, particles[i].y);
 						ctx.lineTo(mouse.x, mouse.y);
@@ -990,42 +1086,42 @@
 				}
 			}
 			requestAnimationFrame(renderConstellation);
-			}
-			renderConstellation();
+		}
+		renderConstellation();
 
-			// Crosshair & Mouse Tracking
-			const crosshair = document.getElementById('val-crosshair');
-			document.addEventListener('mousemove', (e) => {
+		// Crosshair & Mouse Tracking
+		const crosshair = document.getElementById('val-crosshair');
+		document.addEventListener('mousemove', (e) => {
 			crosshair.style.left = `${e.clientX}px`;
 			crosshair.style.top = `${e.clientY}px`;
 			mouse.x = e.clientX;
 			mouse.y = e.clientY;
-			});
+		});
 
-			document.addEventListener('mouseleave', () => {
+		document.addEventListener('mouseleave', () => {
 			mouse.x = null;
 			mouse.y = null;
-			});
+		});
 
-			document.addEventListener('click', (e) => {
+		document.addEventListener('click', (e) => {
 			const ripple = document.createElement('div');
 			ripple.className = 'click-ripple';
 			ripple.style.left = `${e.clientX}px`;
 			ripple.style.top = `${e.clientY}px`;
 			document.body.appendChild(ripple);
 			setTimeout(() => ripple.remove(), 600);
-			});
+		});
 
-			/* -------------------------------------------------------------
-			   DIRECT MODERN MULTI-PANEL SKEWED WIPE LOGIC
-			------------------------------------------------------------- */
-			const fill = document.getElementById('load-progress-fill');
-			const counter = document.getElementById('load-counter');
-			const subtext = document.getElementById('loader-subtext');
-			const curtainWipe = document.getElementById('curtain-wipe');
+		/* -------------------------------------------------------------
+		   DIRECT MODERN MULTI-PANEL SKEWED WIPE LOGIC
+		------------------------------------------------------------- */
+		const fill = document.getElementById('load-progress-fill');
+		const counter = document.getElementById('load-counter');
+		const subtext = document.getElementById('loader-subtext');
+		const curtainWipe = document.getElementById('curtain-wipe');
 
-			let progress = 0;
-			const loadInterval = setInterval(() => {
+		let progress = 0;
+		const loadInterval = setInterval(() => {
 			progress += Math.floor(Math.random() * 12) + 4;
 			if (progress >= 100) {
 				progress = 100;
@@ -1055,10 +1151,10 @@
 				fill.style.width = `${progress}%`;
 				counter.textContent = `${progress}%`;
 			}
-			}, 70);
+		}, 70);
 
-			// 3D Card Interactive Tilt Effects
-			document.querySelectorAll('.val-card').forEach((card) => {
+		// 3D Card Interactive Tilt Effects
+		document.querySelectorAll('.val-card').forEach((card) => {
 			card.addEventListener('mousemove', (e) => {
 				const rect = card.getBoundingClientRect();
 				const x = e.clientX - rect.left;
@@ -1074,32 +1170,32 @@
 			card.addEventListener('mouseleave', () => {
 				card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
 			});
-			});
+		});
 
-			// Scroll Intersection Observer
-			const observerOptions = {
+		// Scroll Intersection Observer
+		const observerOptions = {
 			root: null,
 			rootMargin: '0px 0px -60px 0px',
 			threshold: 0.15
-			};
+		};
 
-			const revealObserver = new IntersectionObserver((entries) => {
+		const revealObserver = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add('is-visible');
 				}
 			});
-			}, observerOptions);
+		}, observerOptions);
 
-			document.querySelectorAll('.scroll-reveal').forEach((card) => {
+		document.querySelectorAll('.scroll-reveal').forEach((card) => {
 			revealObserver.observe(card);
-			});
+		});
 
-			// Lucide Icons
-			lucide.createIcons();
+		// Lucide Icons
+		lucide.createIcons();
 
-			// Digital Clock Timer Updates
-			function updateClock() {
+		// Digital Clock Timer Updates
+		function updateClock() {
 			const now = new Date();
 			let hours = now.getHours();
 			const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -1111,10 +1207,10 @@
 			const hoursStr = String(hours).padStart(2, '0');
 
 			document.getElementById('clock-time').textContent = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
-			}
+		}
 
-			updateClock();
-			setInterval(updateClock, 1000);
-		</script>
-	</body>
+		updateClock();
+		setInterval(updateClock, 1000);
+	</script>
+</body>
 </html>
