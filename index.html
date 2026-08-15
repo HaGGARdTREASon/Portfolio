@@ -22,9 +22,12 @@
 	<!-- Custom Styling & Curtain Transitions -->
 	<style>
 		:root {
-			--val-purple: #8b5cf6;
-			--val-purple-glow: rgba(139, 92, 246, 0.6);
+			--val-purple: #9333ea;
+			--val-purple-glow: rgba(147, 51, 234, 0.6);
 			--val-cyan: #06b6d4;
+			--val-casberry: #a855f7;
+			--val-casberry-glow: rgba(168, 85, 247, 0.6);
+			--val-cassis: #7e22ce;
 			--val-dark: #0f1923;
 			--val-bg: #ece8e1;
 			--val-card: #ffffff;
@@ -114,21 +117,21 @@
 		}
 
 		.panel-1 {
-			background: var(--val-purple);
+			background: var(--val-casberry);
 			z-index: 1;
-			box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+			box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
 		}
 
 		.panel-2 {
-			background: #06b6d4;
+			background: var(--val-purple);
 			z-index: 2;
-			box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+			box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
 		}
 
 		.panel-3 {
 			background: #090e14;
 			z-index: 3;
-			box-shadow: -15px 0 50px rgba(0, 0, 0, 0.8), -5px 0 20px var(--val-purple);
+			box-shadow: -15px 0 50px rgba(0, 0, 0, 0.8), -5px 0 20px var(--val-casberry);
 		}
 
 		#curtain-wipe.active-wipe .panel-1 {
@@ -160,7 +163,7 @@
 			left: 0;
 			width: 32px;
 			height: 32px;
-			border: 1.5px solid var(--val-purple);
+			border: 1.5px solid var(--val-casberry);
 			pointer-events: none;
 			z-index: 9999999;
 			transform: translate(-50%, -50%);
@@ -174,7 +177,7 @@
 				left: 50%;
 				width: 4px;
 				height: 4px;
-				background: var(--val-purple);
+				background: var(--val-casberry);
 				transform: translate(-50%, -50%);
 			}
 
@@ -182,7 +185,7 @@
 				content: '';
 				position: absolute;
 				inset: -5px;
-				border: 1px dashed var(--val-purple-glow);
+				border: 1px dashed var(--val-casberry-glow);
 				animation: crosshairSpin 8s linear infinite;
 			}
 
@@ -194,7 +197,7 @@
 
 		.click-ripple {
 			position: fixed;
-			border: 2px solid var(--val-purple);
+			border: 2px solid var(--val-casberry);
 			border-radius: 0%;
 			transform: translate(-50%, -50%) rotate(45deg) scale(0);
 			pointer-events: none;
@@ -274,8 +277,8 @@
 		.load-progress-fill {
 			width: 0%;
 			height: 100%;
-			background: var(--val-purple);
-			box-shadow: 0 0 12px var(--val-purple);
+			background: var(--val-casberry);
+			box-shadow: 0 0 12px var(--val-casberry);
 			transition: width 0.1s linear;
 		}
 
@@ -296,9 +299,9 @@
 		.val-side-bar-main {
 			width: 4px;
 			height: 75px;
-			background: var(--val-purple);
+			background: var(--val-casberry);
 			position: relative;
-			box-shadow: 0 0 12px var(--val-purple);
+			box-shadow: 0 0 12px var(--val-casberry);
 		}
 
 			.val-side-bar-main::before, .val-side-bar-main::after {
@@ -350,13 +353,13 @@
 		}
 
 			.glitch-text span {
-				color: var(--val-purple);
+				color: var(--val-casberry);
 			}
 
 		@keyframes valGlitch {
 			0% {
 				transform: translate(0);
-				text-shadow: 3px 0 var(--val-purple), -3px 0 cyan;
+				text-shadow: 3px 0 var(--val-casberry), -3px 0 var(--val-purple);
 			}
 
 			25% {
@@ -365,7 +368,7 @@
 
 			50% {
 				transform: translate(-2px, -2px);
-				text-shadow: -3px 0 var(--val-purple), 3px 0 cyan;
+				text-shadow: -3px 0 var(--val-casberry), 3px 0 var(--val-cyan);
 			}
 
 			75% {
@@ -383,8 +386,8 @@
 			left: 0;
 			width: 100%;
 			height: 3px;
-			background: linear-gradient(90deg, transparent, var(--val-purple), transparent);
-			box-shadow: 0 0 15px var(--val-purple);
+			background: linear-gradient(90deg, transparent, var(--val-casberry), transparent);
+			box-shadow: 0 0 15px var(--val-casberry);
 			animation: scanline 4s ease-in-out infinite;
 			pointer-events: none;
 		}
@@ -433,12 +436,12 @@
 			}
 
 			.val-card:hover {
-				border-color: var(--val-purple) !important;
-				box-shadow: 12px 12px 0px var(--val-dark), 0 0 25px var(--val-purple-glow) !important;
+				border-color: var(--val-casberry) !important;
+				box-shadow: 12px 12px 0px var(--val-dark), 0 0 25px var(--val-casberry-glow) !important;
 			}
 
 				.val-card:hover::before {
-					background: var(--val-purple);
+					background: var(--val-casberry);
 					width: 8px;
 				}
 
@@ -449,7 +452,7 @@
 				right: 0;
 				width: 20px;
 				height: 20px;
-				background: var(--val-purple);
+				background: var(--val-casberry);
 				clip-path: polygon(100% 0, 100% 100%, 0 100%);
 				opacity: 0;
 				transition: opacity 0.2s ease, transform 0.2s ease;
@@ -462,23 +465,23 @@
 			}
 
 		.patent-card-highlight {
-			border: 2px solid var(--val-purple) !important;
+			border: 2px solid var(--val-casberry) !important;
 			animation: patentGlowPulse 1.2s infinite ease-in-out;
 		}
 
 			.patent-card-highlight::before {
-				background: var(--val-purple) !important;
+				background: var(--val-casberry) !important;
 				width: 8px !important;
 			}
 
 		@keyframes patentGlowPulse {
 			0%, 100% {
-				box-shadow: 0 0 15px rgba(139, 92, 246, 0.5), inset 0 0 10px rgba(139, 92, 246, 0.2);
-				border-color: var(--val-purple) !important;
+				box-shadow: 0 0 15px rgba(168, 85, 247, 0.5), inset 0 0 10px rgba(168, 85, 247, 0.2);
+				border-color: var(--val-casberry) !important;
 			}
 
 			50% {
-				box-shadow: 0 0 35px rgba(139, 92, 246, 0.95), 0 0 60px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(139, 92, 246, 0.4);
+				box-shadow: 0 0 35px rgba(168, 85, 247, 0.95), 0 0 60px rgba(168, 85, 247, 0.6), inset 0 0 20px rgba(168, 85, 247, 0.4);
 				border-color: #c084fc !important;
 			}
 		}
@@ -528,7 +531,7 @@
 			}
 
 		.val-btn {
-			background-color: var(--val-purple) !important;
+			background-color: var(--val-casberry) !important;
 			color: #ffffff !important;
 			font-family: 'Space Grotesk', sans-serif !important;
 			font-weight: 800 !important;
@@ -540,9 +543,9 @@
 
 			.val-btn:hover {
 				background-color: var(--val-dark) !important;
-				color: var(--val-purple) !important;
+				color: var(--val-casberry) !important;
 				transform: translateY(-3px) scale(1.04);
-				box-shadow: 0 0 25px var(--val-purple-glow);
+				box-shadow: 0 0 25px var(--val-casberry-glow);
 			}
 
 		.val-btn-outline {
@@ -573,7 +576,7 @@
 		}
 
 		.val-badge-purple {
-			background: var(--val-purple);
+			background: var(--val-casberry);
 			color: #ffffff;
 		}
 
@@ -588,9 +591,9 @@
 		}
 
 			.val-chip:hover {
-				background: var(--val-purple);
+				background: var(--val-casberry);
 				color: #ffffff;
-				border-color: var(--val-purple);
+				border-color: var(--val-casberry);
 				transform: translateY(-3px) rotate(-1deg);
 			}
 
@@ -600,10 +603,10 @@
 
 		#digital-clock {
 			background: var(--val-dark) !important;
-			border: 2px solid var(--val-purple) !important;
+			border: 2px solid var(--val-casberry) !important;
 			clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 			color: #ffffff !important;
-			box-shadow: 0 4px 15px var(--val-purple-glow);
+			box-shadow: 0 4px 15px var(--val-casberry-glow);
 			opacity: 0;
 			transform: translateY(-30px);
 			transition: all 0.6s var(--ease-out-expo);
@@ -620,7 +623,7 @@
 </head>
 <body class="loading min-h-screen">
 
-	<!-- HIGH-DENSITY INTERACTIVE CONSTELLATION NETWORK CANVAS -->
+	<!-- DYNAMIC HIGH-DENSITY PURPLE PARTICLE ENGINE -->
 	<canvas id="constellation-canvas"></canvas>
 
 	<!-- MODERN MULTI-PANEL SKEWED CURTAIN WIPE TRANSITION -->
@@ -636,14 +639,14 @@
 	<!-- Custom Purple Tactical Crosshair -->
 	<div id="val-crosshair"></div>
 
-	<!-- Multi-Stage Valorant Intro Preloader -->
+	<!-- Multi-Stage Intro Preloader -->
 	<div id="intro-loader" aria-hidden="true">
 		<div class="loader-content">
-			<div class="mb-5 inline-block bg-[var(--val-purple)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
-				⚡ SYSTEM INITIALIZATION // TAC-HUD
+			<div class="mb-5 inline-block bg-[var(--val-casberry)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
+				⚡ SYSTEM INITIALIZATION // PURPLE-PARTICLE-HUD
 			</div>
 
-			<!-- Valorant Start-Side UI Bracket Lines -->
+			<!-- Start-Side UI Bracket Lines -->
 			<div class="val-start-side-wrapper">
 				<div class="val-side-bracket left-bracket">
 					<div class="val-side-ticks">
@@ -675,14 +678,14 @@
 			</div>
 
 			<p id="loader-subtext" class="mt-4 font-mono text-sm tracking-[0.3em] text-[#768079] uppercase">
-				⚡ INITIALIZING SYSTEM ASSETS...
+				⚡ INITIALIZING PURPLE PARTICLE ENGINE...
 			</p>
 
-			<!-- Realistic Loading Progress Bar & Percentage Counter -->
+			<!-- Loading Progress Bar & Percentage Counter -->
 			<div class="load-progress-bar">
 				<div id="load-progress-fill" class="load-progress-fill"></div>
 			</div>
-			<p id="load-counter" class="mt-2 font-mono text-xs font-bold text-[var(--val-purple)] tracking-widest">
+			<p id="load-counter" class="mt-2 font-mono text-xs font-bold text-[var(--val-casberry)] tracking-widest">
 				0%
 			</p>
 		</div>
@@ -690,7 +693,7 @@
 
 	<!-- Floating Tactical HUD Purple Clock -->
 	<div id="digital-clock" class="fixed right-4 top-4 z-50 flex items-center gap-2.5 px-5 py-2.5 font-display text-sm font-black tracking-widest sm:right-6 sm:top-6">
-		<i data-lucide="crosshair" class="size-4 animate-spin text-[var(--val-purple)]"></i>
+		<i data-lucide="crosshair" class="size-4 animate-spin text-[var(--val-casberry)]"></i>
 		<span id="clock-time">00:00:00 AM</span>
 	</div>
 
@@ -713,10 +716,10 @@
 				<!-- Name & Profile Picture -->
 				<div class="hero-deploy-item mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
 					<h1 class="text-6xl font-black uppercase leading-[0.9] tracking-tight text-[var(--val-dark)] sm:text-8xl hover:skew-x-2 transition-transform">
-						Jash <span class="text-[var(--val-purple)]">Saha</span> 🚀
+						Jash <span class="text-[var(--val-casberry)]">Saha</span> 🚀
 					</h1>
 					<div class="relative group">
-						<div class="absolute -inset-1 bg-[var(--val-purple)] clip-path-polygon rotate-3 transition-transform group-hover:rotate-6"></div>
+						<div class="absolute -inset-1 bg-[var(--val-casberry)] clip-path-polygon rotate-3 transition-transform group-hover:rotate-6"></div>
 						<img src="1775580373561.jpg"
 							 alt="Jash Saha"
 							 class="relative size-32 sm:size-40 rounded-none object-cover shrink-0 border-4 border-[var(--val-dark)] bg-white"
@@ -747,19 +750,19 @@
 				<!-- Stat Counters -->
 				<dl class="hero-deploy-item mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4">
 					<div class="val-card scroll-reveal p-6">
-						<dt class="font-display text-4xl font-black text-[var(--val-purple)]">03 🚀</dt>
+						<dt class="font-display text-4xl font-black text-[var(--val-casberry)]">03 🚀</dt>
 						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Flagship Projects</dd>
 					</div>
 					<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card scroll-reveal p-6 block">
-					<dt class="font-display text-4xl font-black text-[var(--val-purple)]">01 📜</dt>
+					<dt class="font-display text-4xl font-black text-[var(--val-casberry)]">01 📜</dt>
 					<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Published Patent</dd>
 					</a>
 					<div class="val-card scroll-reveal p-6">
 						<dt class="font-display text-xl font-black text-[var(--val-dark)] uppercase leading-tight">🔬 Research</dt>
-						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-purple)]">In Progress</dd>
+						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-casberry)]">In Progress</dd>
 					</div>
 					<div class="val-card scroll-reveal p-6">
-						<dt class="font-display text-4xl font-black text-[var(--val-purple)]">2027 🎓</dt>
+						<dt class="font-display text-4xl font-black text-[var(--val-casberry)]">2027 🎓</dt>
 						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Graduation Year</dd>
 					</div>
 				</dl>
@@ -787,7 +790,7 @@
 					</div>
 					<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🤟 Sign Language Translation System for Speech Impaired People</h3>
 					<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
-						<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-purple)] font-bold">Bridging the Gap:</strong> Facilitates seamless communication between sign language users and non-signers by eliminating language barriers.</li>
+						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">Bridging the Gap:</strong> Facilitates seamless communication between sign language users and non-signers by eliminating language barriers.</li>
 						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Real-Time Translation:</strong> Instantly detects hand gestures using computer vision and converts them into spoken audio.</li>
 					</ul>
 				</article>
@@ -800,7 +803,7 @@
 					</div>
 					<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🌾 End-to-End AI System for Agricultural Commodity Prices & Market Risk Assessment</h3>
 					<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
-						<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed">Designed and trained a custom PyTorch Neural Network utilizing a Multi-Algorithm Ensemble (MoE) architecture to predict localized agricultural commodity prices.</li>
+						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed">Designed and trained a custom PyTorch Neural Network utilizing a Multi-Algorithm Ensemble (MoE) architecture to predict localized agricultural commodity prices.</li>
 						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed">Developed a dynamic risk-assessment algorithm that translates AI predictions into actionable market intelligence, categorizing supply chain risks (e.g., Critical Shortage, Elevated Risk) and forecasting price trends.</li>
 					</ul>
 				</article>
@@ -813,7 +816,7 @@
 					</div>
 					<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🛡️ Bad Touch Detection System</h3>
 					<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
-						<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-purple)] font-bold">Real-Time Computer Vision Pipeline:</strong> Engineered a safety monitoring system using OpenCV and MediaPipe tracking skeletal landmarks to differentiate between "self-touch" and potentially unsafe "foreign contact" with high precision.</li>
+						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">Real-Time Computer Vision Pipeline:</strong> Engineered a safety monitoring system using OpenCV and MediaPipe tracking skeletal landmarks to differentiate between "self-touch" and potentially unsafe "foreign contact" with high precision.</li>
 						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Automated Threat Response:</strong> Implemented a geometric logic algorithm defining safety zones around the torso, triggering an immediate audio alarm via Pygame if unauthorized proximity is detected, ensuring proactive personal safety.</li>
 					</ul>
 				</article>
@@ -829,7 +832,7 @@
 				</h2>
 				<span class="h-1 flex-1 bg-[var(--val-dark)]"></span>
 			</div>
-			<div class="val-card scroll-reveal p-8 border-2 border-dashed border-[var(--val-purple)]">
+			<div class="val-card scroll-reveal p-8 border-2 border-dashed border-[var(--val-casberry)]">
 				<div class="flex items-center gap-3">
 					<span class="val-badge val-badge-purple px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5 animate-pulse">
 						🔬 Research In Progress
@@ -837,7 +840,7 @@
 				</div>
 				<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🧪 ML-Based Prediction Model for Sensitivity of a Gate Overlapped Heterojunction TFET Biosensor</h3>
 				<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
-					<li class="border-l-4 border-[var(--val-purple)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-purple)] font-bold">Ensemble Machine Learning:</strong> Implemented a Random Forest Regressor to model complex non-linear dependencies in multi-variable datasets, optimizing feature selection for accurate predictive modeling.</li>
+					<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">Ensemble Machine Learning:</strong> Implemented a Random Forest Regressor to model complex non-linear dependencies in multi-variable datasets, optimizing feature selection for accurate predictive modeling.</li>
 					<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Automated Data Filtering:</strong> Automatically detects and removes statistical outliers by validating experimental data.</li>
 				</ul>
 			</div>
@@ -854,7 +857,7 @@
 			</div>
 			<div class="grid gap-8 sm:grid-cols-2">
 				<div class="val-card scroll-reveal p-6">
-					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
+					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-casberry)]">
 						⚙️ Core Languages & Tools
 					</h3>
 					<div class="mt-4 flex flex-wrap gap-2.5">
@@ -867,7 +870,7 @@
 					</div>
 				</div>
 				<div class="val-card scroll-reveal p-6">
-					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
+					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-casberry)]">
 						🧠 ML & Data Stack
 					</h3>
 					<div class="mt-4 flex flex-wrap gap-2.5">
@@ -881,7 +884,7 @@
 					</div>
 				</div>
 				<div class="val-card scroll-reveal p-6">
-					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
+					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-casberry)]">
 						📊 Technical Practice
 					</h3>
 					<div class="mt-4 flex flex-wrap gap-2.5">
@@ -891,7 +894,7 @@
 					</div>
 				</div>
 				<div class="val-card scroll-reveal p-6">
-					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-purple)]">
+					<h3 class="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-[var(--val-casberry)]">
 						🤝 Leadership & Soft Skills
 					</h3>
 					<div class="mt-4 flex flex-wrap gap-2.5">
@@ -919,7 +922,7 @@
 						<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
 							💼 Indian Institute of Internship (Business Analytics Intern)
 						</h3>
-						<span class="font-display text-sm font-black text-[var(--val-purple)]">Aug 2025 — Oct 2025</span>
+						<span class="font-display text-sm font-black text-[var(--val-casberry)]">Aug 2025 — Oct 2025</span>
 					</div>
 					<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Built Power BI dashboards to analyze sales data & improve reporting efficiency. 📊</p>
 				</div>
@@ -928,7 +931,7 @@
 						<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
 							🎓 Meghnad Saha Institute of Technology Kolkata
 						</h3>
-						<span class="font-display text-sm font-black text-[var(--val-purple)]">Aug 2023 — Jul 2027</span>
+						<span class="font-display text-sm font-black text-[var(--val-casberry)]">Aug 2023 — Jul 2027</span>
 					</div>
 					<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">Bachelor of Technology in Computer Science and Business Systems 💻</p>
 				</div>
@@ -937,7 +940,7 @@
 						<h3 class="text-xl font-black uppercase text-[var(--val-dark)] flex items-center gap-2">
 							🏫 Delhi Public School, Ruby Park
 						</h3>
-						<span class="font-display text-sm font-black text-[var(--val-purple)]">Feb 2009 — Feb 2023</span>
+						<span class="font-display text-sm font-black text-[var(--val-casberry)]">Feb 2009 — Feb 2023</span>
 					</div>
 					<p class="mt-2 text-sm font-semibold text-[var(--val-dark)]">High School Diploma in Science 🔬</p>
 				</div>
@@ -960,7 +963,7 @@
 						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
 							👑 President & Ex-Vice President — Phoenix (Cultural Committee of CSBS)
 						</h3>
-						<span class="font-display text-xs font-black text-[var(--val-purple)]">Nov 2024 – Current</span>
+						<span class="font-display text-xs font-black text-[var(--val-casberry)]">Nov 2024 – Current</span>
 					</div>
 					<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
 						<li>— Organized Teacher's Day celebrations in 2025 and 2026. 🎉</li>
@@ -973,7 +976,7 @@
 						<h3 class="text-lg font-black uppercase text-[var(--val-dark)]">
 							🌿 Vice President & Ex-Speaker — Greenovation Club (GCMSIT)
 						</h3>
-						<span class="font-display text-xs font-black text-[var(--val-purple)]">April 2025 – Current</span>
+						<span class="font-display text-xs font-black text-[var(--val-casberry)]">April 2025 – Current</span>
 					</div>
 					<ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--val-dark)]">
 						<li>— Organized E-waste Recycle Campaign with accumulation of 10kg+ e-waste. ♻️</li>
@@ -985,7 +988,7 @@
 		</section>
 	</main>
 
-	<!-- JAVASCRIPT: ENHANCED CONSTELLATION NETWORK & SYSTEM LOGIC -->
+	<!-- JAVASCRIPT: CASBERRY PARTICLE ENGINE (PURPLE COLOR PALETTE) -->
 	<script>
 		// Force Page Scroll Reset
 		if ('scrollRestoration' in history) {
@@ -994,15 +997,26 @@
 		window.scrollTo(0, 0);
 
 		/* -------------------------------------------------------------
-		HIGH-DENSITY DYNAMIC INTERACTIVE CONSTELLATION NETWORK
+		DYNAMIC HIGH-DENSITY PURPLE CASBERRY PARTICLE ENGINE
 		------------------------------------------------------------- */
 		const canvas = document.getElementById('constellation-canvas');
 		const ctx = canvas.getContext('2d');
 		let width, height;
 		let particles = [];
-		const particleCount = 160;
+		let casberryOrbs = [];
+		const particleCount = 180;
+		const casberryOrbCount = 22;
 		const maxDistance = 160;
-		let mouse = { x: null, y: null, radius: 220 };
+		let mouse = { x: null, y: null, radius: 240 };
+
+		// Casberry Purple Palette: Violet, Deep Purple, Fuchsia, Electric Violet, Indigo
+		const purpleColors = [
+			'rgba(168, 85, 247, ',   /* Bright Purple / Violet */
+			'rgba(147, 51, 234, ',   /* Deep Purple */
+			'rgba(192, 38, 211, ',   /* Fuchsia / Purple Magenta */
+			'rgba(124, 58, 237, ',   /* Electric Violet */
+			'rgba(99, 102, 241, '    /* Indigo Glow */
+		];
 
 		function resizeCanvas() {
 			width = canvas.width = window.innerWidth;
@@ -1011,16 +1025,20 @@
 		window.addEventListener('resize', resizeCanvas);
 		resizeCanvas();
 
+		/* Standard Dynamic Node Particles */
 		class Particle {
 			constructor() {
+				this.reset();
+			}
+			reset() {
 				this.x = Math.random() * width;
 				this.y = Math.random() * height;
-				this.vx = (Math.random() - 0.5) * 1.4;
-				this.vy = (Math.random() - 0.5) * 1.4;
-				this.radius = Math.random() * 2.8 + 1;
-				this.color = Math.random() > 0.3 ? 'rgba(139, 92, 246, ' : 'rgba(6, 182, 212, ';
+				this.vx = (Math.random() - 0.5) * 1.5;
+				this.vy = (Math.random() - 0.5) * 1.5;
+				this.radius = Math.random() * 2.8 + 1.2;
+				this.color = purpleColors[Math.floor(Math.random() * purpleColors.length)];
 				this.pulse = Math.random() * Math.PI * 2;
-				this.pulseSpeed = 0.03 + Math.random() * 0.02;
+				this.pulseSpeed = 0.03 + Math.random() * 0.03;
 			}
 			update() {
 				if (this.x < 0 || this.x > width) this.vx *= -1;
@@ -1030,24 +1048,72 @@
 				this.pulse += this.pulseSpeed;
 			}
 			draw() {
-				const currentRadius = this.radius + Math.sin(this.pulse) * 0.8;
+				const currentRadius = this.radius + Math.sin(this.pulse) * 0.9;
 				ctx.beginPath();
-				ctx.arc(this.x, this.y, Math.max(0.5, currentRadius), 0, Math.PI * 2);
+				ctx.arc(this.x, this.y, Math.max(0.6, currentRadius), 0, Math.PI * 2);
 				ctx.fillStyle = this.color + '0.9)';
-				ctx.shadowBlur = 10;
-				ctx.shadowColor = 'rgba(139, 92, 246, 0.8)';
+				ctx.shadowBlur = 12;
+				ctx.shadowColor = 'rgba(168, 85, 247, 0.85)';
 				ctx.fill();
 				ctx.shadowBlur = 0;
+			}
+		}
+
+		/* Glowing Floating Ambient Purple Orbs */
+		class CasberryOrb {
+			constructor() {
+				this.x = Math.random() * width;
+				this.y = Math.random() * height;
+				this.vx = (Math.random() - 0.5) * 0.6;
+				this.vy = (Math.random() - 0.5) * 0.6;
+				this.radius = Math.random() * 14 + 8;
+				this.color = purpleColors[Math.floor(Math.random() * purpleColors.length)];
+				this.alpha = Math.random() * 0.25 + 0.1;
+				this.pulse = Math.random() * Math.PI * 2;
+			}
+			update() {
+				this.x += this.vx;
+				this.y += this.vy;
+				if (this.x < -30) this.x = width + 30;
+				if (this.x > width + 30) this.x = -30;
+				if (this.y < -30) this.y = height + 30;
+				if (this.y > height + 30) this.y = -30;
+				this.pulse += 0.02;
+			}
+			draw() {
+				const currentAlpha = this.alpha + Math.sin(this.pulse) * 0.06;
+				ctx.save();
+				ctx.beginPath();
+				const gradient = ctx.createRadialGradient(
+					this.x, this.y, 0,
+					this.x, this.y, this.radius * 2
+				);
+				gradient.addColorStop(0, this.color + Math.max(0.02, currentAlpha) + ')');
+				gradient.addColorStop(1, 'transparent');
+				ctx.fillStyle = gradient;
+				ctx.arc(this.x, this.y, this.radius * 2, 0, Math.PI * 2);
+				ctx.fill();
+				ctx.restore();
 			}
 		}
 
 		for (let i = 0; i < particleCount; i++) {
 			particles.push(new Particle());
 		}
+		for (let i = 0; i < casberryOrbCount; i++) {
+			casberryOrbs.push(new CasberryOrb());
+		}
 
 		function renderConstellation() {
 			ctx.clearRect(0, 0, width, height);
 
+			// Draw Ambient Purple Glowing Background Orbs
+			for (let i = 0; i < casberryOrbs.length; i++) {
+				casberryOrbs[i].update();
+				casberryOrbs[i].draw();
+			}
+
+			// Draw Particle Nodes & Connecting Dynamic Purple Lines
 			for (let i = 0; i < particles.length; i++) {
 				particles[i].update();
 				particles[i].draw();
@@ -1062,9 +1128,14 @@
 						ctx.beginPath();
 						ctx.moveTo(particles[i].x, particles[i].y);
 						ctx.lineTo(particles[j].x, particles[j].y);
-						const alpha = (1 - dist / maxDistance) * 0.7;
-						ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
-						ctx.lineWidth = 0.8;
+						const alpha = (1 - dist / maxDistance) * 0.75;
+
+						const lineGradient = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+						lineGradient.addColorStop(0, particles[i].color + alpha + ')');
+						lineGradient.addColorStop(1, particles[j].color + alpha + ')');
+
+						ctx.strokeStyle = lineGradient;
+						ctx.lineWidth = 0.95;
 						ctx.stroke();
 					}
 				}
@@ -1079,8 +1150,8 @@
 						ctx.moveTo(particles[i].x, particles[i].y);
 						ctx.lineTo(mouse.x, mouse.y);
 						const mAlpha = (1 - mdist / mouse.radius) * 0.95;
-						ctx.strokeStyle = `rgba(139, 92, 246, ${mAlpha})`;
-						ctx.lineWidth = 1.4;
+						ctx.strokeStyle = `rgba(168, 85, 247, ${mAlpha})`;
+						ctx.lineWidth = 1.5;
 						ctx.stroke();
 					}
 				}
@@ -1113,7 +1184,7 @@
 		});
 
 		/* -------------------------------------------------------------
-		   DIRECT MODERN MULTI-PANEL SKEWED WIPE LOGIC
+		   LOADER & CURTAIN WIPE SYSTEM
 		------------------------------------------------------------- */
 		const fill = document.getElementById('load-progress-fill');
 		const counter = document.getElementById('load-counter');
@@ -1130,7 +1201,7 @@
 				fill.style.width = '100%';
 				counter.textContent = '100% — ACCESS GRANTED';
 				subtext.textContent = '🎯 SYSTEM READY. DEPLOYING HUD...';
-				subtext.style.color = '#8b5cf6';
+				subtext.style.color = '#a855f7';
 
 				setTimeout(() => {
 					// Trigger Modern Multi-Panel Skewed Curtain Wipe
