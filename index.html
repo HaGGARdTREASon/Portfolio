@@ -304,7 +304,7 @@
 		}
 
 		.val-card {
-			background-color: var(--val-card) !important;
+			background-color: #ffffff !important;
 			border: 1px solid var(--val-border) !important;
 			clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
 			position: relative;
@@ -313,6 +313,13 @@
 			transform-style: preserve-3d;
 			transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
 			will-change: transform;
+		}
+
+		/* Hero stat boxes: solid opaque white with hard definition on the white page */
+		dl .val-card {
+			background-color: #ffffff !important;
+			border: 1px solid var(--val-dark) !important;
+			box-shadow: 6px 6px 0px rgba(15, 25, 35, 0.9);
 		}
 
 			.val-card::before {
@@ -377,16 +384,37 @@
 			}
 		}
 
+		/* SCROLL PROGRESS BAR — transform-only fill */
+		#scroll-progress {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 4px;
+			z-index: 99990;
+			background: rgba(15, 25, 35, 0.08);
+			pointer-events: none;
+		}
+
+		#scroll-progress-fill {
+			height: 100%;
+			width: 100%;
+			background: var(--val-casberry);
+			transform: scaleX(0);
+			transform-origin: 0 50%;
+			will-change: transform;
+		}
+
 		.scroll-reveal {
 			opacity: 0;
-			transform: translateY(60px) scale(0.92) rotateX(15deg);
-			transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+			transform: translateY(36px);
+			transition: opacity 0.9s ease, transform 0.9s var(--ease-out-expo);
 			will-change: opacity, transform;
 		}
 
 			.scroll-reveal.is-visible {
 				opacity: 1;
-				transform: translateY(0) scale(1) rotateX(0deg);
+				transform: translateY(0);
 			}
 
 		.hero-deploy-item {
@@ -440,7 +468,7 @@
 			}
 
 		.val-btn-outline {
-			background-color: transparent !important;
+			background-color: #ffffff !important;
 			color: var(--val-dark) !important;
 			border: 2px solid var(--val-dark) !important;
 			font-family: 'Times New Roman', Times, serif !important;
@@ -537,6 +565,9 @@
 	<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="loading min-h-screen">
+
+	<!-- Scroll Progress Bar -->
+	<div id="scroll-progress" aria-hidden="true"><div id="scroll-progress-fill"></div></div>
 
 	<!-- DYNAMIC HIGH-DENSITY PURPLE PARTICLE ENGINE -->
 	<canvas id="constellation-canvas"></canvas>
@@ -1146,6 +1177,24 @@
 		document.querySelectorAll('.scroll-reveal').forEach((card) => {
 			revealObserver.observe(card);
 		});
+
+		// Scroll Progress Bar (rAF-throttled, transform-only)
+		const scrollFill = document.getElementById('scroll-progress-fill');
+		let scrollTicking = false;
+		function updateScrollProgress() {
+			scrollTicking = false;
+			const max = document.documentElement.scrollHeight - window.innerHeight;
+			const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+			scrollFill.style.transform = `scaleX(${p})`;
+		}
+		window.addEventListener('scroll', () => {
+			if (!scrollTicking) {
+				scrollTicking = true;
+				requestAnimationFrame(updateScrollProgress);
+			}
+		}, { passive: true });
+		window.addEventListener('resize', updateScrollProgress);
+		updateScrollProgress();
 
 		// Lucide Icons
 		lucide.createIcons();
