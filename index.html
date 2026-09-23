@@ -247,38 +247,6 @@
 			color: var(--val-casberry);
 		}
 
-		.laser-scanner {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 3px;
-			background: linear-gradient(90deg, transparent, var(--val-casberry), transparent);
-			box-shadow: 0 0 15px var(--val-casberry);
-			animation: scanline 4s ease-in-out infinite;
-			pointer-events: none;
-		}
-
-		@keyframes scanline {
-			0% {
-				top: 0%;
-				opacity: 0;
-			}
-
-			15% {
-				opacity: 1;
-			}
-
-			85% {
-				opacity: 1;
-			}
-
-			100% {
-				top: 100%;
-				opacity: 0;
-			}
-		}
-
 		.val-card {
 			background-color: #ffffff !important;
 			border: 1px solid var(--val-border) !important;
@@ -633,7 +601,6 @@
 
 		<!-- Projects Section -->
 		<section class="relative mx-auto max-w-5xl px-6 py-20">
-			<div class="laser-scanner"></div>
 			<div class="mb-12 flex items-center gap-4">
 				<span class="val-badge val-badge-purple px-3 py-1 font-display text-xs font-black tracking-widest">// 01</span>
 				<h2 class="text-3xl font-black uppercase tracking-wider text-[var(--val-dark)] sm:text-5xl">
@@ -1132,10 +1099,25 @@
 			threshold: 0.15
 		};
 
+		// One-by-one scroll reveal: objects appear from nothing in entry order
+		const revealQueue = [];
+		let revealRunning = false;
+		function processRevealQueue() {
+			if (revealQueue.length === 0) {
+				revealRunning = false;
+				return;
+			}
+			revealRunning = true;
+			const el = revealQueue.shift();
+			el.classList.add('is-visible');
+			setTimeout(processRevealQueue, 500);
+		}
 		const revealObserver = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('is-visible');
+				if (entry.isIntersecting && !entry.target.classList.contains('is-visible')) {
+					revealObserver.unobserve(entry.target);
+					revealQueue.push(entry.target);
+					if (!revealRunning) processRevealQueue();
 				}
 			});
 		}, observerOptions);
