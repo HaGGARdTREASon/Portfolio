@@ -352,13 +352,15 @@
 		.scroll-reveal {
 			opacity: 0;
 			transform: translateY(36px);
-			transition: opacity 0.9s ease, transform 0.9s var(--ease-out-expo);
-			will-change: opacity, transform;
+			filter: blur(10px);
+			transition: opacity 0.9s ease, transform 0.9s var(--ease-out-expo), filter 0.9s ease;
+			will-change: opacity, transform, filter;
 		}
 
 			.scroll-reveal.is-visible {
 				opacity: 1;
 				transform: translateY(0);
+				filter: blur(0);
 			}
 
 		.hero-deploy-item {
