@@ -19,7 +19,7 @@
 	<!-- Tailwind CSS CDN -->
 	<script src="https://cdn.tailwindcss.com"></script>
 
-	<!-- Custom Styling & Curtain Transitions -->
+	<!-- Custom Styling & Mask-Zoom Transition -->
 	<style>
 		:root {
 			--val-purple: #9333ea;
@@ -58,25 +58,15 @@
 			font-family: 'DM Sans', sans-serif;
 			position: relative;
 			min-height: 100vh;
-			background-image: linear-gradient(rgba(15, 25, 35, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 25, 35, 0.04) 1px, transparent 1px);
-			background-size: 32px 32px;
-			animation: bgGridMove 20s linear infinite;
-		}
-
-		@keyframes bgGridMove {
-			0% {
-				background-position: 0 0;
-			}
-
-			100% {
-				background-position: 32px 32px;
-			}
 		}
 
 		/* FIXED FULLSCREEN CONSTELLATION CANVAS */
 		#constellation-canvas {
 			position: fixed;
 			inset: 0;
+			width: 100vw;
+			height: 100vh;
+			display: block;
 			pointer-events: none;
 			z-index: 10;
 		}
@@ -92,67 +82,45 @@
 			transition: opacity 0.4s ease-out;
 		}
 
-		/* MODERN MULTI-PANEL SKEWED CURTAIN WIPE TRANSITION */
-		#curtain-wipe {
-			position: fixed;
-			inset: 0;
-			z-index: 99999;
-			pointer-events: none;
-			overflow: hidden;
-			display: none;
+		/* MASK / ZOOM TRANSITION — typed line scales up in place, centered */
+		body.loader-exiting .typing-line {
+			transform-origin: 50% 50%;
+			animation: nameZoomCenter 2.6s cubic-bezier(0.45, 0, 0.35, 1) 0.1s forwards;
+			will-change: transform, opacity;
 		}
 
-			#curtain-wipe.active-wipe {
-				display: block;
-			}
-
-		.curtain-panel {
-			position: absolute;
-			top: -20%;
-			bottom: -20%;
-			width: 140vw;
-			left: -140vw;
-			transform: skewX(-15deg);
-			will-change: transform;
+		body.loader-exiting .typing-caret {
+			opacity: 0;
 		}
 
-		.panel-1 {
-			background: var(--val-casberry);
-			z-index: 1;
-			box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
-		}
-
-		.panel-2 {
-			background: var(--val-purple);
-			z-index: 2;
-			box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
-		}
-
-		.panel-3 {
-			background: #090e14;
-			z-index: 3;
-			box-shadow: -15px 0 50px rgba(0, 0, 0, 0.8), -5px 0 20px var(--val-casberry);
-		}
-
-		#curtain-wipe.active-wipe .panel-1 {
-			animation: modernDirectSweep 1.1s var(--ease-cinematic) forwards;
-		}
-
-		#curtain-wipe.active-wipe .panel-2 {
-			animation: modernDirectSweep 1.1s var(--ease-cinematic) 0.08s forwards;
-		}
-
-		#curtain-wipe.active-wipe .panel-3 {
-			animation: modernDirectSweep 1.1s var(--ease-cinematic) 0.16s forwards;
-		}
-
-		@keyframes modernDirectSweep {
+		@keyframes nameZoomCenter {
 			0% {
-				transform: translateX(0) skewX(-15deg);
+				opacity: 1;
+				transform: scale(1);
 			}
 
 			100% {
-				transform: translateX(280vw) skewX(-15deg);
+				opacity: 0;
+				transform: scale(9);
+			}
+		}
+
+		/* WHITE FLASH PULSE AT THE REVEAL MOMENT — soft + slow, opacity only */
+		#flash-overlay.flash-pulse {
+			animation: flashPulse 1s ease-out forwards;
+		}
+
+		@keyframes flashPulse {
+			0% {
+				opacity: 0;
+			}
+
+			15% {
+				opacity: 0.35;
+			}
+
+			100% {
+				opacity: 0;
 			}
 		}
 
@@ -222,20 +190,19 @@
 			}
 		}
 
-		/* PRELOADER INTRO SCREEN */
+		/* PRELOADER INTRO SCREEN — LIGHT THEME */
 		#intro-loader {
 			position: fixed;
 			inset: 0;
 			z-index: 99998;
-			background-color: rgba(15, 25, 35, 0.92);
-			backdrop-filter: blur(10px);
+			background-color: rgba(236, 232, 225, 0.97);
+			color: var(--val-dark);
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			overflow: hidden;
-			perspective: 1200px;
-			transition: transform 0.85s var(--ease-cinematic);
-			will-change: transform;
+			transition: opacity 1.2s ease;
+			will-change: opacity;
 		}
 
 		body.shutter-exit #intro-loader {
@@ -247,136 +214,55 @@
 			position: relative;
 			z-index: 20;
 			text-align: center;
-			transition: opacity 0.5s cubic-bezier(0.4, 0, 1, 1);
-			transform-origin: center center;
+			transform-origin: center bottom;
 		}
 
 		main {
-			perspective: 1200px;
-			transition: transform 1s var(--ease-out-expo), filter 0.8s ease;
-			transform: scale(1.15);
-			filter: blur(8px);
-			will-change: transform, filter;
+			opacity: 0;
+			transform: scale(0.04);
+			transform-origin: 50% 50vh;
+			transition: opacity 0.35s ease, transform 1.8s var(--ease-out-expo);
+			will-change: opacity, transform;
 		}
 
 		body.deployed main {
+			opacity: 1;
 			transform: scale(1);
-			filter: blur(0px);
 		}
 
-		.load-progress-bar {
-			width: 280px;
-			height: 4px;
-			background: rgba(255, 255, 255, 0.1);
-			margin: 1.5rem auto 0;
-			position: relative;
-			overflow: hidden;
-			border: 1px solid rgba(255, 255, 255, 0.2);
-		}
-
-		.load-progress-fill {
-			width: 0%;
-			height: 100%;
-			background: var(--val-casberry);
-			box-shadow: 0 0 12px var(--val-casberry);
-			transition: width 0.1s linear;
-		}
-
-		.val-start-side-wrapper {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 1.5rem;
-		}
-
-		.val-side-bracket {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 4px;
-		}
-
-		.val-side-bar-main {
-			width: 4px;
-			height: 75px;
-			background: var(--val-casberry);
-			position: relative;
-			box-shadow: 0 0 12px var(--val-casberry);
-		}
-
-			.val-side-bar-main::before, .val-side-bar-main::after {
-				content: '';
-				position: absolute;
-				width: 14px;
-				height: 4px;
-				background: #ffffff;
-			}
-
-			.val-side-bar-main::before {
-				top: 0;
-			}
-
-			.val-side-bar-main::after {
-				bottom: 0;
-			}
-
-		.left-bracket .val-side-bar-main::before, .left-bracket .val-side-bar-main::after {
-			right: 0;
-		}
-
-		.right-bracket .val-side-bar-main::before, .right-bracket .val-side-bar-main::after {
-			left: 0;
-		}
-
-		.val-side-ticks {
-			display: flex;
-			flex-direction: column;
-			gap: 3px;
-		}
-
-		.val-side-tick {
-			width: 10px;
-			height: 2px;
-			background: rgba(255, 255, 255, 0.6);
-		}
-
-		.glitch-text {
-			font-family: 'Space Grotesk', sans-serif;
-			font-size: clamp(2.5rem, 8vw, 6.5rem);
-			font-weight: 900;
-			letter-spacing: 0.15em;
-			color: #ece8e1;
+		.typing-text {
+			font-family: 'Times New Roman', Times, serif;
+			font-size: clamp(1.8rem, 6vw, 4rem);
+			font-weight: 400;
+			letter-spacing: 0.08em;
+			color: var(--val-dark);
 			text-transform: uppercase;
-			position: relative;
 			display: inline-block;
-			animation: valGlitch 0.3s infinite alternate;
+			min-height: 1.4em;
 		}
 
-			.glitch-text span {
-				color: var(--val-casberry);
+		.typing-accent {
+			display: block;
+			color: var(--val-casberry);
+		}
+
+		.typing-caret {
+			display: inline-block;
+			width: 3px;
+			height: 1.1em;
+			margin-left: 6px;
+			vertical-align: text-bottom;
+			background: var(--val-casberry);
+			animation: caretBlink 1s step-end infinite;
+		}
+
+		@keyframes caretBlink {
+			0%, 49% {
+				opacity: 1;
 			}
 
-		@keyframes valGlitch {
-			0% {
-				transform: translate(0);
-				text-shadow: 3px 0 var(--val-casberry), -3px 0 var(--val-purple);
-			}
-
-			25% {
-				transform: translate(-2px, 2px);
-			}
-
-			50% {
-				transform: translate(-2px, -2px);
-				text-shadow: -3px 0 var(--val-casberry), 3px 0 var(--val-cyan);
-			}
-
-			75% {
-				transform: translate(2px, 1px);
-			}
-
-			100% {
-				transform: translate(0);
+			50%, 100% {
+				opacity: 0;
 			}
 		}
 
@@ -616,6 +502,30 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
+	/* ===== RESUME SECTION ===== */
+	.val-resume-section {
+		background: linear-gradient(135deg, var(--val-dark) 0%, #1a1328 60%, var(--val-bg) 100%);
+	}
+	.val-resume-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+	.val-resume-raw {
+		font-size: 0.9rem;
+		line-height: 1.7;
+		color: #d1cbd5;
+		word-break: break-word;
+	}
+	.val-resume-header {
+		text-align: center;
+		padding: 2rem 1rem;
+	}
+	@media (max-width: 768px) {
+		.val-resume-grid {
+			grid-template-columns: 1fr;
+		}
+	}
 	</style>
 
 	<!-- Lucide Icons -->
@@ -626,68 +536,16 @@
 	<!-- DYNAMIC HIGH-DENSITY PURPLE PARTICLE ENGINE -->
 	<canvas id="constellation-canvas"></canvas>
 
-	<!-- MODERN MULTI-PANEL SKEWED CURTAIN WIPE TRANSITION -->
-	<div id="curtain-wipe">
-		<div class="curtain-panel panel-1"></div>
-		<div class="curtain-panel panel-2"></div>
-		<div class="curtain-panel panel-3"></div>
-	</div>
-
 	<!-- Dynamic Flash Overlay -->
 	<div id="flash-overlay"></div>
 
 	<!-- Custom Purple Tactical Crosshair -->
 	<div id="val-crosshair"></div>
 
-	<!-- Multi-Stage Intro Preloader -->
+		<!-- Typing Intro Preloader -->
 	<div id="intro-loader" aria-hidden="true">
 		<div class="loader-content">
-			<div class="mb-5 inline-block bg-[var(--val-casberry)] px-4 py-1 text-xs font-black tracking-[0.4em] text-white uppercase">
-				⚡ SYSTEM INITIALIZATION // PURPLE-PARTICLE-HUD
-			</div>
-
-			<!-- Start-Side UI Bracket Lines -->
-			<div class="val-start-side-wrapper">
-				<div class="val-side-bracket left-bracket">
-					<div class="val-side-ticks">
-						<div class="val-side-tick"></div>
-						<div class="val-side-tick"></div>
-					</div>
-					<div class="val-side-bar-main"></div>
-					<div class="val-side-ticks">
-						<div class="val-side-tick"></div>
-						<div class="val-side-tick"></div>
-					</div>
-				</div>
-
-				<h1 class="glitch-text">
-					JASH <span>SAHA</span>
-				</h1>
-
-				<div class="val-side-bracket right-bracket">
-					<div class="val-side-ticks">
-						<div class="val-side-tick"></div>
-						<div class="val-side-tick"></div>
-					</div>
-					<div class="val-side-bar-main"></div>
-					<div class="val-side-ticks">
-						<div class="val-side-tick"></div>
-						<div class="val-side-tick"></div>
-					</div>
-				</div>
-			</div>
-
-			<p id="loader-subtext" class="mt-4 font-mono text-sm tracking-[0.3em] text-[#768079] uppercase">
-				⚡ INITIALIZING PURPLE PARTICLE ENGINE...
-			</p>
-
-			<!-- Loading Progress Bar & Percentage Counter -->
-			<div class="load-progress-bar">
-				<div id="load-progress-fill" class="load-progress-fill"></div>
-			</div>
-			<p id="load-counter" class="mt-2 font-mono text-xs font-bold text-[var(--val-casberry)] tracking-widest">
-				0%
-			</p>
+			<p class="typing-line"><span id="typing-text" class="typing-text"></span><span class="typing-text typing-accent"><span id="typing-accent-text"></span><span class="typing-caret" aria-hidden="true"></span></span></p>
 		</div>
 	</div>
 
@@ -699,8 +557,7 @@
 
 	<main class="relative z-10">
 		<!-- Hero Section -->
-		<section class="relative overflow-hidden bg-white/40 backdrop-blur-sm">
-			<div class="laser-scanner"></div>
+		<section class="relative overflow-hidden">
 			<div class="relative mx-auto max-w-5xl px-6 py-20 sm:py-32">
 
 				<div class="hero-deploy-item flex items-center gap-4">
@@ -745,12 +602,15 @@
 					<a href="https://github.com/HaGGARdTREASon" target="_blank" rel="noreferrer" class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
 						💻 GitHub
 					</a>
-				</div>
+					<a href="Jash Saha_RESUME.pdf" download class="val-btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold">
+						📄 Resume
+					</a>
+					</div>
 
 				<!-- Stat Counters -->
 				<dl class="hero-deploy-item mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4">
 					<div class="val-card scroll-reveal p-6">
-						<dt class="font-display text-4xl font-black text-[var(--val-casberry)]">03 🚀</dt>
+						<dt class="font-display text-4xl font-black text-[var(--val-casberry)]">04 🚀</dt>
 						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Flagship Projects</dd>
 					</div>
 					<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card scroll-reveal p-6 block">
@@ -820,6 +680,20 @@
 						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Automated Threat Response:</strong> Implemented a geometric logic algorithm defining safety zones around the torso, triggering an immediate audio alarm via Pygame if unauthorized proximity is detected, ensuring proactive personal safety.</li>
 					</ul>
 				</article>
+
+				<article class="val-card scroll-reveal p-8">
+					<div class="flex items-center gap-3">
+						<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
+							💬 Full-Stack & Real-Time Systems
+						</span>
+					</div>
+					<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🔐 Secure Full-Stack Real-Time Chat Application</h3>
+					<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">Scalable Backend & Database Integration:</strong> Engineered an asynchronous Python server (aiohttp, Socket.IO) integrated with PostgreSQL to seamlessly handle concurrent connections, room-based message routing, and persistent chat history.</li>
+						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Identity Protection & Authentication:</strong> Implemented dynamic user registration and authentication utilizing bcrypt password hashing to secure private chat rooms and protect user identities.</li>
+						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">WebRTC & Multimedia Capabilities:</strong> Designed a responsive, full-screen Progressive Web App (PWA) featuring WebRTC for low-latency peer-to-peer audio/video calling and real-time file sharing.</li>
+					</ul>
+				</article>
 			</div>
 		</section>
 
@@ -866,7 +740,9 @@
 						<span class="val-chip px-4 py-2 text-xs">Python 🐍</span>
 						<span class="val-chip px-4 py-2 text-xs">SQL 🗄️</span>
 						<span class="val-chip px-4 py-2 text-xs">HTML & CSS 🌐</span>
-						<span class="val-chip px-4 py-2 text-xs">Power BI 📊</span>
+						<span class="val-chip px-4 py-2 text-xs">React.js ⚛️</span>
+						<span class="val-chip px-4 py-2 text-xs">Node.js 🟢</span>
+						<span class="val-chip px-4 py-2 text-xs">JavaScript 🟨</span>
 					</div>
 				</div>
 				<div class="val-card scroll-reveal p-6">
@@ -875,6 +751,7 @@
 					</h3>
 					<div class="mt-4 flex flex-wrap gap-2.5">
 						<span class="val-chip px-4 py-2 text-xs">PyTorch 🔥</span>
+						<span class="val-chip px-4 py-2 text-xs">TensorFlow 🧬</span>
 						<span class="val-chip px-4 py-2 text-xs">Scikit-Learn 🤖</span>
 						<span class="val-chip px-4 py-2 text-xs">OpenCV 👁️</span>
 						<span class="val-chip px-4 py-2 text-xs">MediaPipe 🖐️</span>
@@ -1019,8 +896,14 @@
 		];
 
 		function resizeCanvas() {
-			width = canvas.width = window.innerWidth;
-			height = canvas.height = window.innerHeight;
+			const dpr = Math.min(window.devicePixelRatio || 1, 2);
+			width = window.innerWidth;
+			height = window.innerHeight;
+			canvas.width = Math.floor(width * dpr);
+			canvas.height = Math.floor(height * dpr);
+			canvas.style.width = width + 'px';
+			canvas.style.height = height + 'px';
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 		}
 		window.addEventListener('resize', resizeCanvas);
 		resizeCanvas();
@@ -1184,45 +1067,42 @@
 		});
 
 		/* -------------------------------------------------------------
-		   LOADER & CURTAIN WIPE SYSTEM
+		   TYPING INTRO & MASK-ZOOM SYSTEM
 		------------------------------------------------------------- */
-		const fill = document.getElementById('load-progress-fill');
-		const counter = document.getElementById('load-counter');
-		const subtext = document.getElementById('loader-subtext');
-		const curtainWipe = document.getElementById('curtain-wipe');
+		const typingEl = document.getElementById('typing-text');
+		const typingAccent = document.getElementById('typing-accent-text');
+		const mainText = "Jash Saha's ";
+		const accentText = 'portfolio';
+		let charIndex = 0;
 
-		let progress = 0;
-		const loadInterval = setInterval(() => {
-			progress += Math.floor(Math.random() * 12) + 4;
-			if (progress >= 100) {
-				progress = 100;
-				clearInterval(loadInterval);
+		const typeInterval = setInterval(() => {
+			charIndex += 1;
+			const combined = (mainText + accentText).slice(0, charIndex);
+			typingEl.textContent = combined.slice(0, mainText.length);
+			typingAccent.textContent = combined.slice(mainText.length);
 
-				fill.style.width = '100%';
-				counter.textContent = '100% — ACCESS GRANTED';
-				subtext.textContent = '🎯 SYSTEM READY. DEPLOYING HUD...';
-				subtext.style.color = '#a855f7';
+			if (charIndex >= mainText.length + accentText.length) {
+				clearInterval(typeInterval);
 
 				setTimeout(() => {
-					// Trigger Modern Multi-Panel Skewed Curtain Wipe
-					curtainWipe.classList.add('active-wipe');
+					// Stage 1: typed line zooms up in place (2.6s, single motion)
+					document.body.classList.add('loader-exiting');
 
-					// Reveal main UI at exact midpoint when the dark curtain covers the viewport (~550ms)
+					// Stage 2: fade loader veil near zoom end, zoom main UI in
 					setTimeout(() => {
+						const flash = document.getElementById('flash-overlay');
+						if (flash) flash.classList.add('flash-pulse');
+
 						document.body.classList.add('shutter-exit');
 						document.body.classList.remove('loading');
 						document.body.classList.add('deployed');
 
 						const loader = document.getElementById('intro-loader');
 						if (loader) loader.style.display = 'none';
-					}, 550);
-
-				}, 400);
-			} else {
-				fill.style.width = `${progress}%`;
-				counter.textContent = `${progress}%`;
+					}, 2500);
+				}, 600);
 			}
-		}, 70);
+		}, 90);
 
 		// 3D Card Interactive Tilt Effects
 		document.querySelectorAll('.val-card').forEach((card) => {
