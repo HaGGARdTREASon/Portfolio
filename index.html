@@ -597,7 +597,7 @@
 				<!-- Stat Counters -->
 				<dl class="hero-deploy-item mt-16 grid grid-cols-2 gap-5 sm:grid-cols-4">
 					<div class="val-card scroll-reveal p-6">
-						<dt class="font-display text-4xl font-black text-[var(--val-casberry)]">04 🚀</dt>
+						<dt class="font-display text-4xl font-black text-[var(--val-casberry)]">05 🚀</dt>
 						<dd class="mt-1 text-xs font-black uppercase tracking-[0.2em] text-[var(--val-dark)]">Flagship Projects</dd>
 					</div>
 					<a href="https://www.linkedin.com/posts/ece-msit-kolkata-a66ab6411_congratulations-to-all-concerned-students-activity-7465669963740196864-gGxS?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEs7by4B2_IOryh8MHtT8tlZpHiPDdZSNMg" target="_blank" rel="noreferrer" class="val-card scroll-reveal p-6 block">
@@ -678,6 +678,21 @@
 						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">Scalable Backend & Database Integration:</strong> Engineered an asynchronous Python server (aiohttp, Socket.IO) integrated with PostgreSQL to seamlessly handle concurrent connections, room-based message routing, and persistent chat history.</li>
 						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">Identity Protection & Authentication:</strong> Implemented dynamic user registration and authentication utilizing bcrypt password hashing to secure private chat rooms and protect user identities.</li>
 						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">WebRTC & Multimedia Capabilities:</strong> Designed a responsive, full-screen Progressive Web App (PWA) featuring WebRTC for low-latency peer-to-peer audio/video calling and real-time file sharing.</li>
+					</ul>
+				</article>
+
+				<article class="val-card scroll-reveal p-8">
+					<div class="flex items-center gap-3">
+						<span class="val-badge px-3 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-1.5">
+							💼 E-Commerce & AI Seller Suite
+						</span>
+					</div>
+					<h3 class="mt-4 text-2xl font-black uppercase tracking-wide text-[var(--val-dark)]">🧵 KarigarSetu – Direct-to-Consumer Artisan Marketplace</h3>
+					<p class="mt-2 text-sm font-semibold italic text-[var(--val-dark)]">Empowering craftspeople with a dedicated digital storefront and intelligent business tools.</p>
+					<ul class="mt-4 space-y-3 font-medium text-[var(--val-dark)]">
+						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">End-to-End Marketplace Platform:</strong> Engineered a responsive full-stack web application featuring product upload, dynamic browsing, cart management, and wishlist tracking for seamless user experiences.</li>
+						<li class="border-l-4 border-[var(--val-dark)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-dark)] font-bold">AI-Powered Seller Utilities:</strong> Developed integrated tools including a Price Suggestion Engine, Product Name Generator, and SEO Tagline Optimizer to help artisans maximize value and visibility.</li>
+						<li class="border-l-4 border-[var(--val-casberry)] pl-4 text-sm leading-relaxed"><strong class="text-[var(--val-casberry)] font-bold">Artisan Storytelling & Trust:</strong> Designed dedicated sections for artisan profiles and product narratives to bridge the gap between creators and consumers, fostering authenticity and buyer confidence.</li>
 					</ul>
 				</article>
 			</div>
@@ -1143,6 +1158,10 @@
 
 						const loader = document.getElementById('intro-loader');
 						if (loader) loader.style.display = 'none';
+
+						// Arm scroll reveals after the dot-zoom settles,
+						// then queue anything already in view
+						setTimeout(armReveals, 1900);
 					}, 2500);
 				}, 600);
 			}
@@ -1174,7 +1193,11 @@
 			threshold: 0.15
 		};
 
-		// One-by-one scroll reveal: objects appear from nothing in entry order
+		// One-by-one scroll reveal: objects appear from nothing in entry order.
+		// Gated until the intro dot-zoom settles — while main is scaled to a
+		// dot every card counts as "in viewport", which would queue them all
+		// up front and break the scroll linkage.
+		let revealsArmed = false;
 		const revealQueue = [];
 		let revealRunning = false;
 		function processRevealQueue() {
@@ -1189,13 +1212,27 @@
 		}
 		const revealObserver = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				if (entry.isIntersecting && !entry.target.classList.contains('is-visible')) {
+				if (revealsArmed && entry.isIntersecting && !entry.target.classList.contains('is-visible')) {
 					revealObserver.unobserve(entry.target);
 					revealQueue.push(entry.target);
 					if (!revealRunning) processRevealQueue();
 				}
 			});
 		}, observerOptions);
+
+		// Called once the intro zoom settles: allow scroll reveals, and
+		// immediately queue whatever is already in the viewport
+		function armReveals() {
+			revealsArmed = true;
+			document.querySelectorAll('.scroll-reveal:not(.is-visible)').forEach((el) => {
+				const r = el.getBoundingClientRect();
+				if (r.top < window.innerHeight * 0.85 && r.bottom > 0) {
+					revealObserver.unobserve(el);
+					revealQueue.push(el);
+				}
+			});
+			if (!revealRunning) processRevealQueue();
+		}
 
 		document.querySelectorAll('.scroll-reveal').forEach((card) => {
 			revealObserver.observe(card);
