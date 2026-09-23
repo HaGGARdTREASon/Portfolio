@@ -17,12 +17,12 @@
 	<!-- Custom Styling & Mask-Zoom Transition -->
 	<style>
 		:root {
-			--val-purple: #9333ea;
-			--val-purple-glow: rgba(147, 51, 234, 0.6);
+			--val-purple: #4e2a84;
+			--val-purple-glow: rgba(78, 42, 132, 0.6);
 			--val-cyan: #06b6d4;
-			--val-casberry: #a855f7;
-			--val-casberry-glow: rgba(168, 85, 247, 0.6);
-			--val-cassis: #7e22ce;
+			--val-casberry: #7851a9;
+			--val-casberry-glow: rgba(120, 81, 169, 0.6);
+			--val-cassis: #3f2064;
 			--val-dark: #0f1923;
 			--val-bg: #ffffff;
 			--val-card: #ffffff;
@@ -367,13 +367,13 @@
 
 		@keyframes patentGlowPulse {
 			0%, 100% {
-				box-shadow: 0 0 15px rgba(168, 85, 247, 0.5), inset 0 0 10px rgba(168, 85, 247, 0.2);
+				box-shadow: 0 0 15px rgba(120, 81, 169, 0.5), inset 0 0 10px rgba(120, 81, 169, 0.2);
 				border-color: var(--val-casberry) !important;
 			}
 
 			50% {
-				box-shadow: 0 0 35px rgba(168, 85, 247, 0.95), 0 0 60px rgba(168, 85, 247, 0.6), inset 0 0 20px rgba(168, 85, 247, 0.4);
-				border-color: #c084fc !important;
+				box-shadow: 0 0 35px rgba(120, 81, 169, 0.95), 0 0 60px rgba(120, 81, 169, 0.6), inset 0 0 20px rgba(120, 81, 169, 0.4);
+				border-color: #a37fd0 !important;
 			}
 		}
 
@@ -891,13 +891,13 @@
 		const maxDistance = 160;
 		let mouse = { x: null, y: null, radius: 240 };
 
-		// Casberry Purple Palette: Violet, Deep Purple, Fuchsia, Electric Violet, Indigo
+		// Royal Purple Palette: Royal, Deep Royal, Light Royal, Violet Royal, Dark Royal
 		const purpleColors = [
-			'rgba(168, 85, 247, ',   /* Bright Purple / Violet */
-			'rgba(147, 51, 234, ',   /* Deep Purple */
-			'rgba(192, 38, 211, ',   /* Fuchsia / Purple Magenta */
-			'rgba(124, 58, 237, ',   /* Electric Violet */
-			'rgba(99, 102, 241, '    /* Indigo Glow */
+			'rgba(120, 81, 169, ',   /* Royal Purple */
+			'rgba(78, 42, 132, ',    /* Deep Royal */
+			'rgba(148, 112, 208, ',  /* Light Royal */
+			'rgba(106, 62, 150, ',   /* Violet Royal */
+			'rgba(63, 32, 100, '     /* Dark Royal */
 		];
 
 		function resizeCanvas() {
@@ -941,7 +941,7 @@
 				ctx.arc(this.x, this.y, Math.max(0.6, currentRadius), 0, Math.PI * 2);
 				ctx.fillStyle = this.color + '0.9)';
 				ctx.shadowBlur = 12;
-				ctx.shadowColor = 'rgba(168, 85, 247, 0.85)';
+				ctx.shadowColor = 'rgba(120, 81, 169, 0.85)';
 				ctx.fill();
 				ctx.shadowBlur = 0;
 			}
@@ -1038,7 +1038,7 @@
 						ctx.moveTo(particles[i].x, particles[i].y);
 						ctx.lineTo(mouse.x, mouse.y);
 						const mAlpha = (1 - mdist / mouse.radius) * 0.95;
-						ctx.strokeStyle = `rgba(168, 85, 247, ${mAlpha})`;
+						ctx.strokeStyle = `rgba(120, 81, 169, ${mAlpha})`;
 						ctx.lineWidth = 1.5;
 						ctx.stroke();
 					}
