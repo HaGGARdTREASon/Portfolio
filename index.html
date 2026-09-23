@@ -94,10 +94,6 @@
 			will-change: transform, opacity;
 		}
 
-		body.loader-exiting .typing-caret {
-			opacity: 0;
-		}
-
 		@keyframes nameZoomCenter {
 			0% {
 				opacity: 1;
@@ -238,7 +234,7 @@
 		.typing-text {
 			font-family: 'Times New Roman', Times, serif;
 			font-size: clamp(1.8rem, 6vw, 4rem);
-			font-weight: 400;
+			font-weight: 700;
 			letter-spacing: 0.08em;
 			color: var(--val-dark);
 			text-transform: uppercase;
@@ -249,26 +245,6 @@
 		.typing-accent {
 			display: block;
 			color: var(--val-casberry);
-		}
-
-		.typing-caret {
-			display: inline-block;
-			width: 3px;
-			height: 1.1em;
-			margin-left: 6px;
-			vertical-align: text-bottom;
-			background: var(--val-casberry);
-			animation: caretBlink 1s step-end infinite;
-		}
-
-		@keyframes caretBlink {
-			0%, 49% {
-				opacity: 1;
-			}
-
-			50%, 100% {
-				opacity: 0;
-			}
 		}
 
 		.laser-scanner {
@@ -581,7 +557,7 @@
 		<!-- Typing Intro Preloader -->
 	<div id="intro-loader" aria-hidden="true">
 		<div class="loader-content">
-			<p class="typing-line"><span id="typing-text" class="typing-text"></span><span class="typing-text typing-accent"><span id="typing-accent-text"></span><span class="typing-caret" aria-hidden="true"></span></span></p>
+			<p class="typing-line"><span id="typing-text" class="typing-text"></span><span class="typing-text typing-accent"><span id="typing-accent-text"></span></span></p>
 		</div>
 	</div>
 
